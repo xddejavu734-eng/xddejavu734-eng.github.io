@@ -3,148 +3,199 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dux Scripts</title>
+<title>Dux Scripts 🌌</title>
 <style>
+    /* Fondo estilo espacio */
     body {
+        margin: 0;
         font-family: Arial, sans-serif;
-        background-color: #1e1e2f;
+        background: radial-gradient(ellipse at bottom, #0b0c27 0%, #1a1a40 100%);
         color: #fff;
-        margin: 0;
-        padding: 0;
+        overflow-x: hidden;
     }
+
+    /* Animación de estrellas */
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: url('https://i.ibb.co/Fxj2p9H/stars.png') repeat;
+        z-index: 0;
+        animation: moveStars 60s linear infinite;
+    }
+
+    @keyframes moveStars {
+        from {background-position: 0 0;}
+        to {background-position: 10000px 0;}
+    }
+
     header {
-        background-color: #ff6f61;
-        padding: 20px;
         text-align: center;
-    }
-    h1 {
-        margin: 0;
-    }
-    .container {
-        max-width: 800px;
-        margin: 30px auto;
-        padding: 0 20px;
-    }
-    .script-card {
-        background-color: #2b2b3c;
-        padding: 15px;
-        border-radius: 10px;
-        margin-bottom: 20px;
+        padding: 30px 20px;
+        z-index: 1;
         position: relative;
     }
-    pre {
-        background-color: #1b1b2a;
-        padding: 10px;
-        border-radius: 5px;
-        overflow-x: auto;
+
+    h1 {
+        margin: 0;
+        font-size: 3em;
+        color: #ff6f61;
+        text-shadow: 2px 2px 10px #000;
     }
+
+    p {
+        font-size: 1.2em;
+        margin-top: 10px;
+        color: #ccc;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: 20px auto;
+        padding: 0 20px;
+        z-index: 1;
+        position: relative;
+    }
+
+    .script-card {
+        background-color: rgba(30,30,50,0.8);
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 25px;
+        position: relative;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .script-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(255, 111, 97, 0.6);
+    }
+
+    pre {
+        background-color: rgba(10,10,30,0.8);
+        padding: 15px;
+        border-radius: 8px;
+        overflow-x: auto;
+        font-size: 0.95em;
+    }
+
     button {
         position: absolute;
-        top: 15px;
-        right: 15px;
-        background-color: #ff6f61;
+        top: 20px;
+        right: 20px;
+        background: #ff6f61;
         border: none;
         color: #fff;
-        padding: 5px 10px;
+        padding: 8px 15px;
         cursor: pointer;
-        border-radius: 5px;
+        border-radius: 8px;
+        font-weight: bold;
+        transition: transform 0.2s, background 0.3s, box-shadow 0.3s;
     }
+
     button:hover {
-        background-color: #ff4a3a;
+        transform: scale(1.1);
+        background: #ff4a3a;
+        box-shadow: 0 5px 20px rgba(255,111,97,0.7);
     }
+
     .discord-link {
         display: block;
         text-align: center;
         margin: 30px 0;
-        font-size: 1.2em;
+        font-size: 1.3em;
         color: #7289da;
         text-decoration: none;
+        font-weight: bold;
     }
+
     .discord-link:hover {
         text-decoration: underline;
     }
+
 </style>
 </head>
 <body>
 
 <header>
-    <h1>Dux Scripts</h1>
-    <p>Haz click en el botón para copiar el script 🍭</p>
+    <h1>Dux Scripts 🌌</h1>
+    <p>Haz click en los botones para copiar los scripts 🍭 | Click buttons to copy scripts</p>
 </header>
 
 <div class="container">
 
     <div class="script-card">
-        <h2>🍭 Dux Menu</h2>
-        <button onclick="copyScript('dux')">Copiar</button>
+        <h2>🍭 Dux Menu | Dux Menu</h2>
+        <button onclick="copyScript('dux')">Copiar | Copy</button>
         <pre id="dux">loadstring(game:HttpGet("https://raw.githubusercontent.com/xddejavu734-eng/Dux-Clash-royal-Menu/main/%F0%9F%8D%ADDuxMenu.lua", true))()</pre>
     </div>
 
     <div class="script-card">
-        <h2>⚒️ Clash Royal Script</h2>
-        <button onclick="copyScript('clash')">Copiar</button>
+        <h2>⚒️ Clash Royal Script | Clash Royal Script</h2>
+        <button onclick="copyScript('clash')">Copiar | Copy</button>
         <pre id="clash">loadstring(game:HttpGet("https://raw.githubusercontent.com/xddejavu734-eng/Script-Clash-royal/main/Main.lua", true))()</pre>
     </div>
 
     <div class="script-card">
-        <h2>🐝 Bee Swarm Simulator</h2>
-        <button onclick="copyScript('bss')">Copiar</button>
+        <h2>🐝 Bee Swarm Simulator | Bee Swarm Simulator</h2>
+        <button onclick="copyScript('bss')">Copiar | Copy</button>
         <pre id="bss">loadstring(game:HttpGet("https://raw.githubusercontent.com/Chris12089/atlasbss/main/script.lua"))()</pre>
     </div>
 
     <div class="script-card">
-        <h2>🏀 Arcade Basketball</h2>
-        <button onclick="copyScript('basket')">Copiar</button>
+        <h2>🏀 Arcade Basketball | Arcade Basketball</h2>
+        <button onclick="copyScript('basket')">Copiar | Copy</button>
         <pre id="basket">loadstring(game:HttpGet("https://pastebin.com/raw/L2LX0eM9"))()</pre>
     </div>
 
     <div class="script-card">
-        <h2>🌋 Natural Disaster Stole Balloon</h2>
-        <button onclick="copyScript('balloon')">Copiar</button>
+        <h2>🌋 Natural Disaster Stole Balloon | Natural Disaster Stole Balloon</h2>
+        <button onclick="copyScript('balloon')">Copiar | Copy</button>
         <pre id="balloon">loadstring(game:HttpGet("https://rawscripts.net/raw/Free-CLIENTSIDED-Balloon-Giver!_175"))()</pre>
     </div>
 
     <div class="script-card">
-        <h2>😈 Demon Blade</h2>
-        <button onclick="copyScript('demon')">Copiar</button>
+        <h2>😈 Demon Blade | Demon Blade</h2>
+        <button onclick="copyScript('demon')">Copiar | Copy</button>
         <pre id="demon">loadstring(game:HttpGet("https://raw.githubusercontent.com/shakaUnlocked/IiI/refs/heads/main/dbrw.lua"))()</pre>
     </div>
 
     <div class="script-card">
-        <h2>🚂 Ride and Slide</h2>
-        <button onclick="copyScript('ride')">Copiar</button>
+        <h2>🚂 Ride and Slide | Ride and Slide</h2>
+        <button onclick="copyScript('ride')">Copiar | Copy</button>
         <pre id="ride">loadstring(game:HttpGet("https://raw.githubusercontent.com/gumanba/Scripts/main/RideandSlide"))()</pre>
     </div>
 
     <div class="script-card">
-        <h2>🏡 Brokhaven</h2>
-        <button onclick="copyScript('brok')">Copiar</button>
+        <h2>🏡 Brokhaven | Brokhaven</h2>
+        <button onclick="copyScript('brok')">Copiar | Copy</button>
         <pre id="brok">loadstring(game:HttpGet("https://pastefy.app/ACtpnMQu/raw", true))()</pre>
     </div>
 
     <div class="script-card">
-        <h2>🛥️ Build a Boat</h2>
-        <button onclick="copyScript('boat')">Copiar</button>
+        <h2>🛥️ Build a Boat | Build a Boat</h2>
+        <button onclick="copyScript('boat')">Copiar | Copy</button>
         <pre id="boat">loadstring(game:HttpGet("https://raw.githubusercontent.com/catblox1346/StensUIReMake/refs/heads/main/Script/boatbuilderhub_B1", true))()</pre>
     </div>
 
     <div class="script-card">
-        <h2>🔫 Hypershot</h2>
-        <button onclick="copyScript('hypershot')">Copiar</button>
+        <h2>🔫 Hypershot | Hypershot</h2>
+        <button onclick="copyScript('hypershot')">Copiar | Copy</button>
         <pre id="hypershot">loadstring(game:HttpGet("https://scriptblox.com/script/Hypershot-Zep-v2-60158"))()</pre>
     </div>
 
 </div>
 
-<a class="discord-link" href="https://discord.gg/T7gdwmHY" target="_blank">💬 Únete a nuestro Discord</a>
+<a class="discord-link" href="https://discord.gg/T7gdwmHY" target="_blank">💬 Únete a nuestro Discord | Join our Discord</a>
 
 <script>
 function copyScript(id) {
     const scriptText = document.getElementById(id).textContent;
     navigator.clipboard.writeText(scriptText).then(() => {
-        alert("Script copiado al portapapeles!");
+        alert("Script copiado al portapapeles! | Script copied to clipboard!");
     }).catch(() => {
-        alert("No se pudo copiar el script.");
+        alert("No se pudo copiar el script. | Could not copy the script.");
     });
 }
 </script>
