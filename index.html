@@ -52,13 +52,24 @@
     button:hover {
         background-color: #ff4a3a;
     }
+    .discord-link {
+        display: block;
+        text-align: center;
+        margin: 30px 0;
+        font-size: 1.2em;
+        color: #7289da;
+        text-decoration: none;
+    }
+    .discord-link:hover {
+        text-decoration: underline;
+    }
 </style>
 </head>
 <body>
 
 <header>
     <h1>Dux Scripts</h1>
-    <p>Haz click en el botón para copiar el script</p>
+    <p>Haz click en el botón para copiar el script 🍭</p>
 </header>
 
 <div class="container">
@@ -75,7 +86,57 @@
         <pre id="clash">loadstring(game:HttpGet("https://raw.githubusercontent.com/xddejavu734-eng/Script-Clash-royal/main/Main.lua", true))()</pre>
     </div>
 
+    <div class="script-card">
+        <h2>🐝 Bee Swarm Simulator</h2>
+        <button onclick="copyScript('bss')">Copiar</button>
+        <pre id="bss">loadstring(game:HttpGet("https://raw.githubusercontent.com/Chris12089/atlasbss/main/script.lua"))()</pre>
+    </div>
+
+    <div class="script-card">
+        <h2>🏀 Arcade Basketball</h2>
+        <button onclick="copyScript('basket')">Copiar</button>
+        <pre id="basket">loadstring(game:HttpGet("https://pastebin.com/raw/L2LX0eM9"))()</pre>
+    </div>
+
+    <div class="script-card">
+        <h2>🌋 Natural Disaster Stole Balloon</h2>
+        <button onclick="copyScript('balloon')">Copiar</button>
+        <pre id="balloon">loadstring(game:HttpGet("https://rawscripts.net/raw/Free-CLIENTSIDED-Balloon-Giver!_175"))()</pre>
+    </div>
+
+    <div class="script-card">
+        <h2>😈 Demon Blade</h2>
+        <button onclick="copyScript('demon')">Copiar</button>
+        <pre id="demon">loadstring(game:HttpGet("https://raw.githubusercontent.com/shakaUnlocked/IiI/refs/heads/main/dbrw.lua"))()</pre>
+    </div>
+
+    <div class="script-card">
+        <h2>🚂 Ride and Slide</h2>
+        <button onclick="copyScript('ride')">Copiar</button>
+        <pre id="ride">loadstring(game:HttpGet("https://raw.githubusercontent.com/gumanba/Scripts/main/RideandSlide"))()</pre>
+    </div>
+
+    <div class="script-card">
+        <h2>🏡 Brokhaven</h2>
+        <button onclick="copyScript('brok')">Copiar</button>
+        <pre id="brok">loadstring(game:HttpGet("https://pastefy.app/ACtpnMQu/raw", true))()</pre>
+    </div>
+
+    <div class="script-card">
+        <h2>🛥️ Build a Boat</h2>
+        <button onclick="copyScript('boat')">Copiar</button>
+        <pre id="boat">loadstring(game:HttpGet("https://raw.githubusercontent.com/catblox1346/StensUIReMake/refs/heads/main/Script/boatbuilderhub_B1", true))()</pre>
+    </div>
+
+    <div class="script-card">
+        <h2>🔫 Hypershot</h2>
+        <button onclick="copyScript('hypershot')">Copiar</button>
+        <pre id="hypershot">loadstring(game:HttpGet("https://scriptblox.com/script/Hypershot-Zep-v2-60158"))()</pre>
+    </div>
+
 </div>
+
+<a class="discord-link" href="https://discord.gg/T7gdwmHY" target="_blank">💬 Únete a nuestro Discord</a>
 
 <script>
 function copyScript(id) {
