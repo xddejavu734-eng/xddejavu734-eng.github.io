@@ -1,210 +1,98 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dux Scripts 🌌</title>
-<style>
-/* Fondo tipo espacio con estrellas CSS puro */
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: radial-gradient(ellipse at bottom, #0b0c27 0%, #1a1a40 100%);
-    color: #fff;
-    overflow-x: hidden;
-}
-
-body::before {
-    content: '';
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    z-index: 0;
-    background: transparent;
-    box-shadow:
-      10px 20px #fff,
-      50px 80px #fff,
-      120px 200px #fff,
-      300px 150px #fff,
-      600px 400px #fff,
-      900px 100px #fff,
-      1200px 250px #fff,
-      1500px 500px #fff;
-}
-
-/* Header */
-header {
-    text-align: center;
-    padding: 30px 20px;
-    z-index: 1;
-    position: relative;
-}
-
-h1 {
-    margin: 0;
-    font-size: 3em;
-    color: #ff6f61;
-    text-shadow: 2px 2px 10px #000;
-}
-
-p {
-    font-size: 1.2em;
-    margin-top: 10px;
-    color: #ccc;
-}
-
-/* Container de scripts */
-.container {
-    max-width: 900px;
-    margin: 20px auto;
-    padding: 0 20px;
-    z-index: 1;
-    position: relative;
-}
-
-/* Tarjeta de script */
-.script-card {
-    background-color: rgba(30,30,50,0.8);
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 25px;
-    position: relative;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.script-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(255, 111, 97, 0.6);
-}
-
-pre {
-    background-color: rgba(10,10,30,0.8);
-    padding: 15px;
-    border-radius: 8px;
-    overflow-x: auto;
-    font-size: 0.95em;
-}
-
-/* Botón copiar */
-button {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background: #ff6f61;
-    border: none;
-    color: #fff;
-    padding: 8px 15px;
-    cursor: pointer;
-    border-radius: 8px;
-    font-weight: bold;
-    transition: transform 0.2s, background 0.3s, box-shadow 0.3s;
-}
-
-button:hover {
-    transform: scale(1.1);
-    background: #ff4a3a;
-    box-shadow: 0 5px 20px rgba(255,111,97,0.7);
-}
-
-/* Enlace Discord */
-.discord-link {
-    display: block;
-    text-align: center;
-    margin: 30px 0;
-    font-size: 1.3em;
-    color: #7289da;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.discord-link:hover {
-    text-decoration: underline;
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dux Hub - Status de Juegos</title>
+  <style>
+    body {
+      background-color: #0d1117;
+      color: #e6edf3;
+      font-family: "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #00d9ff;
+    }
+    .section {
+      border: 1px solid #2d333b;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 20px;
+      background: #161b22;
+      box-shadow: 0 0 10px #00d9ff30;
+    }
+    h2 {
+      color: #00d9ff;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      padding: 5px 0;
+    }
+    .op { color: #00ff99; }
+    .no { color: #ff5555; }
+    a {
+      color: #58a6ff;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .footer {
+      text-align: center;
+      color: #aaa;
+      margin-top: 30px;
+    }
+  </style>
 </head>
 <body>
+  <h1>💠 DUX HUB - STATUS DE JUEGOS 💠</h1>
 
-<header>
-    <h1>Dux Scripts 🌌</h1>
-    <p>Haz click en los botones para copiar los scripts 🍭 | Click buttons to copy scripts</p>
-</header>
+  <div class="section">
+    <h2>🎮 Juegos compatibles actualmente:</h2>
+    <ul>
+      <li>🐝 <b>Bee Rich</b> — <code>96601927506261</code> — ✅ <span class="op">(OP)</span></li>
+      <li>🛒 <b>Mart Simulator</b> — <code>123900106804415</code> — ✅</li>
+      <li>⛏️ <b>Dig to Earth’s CORE!</b> — <code>81440632616906</code> — ✅</li>
+      <li>🧠 <b>Brainrot Royale</b> — <code>96151237893653</code> — ✅ <span class="op">(OP)</span></li>
+      <li>🏗️ <b>Dam Tycoon</b> — <code>128811184</code> — ✅</li>
+      <li>🏢 <b>Brainrot Restaurant</b> — <code>96780658634427</code> — ❌ <span class="no">(Patch)</span></li>
+      <li>👹 <b>Rob The Mother</b> — <code>115285389424252</code> — ✅</li>
+      <li>🎃 <b>Make a Brainrot Army [Halloween]</b> — <code>74971517386226</code> — ✅</li>
+      <li>🏰 <b>Mega Luxury</b> — <code>19002485340</code> — ✅</li>
+    </ul>
+  </div>
 
-<div class="container">
+  <div class="section">
+    <h2>💎 PREMIUM - Acceso exclusivo 💎</h2>
+    <ul>
+      <li>🐔 <b>Chicken Gun</b> — <code>16632764973</code> — ✅ 🔐</li>
+    </ul>
+  </div>
 
-    <div class="script-card">
-        <h2>🍭 Dux Menu | Dux Menu</h2>
-        <button onclick="copyScript('dux')">Copiar | Copy</button>
-        <pre id="dux">loadstring(game:HttpGet("https://raw.githubusercontent.com/xddejavu734-eng/Dux-Clash-royal-Menu/main/%F0%9F%8D%ADDuxMenu.lua", true))()</pre>
-    </div>
+  <div class="section">
+    <h2>📌 ¿Cómo obtener Premium?</h2>
+    <p>📌 <b>How to get Premium access?</b></p>
+    <ul>
+      <li>🎥 Si eres creador aprobado por <b>Dux Hub</b></li>
+      <li>🎥 If you're an approved <b>Dux Hub</b> creator</li>
+      <li>💸 O pagando <b>15 Robux</b> para desbloquear el acceso</li>
+      <li>💸 Or by paying <b>15 Robux</b> to unlock access</li>
+    </ul>
+  </div>
 
-    <div class="script-card">
-        <h2>⚒️ Clash Royal Script | Clash Royal Script</h2>
-        <button onclick="copyScript('clash')">Copiar | Copy</button>
-        <pre id="clash">loadstring(game:HttpGet("https://raw.githubusercontent.com/xddejavu734-eng/Script-Clash-royal/main/Main.lua", true))()</pre>
-    </div>
+  <div class="section">
+    <h2>💬 Servidor oficial de soporte</h2>
+    <p>👉 <a href="https://discord.gg/T7gdwmHY" target="_blank">https://discord.gg/T7gdwmHY</a></p>
+  </div>
 
-    <div class="script-card">
-        <h2>🐝 Bee Swarm Simulator | Bee Swarm Simulator</h2>
-        <button onclick="copyScript('bss')">Copiar | Copy</button>
-        <pre id="bss">loadstring(game:HttpGet("https://raw.githubusercontent.com/Chris12089/atlasbss/main/script.lua"))()</pre>
-    </div>
-
-    <div class="script-card">
-        <h2>🏀 Arcade Basketball | Arcade Basketball</h2>
-        <button onclick="copyScript('basket')">Copiar | Copy</button>
-        <pre id="basket">loadstring(game:HttpGet("https://pastebin.com/raw/L2LX0eM9"))()</pre>
-    </div>
-
-    <div class="script-card">
-        <h2>🌋 Natural Disaster Stole Balloon | Natural Disaster Stole Balloon</h2>
-        <button onclick="copyScript('balloon')">Copiar | Copy</button>
-        <pre id="balloon">loadstring(game:HttpGet("https://rawscripts.net/raw/Free-CLIENTSIDED-Balloon-Giver!_175"))()</pre>
-    </div>
-
-    <div class="script-card">
-        <h2>😈 Demon Blade | Demon Blade</h2>
-        <button onclick="copyScript('demon')">Copiar | Copy</button>
-        <pre id="demon">loadstring(game:HttpGet("https://raw.githubusercontent.com/shakaUnlocked/IiI/refs/heads/main/dbrw.lua"))()</pre>
-    </div>
-
-    <div class="script-card">
-        <h2>🚂 Ride and Slide | Ride and Slide</h2>
-        <button onclick="copyScript('ride')">Copiar | Copy</button>
-        <pre id="ride">loadstring(game:HttpGet("https://raw.githubusercontent.com/gumanba/Scripts/main/RideandSlide"))()</pre>
-    </div>
-
-    <div class="script-card">
-        <h2>🏡 Brokhaven | Brokhaven</h2>
-        <button onclick="copyScript('brok')">Copiar | Copy</button>
-        <pre id="brok">loadstring(game:HttpGet("https://pastefy.app/ACtpnMQu/raw", true))()</pre>
-    </div>
-
-    <div class="script-card">
-        <h2>🛥️ Build a Boat | Build a Boat</h2>
-        <button onclick="copyScript('boat')">Copiar | Copy</button>
-        <pre id="boat">loadstring(game:HttpGet("https://raw.githubusercontent.com/catblox1346/StensUIReMake/refs/heads/main/Script/boatbuilderhub_B1", true))()</pre>
-    </div>
-
-    <div class="script-card">
-        <h2>🔫 Hypershot | Hypershot</h2>
-        <button onclick="copyScript('hypershot')">Copiar | Copy</button>
-        <pre id="hypershot">loadstring(game:HttpGet("https://scriptblox.com/script/Hypershot-Zep-v2-60158"))()</pre>
-    </div>
-
-</div>
-
-<a class="discord-link" href="https://discord.gg/T7gdwmHY" target="_blank">💬 Únete a nuestro Discord | Join our Discord</a>
-
-<script>
-function copyScript(id) {
-    const scriptText = document.getElementById(id).textContent;
-    navigator.clipboard.writeText(scriptText).then(() => {
-        alert("Script copiado al portapapeles! | Script copied to clipboard!");
-    }).catch(() => {
-        alert("No se pudo copiar el script. | Could not copy the script.");
-    });
-}
-</script>
-
+  <div class="footer">
+    🧩 Usa <b>Dux Hub</b> para automatizar tus juegos favoritos de Roblox 🚀
+  </div>
 </body>
 </html>
