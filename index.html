@@ -1,98 +1,206 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dux Hub - Status de Juegos</title>
-  <style>
-    body {
-      background-color: #0d1117;
-      color: #e6edf3;
-      font-family: "Segoe UI", sans-serif;
-      margin: 0;
-      padding: 20px;
-    }
-    h1 {
-      text-align: center;
-      color: #00d9ff;
-    }
-    .section {
-      border: 1px solid #2d333b;
-      border-radius: 10px;
-      padding: 15px;
-      margin-bottom: 20px;
-      background: #161b22;
-      box-shadow: 0 0 10px #00d9ff30;
-    }
-    h2 {
-      color: #00d9ff;
-    }
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-    li {
-      padding: 5px 0;
-    }
-    .op { color: #00ff99; }
-    .no { color: #ff5555; }
-    a {
-      color: #58a6ff;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-    .footer {
-      text-align: center;
-      color: #aaa;
-      margin-top: 30px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dux Hub - Status de Juegos</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: radial-gradient(ellipse at bottom, #0d1b2a 0%, #000000 100%);
+    color: white;
+    overflow-x: hidden;
+  }
+
+  canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 2.5em;
+    margin-top: 40px;
+    color: #00b4ff;
+    text-shadow: 0 0 15px #00b4ff;
+    letter-spacing: 2px;
+  }
+
+  .container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    padding: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .card {
+    background: rgba(0, 10, 20, 0.9);
+    border: 1px solid #00b4ff;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 0 15px #0077b6;
+    transition: 0.3s;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 25px #00b4ff;
+  }
+
+  .game-title {
+    font-size: 1.3em;
+    color: #00b4ff;
+  }
+
+  .status {
+    margin-top: 10px;
+    color: #00ffb3;
+  }
+
+  .place {
+    font-size: 0.9em;
+    color: #ccc;
+  }
+
+  .footer {
+    text-align: center;
+    margin-top: 50px;
+    color: #8ecae6;
+  }
+
+  .btn-discord {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    border-radius: 25px;
+    background: #5865f2;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+
+  .btn-discord:hover {
+    background: #4752c4;
+  }
+</style>
 </head>
 <body>
-  <h1>💠 DUX HUB - STATUS DE JUEGOS 💠</h1>
+<canvas id="stars"></canvas>
 
-  <div class="section">
-    <h2>🎮 Juegos compatibles actualmente:</h2>
-    <ul>
-      <li>🐝 <b>Bee Rich</b> — <code>96601927506261</code> — ✅ <span class="op">(OP)</span></li>
-      <li>🛒 <b>Mart Simulator</b> — <code>123900106804415</code> — ✅</li>
-      <li>⛏️ <b>Dig to Earth’s CORE!</b> — <code>81440632616906</code> — ✅</li>
-      <li>🧠 <b>Brainrot Royale</b> — <code>96151237893653</code> — ✅ <span class="op">(OP)</span></li>
-      <li>🏗️ <b>Dam Tycoon</b> — <code>128811184</code> — ✅</li>
-      <li>🏢 <b>Brainrot Restaurant</b> — <code>96780658634427</code> — ❌ <span class="no">(Patch)</span></li>
-      <li>👹 <b>Rob The Mother</b> — <code>115285389424252</code> — ✅</li>
-      <li>🎃 <b>Make a Brainrot Army [Halloween]</b> — <code>74971517386226</code> — ✅</li>
-      <li>🏰 <b>Mega Luxury</b> — <code>19002485340</code> — ✅</li>
-    </ul>
+<h1>💠 Dux Hub - Status de Juegos 💠</h1>
+
+<div class="container">
+  <div class="card">
+    <div class="game-title">🐝 Bee Rich</div>
+    <div class="place">PlaceId: 96601927506261</div>
+    <div class="status">Script listo ✅ (OP)</div>
   </div>
 
-  <div class="section">
-    <h2>💎 PREMIUM - Acceso exclusivo 💎</h2>
-    <ul>
-      <li>🐔 <b>Chicken Gun</b> — <code>16632764973</code> — ✅ 🔐</li>
-    </ul>
+  <div class="card">
+    <div class="game-title">🛒 Mart Simulator</div>
+    <div class="place">PlaceId: 123900106804415</div>
+    <div class="status">Script listo ✅</div>
   </div>
 
-  <div class="section">
-    <h2>📌 ¿Cómo obtener Premium?</h2>
-    <p>📌 <b>How to get Premium access?</b></p>
-    <ul>
-      <li>🎥 Si eres creador aprobado por <b>Dux Hub</b></li>
-      <li>🎥 If you're an approved <b>Dux Hub</b> creator</li>
-      <li>💸 O pagando <b>15 Robux</b> para desbloquear el acceso</li>
-      <li>💸 Or by paying <b>15 Robux</b> to unlock access</li>
-    </ul>
+  <div class="card">
+    <div class="game-title">⛏️ Dig to Earth's CORE!</div>
+    <div class="place">PlaceId: 81440632616906</div>
+    <div class="status">Script listo ✅</div>
   </div>
 
-  <div class="section">
-    <h2>💬 Servidor oficial de soporte</h2>
-    <p>👉 <a href="https://discord.gg/T7gdwmHY" target="_blank">https://discord.gg/T7gdwmHY</a></p>
+  <div class="card">
+    <div class="game-title">🧠 Brainrot Royale</div>
+    <div class="place">PlaceId: 96151237893653</div>
+    <div class="status">Script listo ✅ (OP)</div>
   </div>
 
-  <div class="footer">
-    🧩 Usa <b>Dux Hub</b> para automatizar tus juegos favoritos de Roblox 🚀
+  <div class="card">
+    <div class="game-title">🏗️ Dam Tycoon</div>
+    <div class="place">PlaceId: 128811184</div>
+    <div class="status">Script listo ✅</div>
   </div>
+
+  <div class="card">
+    <div class="game-title">🏢 Brainrot Restaurant</div>
+    <div class="place">PlaceId: 96780658634427</div>
+    <div class="status">No listo ❌ (Patch)</div>
+  </div>
+
+  <div class="card">
+    <div class="game-title">👹 Rob The Mother</div>
+    <div class="place">PlaceId: 115285389424252</div>
+    <div class="status">Script listo ✅</div>
+  </div>
+
+  <div class="card">
+    <div class="game-title">🎃 Make a Brainrot Army [Halloween]</div>
+    <div class="place">PlaceId: 74971517386226</div>
+    <div class="status">Script listo ✅</div>
+  </div>
+
+  <div class="card">
+    <div class="game-title">🏰 Mega Luxury</div>
+    <div class="place">PlaceId: 19002485340</div>
+    <div class="status">Script listo ✅</div>
+  </div>
+
+  <div class="card">
+    <div class="game-title">🐔 Chicken Gun (Premium)</div>
+    <div class="place">PlaceId: 16632764973</div>
+    <div class="status">Premium 🔐 Script listo ✅</div>
+  </div>
+</div>
+
+<div class="footer">
+  💬 Servidor oficial de soporte:<br>
+  <a href="https://discord.gg/T7gdwmHY" target="_blank" class="btn-discord">Únete al Discord</a>
+  <p>🧩 Usa Dux Hub para automatizar tus juegos favoritos de Roblox</p>
+</div>
+
+<script>
+  // Fondo de estrellas 🌌
+  const canvas = document.getElementById("stars");
+  const ctx = canvas.getContext("2d");
+  let stars = [];
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+
+  window.addEventListener("resize", resize);
+  resize();
+
+  for (let i = 0; i < 200; i++) {
+    stars.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      size: Math.random() * 2,
+      speed: Math.random() * 0.5
+    });
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "white";
+    stars.forEach(s => {
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+      ctx.fill();
+      s.y += s.speed;
+      if (s.y > canvas.height) s.y = 0;
+    });
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+</script>
+
 </body>
 </html>
