@@ -1,29 +1,124 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Dux Hub - Status de Juegos</title>
 <style>
+  /* Reset mínimo */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
   body {
     margin: 0;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     background: radial-gradient(ellipse at bottom, #0d1b2a 0%, #000000 100%);
     color: white;
     overflow-x: hidden;
   }
 
-  canvas {
+  /* Top nav */
+  .topbar {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: -1;
+    right: 0;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 24px;
+    background: linear-gradient(90deg, rgba(5,9,15,0.6), rgba(10,18,30,0.4));
+    border-bottom: 1px solid rgba(0,180,255,0.06);
+    z-index: 50;
+    backdrop-filter: blur(6px);
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .brand .logo {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: linear-gradient(135deg,#006ea6,#00b4ff);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:700;
+    color:#00121a;
+    box-shadow: 0 6px 18px rgba(0,180,255,0.08);
+  }
+
+  .brand h3 {
+    font-size: 18px;
+    color: #eaf6ff;
+    letter-spacing: 1px;
+  }
+
+  /* Executor dropdown */
+  .nav-actions {
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+
+  .dropdown {
+    position: relative;
+  }
+
+  .drop-btn {
+    background: linear-gradient(90deg,#00a0ff,#006ea6);
+    color:white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight:600;
+    box-shadow: 0 6px 18px rgba(0,180,255,0.08);
+  }
+
+  .drop-panel {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 10px);
+    min-width: 240px;
+    background: rgba(5,9,15,0.95);
+    border: 1px solid rgba(0,180,255,0.06);
+    border-radius: 10px;
+    padding: 8px;
+    display: none;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+    backdrop-filter: blur(6px);
+  }
+
+  .drop-panel a {
+    display: block;
+    text-decoration: none;
+    color: #dbeeff;
+    padding: 10px 12px;
+    border-radius: 8px;
+    transition: background .15s, transform .08s;
+    font-size: 14px;
+  }
+
+  .drop-panel a:hover {
+    background: rgba(0,180,255,0.06);
+    transform: translateX(6px);
+  }
+
+  /* Page main spacing to not hide behind topbar */
+  main {
+    padding-top: 90px;
+    padding-bottom: 70px;
   }
 
   h1 {
     text-align: center;
     font-size: 2.5em;
-    margin-top: 40px;
+    margin-top: 20px;
     color: #00b4ff;
     text-shadow: 0 0 15px #00b4ff;
     letter-spacing: 2px;
@@ -33,174 +128,248 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 25px;
-    padding: 40px;
-    max-width: 1000px;
+    padding: 24px;
+    max-width: 1100px;
     margin: 0 auto;
   }
 
   .card {
-    background: rgba(0, 10, 20, 0.9);
-    border: 1px solid #00b4ff;
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0 0 15px #0077b6;
-    transition: 0.3s;
+    background: linear-gradient(180deg, rgba(0,10,20,0.9), rgba(5,8,15,0.9));
+    border: 1px solid rgba(0,180,255,0.06);
+    border-radius: 14px;
+    padding: 18px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+    transition: transform .25s, box-shadow .25s;
   }
 
   .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 25px #00b4ff;
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(0,180,255,0.08);
   }
 
   .game-title {
-    font-size: 1.3em;
+    font-size: 1.15em;
     color: #00b4ff;
-  }
-
-  .status {
-    margin-top: 10px;
-    color: #00ffb3;
+    display:flex;
+    align-items:center;
+    gap:8px;
   }
 
   .place {
     font-size: 0.9em;
-    color: #ccc;
+    color: #bfcbd8;
+    margin-top: 8px;
   }
+
+  .status {
+    margin-top: 12px;
+    color: #00ffb3;
+    font-weight:600;
+  }
+
+  .status.no { color: #ff6b6b; }
 
   .footer {
     text-align: center;
-    margin-top: 50px;
+    margin-top: 28px;
     color: #8ecae6;
   }
 
   .btn-discord {
     display: inline-block;
-    margin-top: 15px;
-    padding: 10px 20px;
-    border-radius: 25px;
+    margin-top: 12px;
+    padding: 10px 18px;
+    border-radius: 20px;
     background: #5865f2;
     color: white;
     text-decoration: none;
-    font-weight: bold;
-    transition: 0.3s;
+    font-weight: 700;
+    transition: 0.25s;
   }
 
-  .btn-discord:hover {
-    background: #4752c4;
+  .btn-discord:hover { background: #4752c4; transform: translateY(-2px); }
+
+  /* Responsive tweaks */
+  @media (max-width: 640px) {
+    .brand h3 { font-size: 15px; }
+    .drop-panel { right: -6px; left: 6px; }
   }
 </style>
 </head>
 <body>
-<canvas id="stars"></canvas>
+  <!-- background canvas for stars -->
+  <canvas id="stars" aria-hidden="true"></canvas>
 
-<h1>💠 Dux Hub - Status de Juegos 💠</h1>
+  <!-- topbar -->
+  <div class="topbar" role="navigation" aria-label="Topbar">
+    <div class="brand">
+      <div class="logo">DH</div>
+      <h3>💠 Dux Hub</h3>
+    </div>
 
-<div class="container">
-  <div class="card">
-    <div class="game-title">🐝 Bee Rich</div>
-    <div class="place">PlaceId: 96601927506261</div>
-    <div class="status">Script listo ✅ (OP)</div>
+    <div class="nav-actions">
+      <div class="dropdown" id="executorDropdown">
+        <button class="drop-btn" id="dropBtn" aria-haspopup="true" aria-expanded="false">Executor ▾</button>
+        <div class="drop-panel" id="dropPanel" role="menu" aria-hidden="true">
+          <a href="https://krnl-ios.com/" target="_blank" rel="noopener noreferrer">Krnl iOS — https://krnl-ios.com/</a>
+          <a href="https://deltaios-executor.com/" target="_blank" rel="noopener noreferrer">Delta iOS — https://deltaios-executor.com/</a>
+          <a href="https://deltaexploits.gg/delta-executor-android" target="_blank" rel="noopener noreferrer">Delta Android — https://deltaexploits.gg/delta-executor-android</a>
+          <a href="https://filenetwork.vip/android.html" target="_blank" rel="noopener noreferrer">Krnl Android — https://filenetwork.vip/android.html</a>
+        </div>
+      </div>
+
+      <a class="btn-discord" href="https://discord.gg/T7gdwmHY" target="_blank" rel="noopener noreferrer">Únete al Discord</a>
+    </div>
   </div>
 
-  <div class="card">
-    <div class="game-title">🛒 Mart Simulator</div>
-    <div class="place">PlaceId: 123900106804415</div>
-    <div class="status">Script listo ✅</div>
-  </div>
+  <main>
+    <h1>💠 Dux Hub - Status de Juegos 💠</h1>
 
-  <div class="card">
-    <div class="game-title">⛏️ Dig to Earth's CORE!</div>
-    <div class="place">PlaceId: 81440632616906</div>
-    <div class="status">Script listo ✅</div>
-  </div>
+    <div class="container">
+      <div class="card">
+        <div class="game-title">🐝 Bee Rich</div>
+        <div class="place">PlaceId: <code>96601927506261</code></div>
+        <div class="status">Script listo ✅ (OP)</div>
+      </div>
 
-  <div class="card">
-    <div class="game-title">🧠 Brainrot Royale</div>
-    <div class="place">PlaceId: 96151237893653</div>
-    <div class="status">Script listo ✅ (OP)</div>
-  </div>
+      <div class="card">
+        <div class="game-title">🛒 Mart Simulator</div>
+        <div class="place">PlaceId: <code>123900106804415</code></div>
+        <div class="status">Script listo ✅</div>
+      </div>
 
-  <div class="card">
-    <div class="game-title">🏗️ Dam Tycoon</div>
-    <div class="place">PlaceId: 128811184</div>
-    <div class="status">Script listo ✅</div>
-  </div>
+      <div class="card">
+        <div class="game-title">⛏️ Dig to Earth's CORE!</div>
+        <div class="place">PlaceId: <code>81440632616906</code></div>
+        <div class="status">Script listo ✅</div>
+      </div>
 
-  <div class="card">
-    <div class="game-title">🏢 Brainrot Restaurant</div>
-    <div class="place">PlaceId: 96780658634427</div>
-    <div class="status">No listo ❌ (Patch)</div>
-  </div>
+      <div class="card">
+        <div class="game-title">🧠 Brainrot Royale</div>
+        <div class="place">PlaceId: <code>96151237893653</code></div>
+        <div class="status">Script listo ✅ (OP)</div>
+      </div>
 
-  <div class="card">
-    <div class="game-title">👹 Rob The Mother</div>
-    <div class="place">PlaceId: 115285389424252</div>
-    <div class="status">Script listo ✅</div>
-  </div>
+      <div class="card">
+        <div class="game-title">🏗️ Dam Tycoon</div>
+        <div class="place">PlaceId: <code>128811184</code></div>
+        <div class="status">Script listo ✅</div>
+      </div>
 
-  <div class="card">
-    <div class="game-title">🎃 Make a Brainrot Army [Halloween]</div>
-    <div class="place">PlaceId: 74971517386226</div>
-    <div class="status">Script listo ✅</div>
-  </div>
+      <div class="card">
+        <div class="game-title">🏢 Brainrot Restaurant</div>
+        <div class="place">PlaceId: <code>96780632616927</code></div>
+        <div class="status no">No listo ❌ (Patch)</div>
+      </div>
 
-  <div class="card">
-    <div class="game-title">🏰 Mega Luxury</div>
-    <div class="place">PlaceId: 19002485340</div>
-    <div class="status">Script listo ✅</div>
-  </div>
+      <div class="card">
+        <div class="game-title">👹 Rob The Mother</div>
+        <div class="place">PlaceId: <code>115285389424252</code></div>
+        <div class="status">Script listo ✅</div>
+      </div>
 
-  <div class="card">
-    <div class="game-title">🐔 Chicken Gun (Premium)</div>
-    <div class="place">PlaceId: 16632764973</div>
-    <div class="status">Premium 🔐 Script listo ✅</div>
-  </div>
-</div>
+      <div class="card">
+        <div class="game-title">🎃 Make a Brainrot Army [Halloween]</div>
+        <div class="place">PlaceId: <code>74971517386226</code></div>
+        <div class="status">Script listo ✅</div>
+      </div>
 
-<div class="footer">
-  💬 Servidor oficial de soporte:<br>
-  <a href="https://discord.gg/T7gdwmHY" target="_blank" class="btn-discord">Únete al Discord</a>
-  <p>🧩 Usa Dux Hub para automatizar tus juegos favoritos de Roblox</p>
-</div>
+      <div class="card">
+        <div class="game-title">🏰 Mega Luxury</div>
+        <div class="place">PlaceId: <code>19002485340</code></div>
+        <div class="status">Script listo ✅</div>
+      </div>
+
+      <div class="card">
+        <div class="game-title">🐔 Chicken Gun (Premium)</div>
+        <div class="place">PlaceId: <code>16632764973</code></div>
+        <div class="status">Premium 🔐 Script listo ✅</div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>💬 Servidor oficial de soporte:</p>
+      <a href="https://discord.gg/T7gdwmHY" target="_blank" rel="noopener noreferrer" class="btn-discord">Únete al Discord</a>
+      <p style="margin-top:10px;">🧩 Usa Dux Hub para automatizar tus juegos favoritos de Roblox</p>
+    </div>
+  </main>
 
 <script>
-  // Fondo de estrellas 🌌
-  const canvas = document.getElementById("stars");
-  const ctx = canvas.getContext("2d");
+  // dropdown toggle
+  (function(){
+    const dropBtn = document.getElementById('dropBtn');
+    const dropPanel = document.getElementById('dropPanel');
+    const dropdown = document.getElementById('executorDropdown');
+
+    function openPanel() {
+      dropPanel.style.display = 'block';
+      dropBtn.setAttribute('aria-expanded','true');
+      dropPanel.setAttribute('aria-hidden','false');
+    }
+    function closePanel() {
+      dropPanel.style.display = 'none';
+      dropBtn.setAttribute('aria-expanded','false');
+      dropPanel.setAttribute('aria-hidden','true');
+    }
+
+    dropBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      if (dropPanel.style.display === 'block') closePanel(); else openPanel();
+    });
+
+    // close when clicking outside
+    document.addEventListener('click', function(e){
+      if (!dropdown.contains(e.target)) closePanel();
+    });
+
+    // keyboard support: Esc to close
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape') closePanel();
+    });
+  })();
+
+  // stars background
+  const canvas = document.getElementById('stars');
+  const ctx = canvas.getContext('2d');
   let stars = [];
 
   function resize() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
   }
-
-  window.addEventListener("resize", resize);
+  window.addEventListener('resize', resize);
   resize();
 
-  for (let i = 0; i < 200; i++) {
-    stars.push({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      size: Math.random() * 2,
-      speed: Math.random() * 0.5
-    });
+  function initStars(count) {
+    stars = [];
+    for (let i = 0; i < count; i++) {
+      stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 2.2 + 0.2,
+        speed: Math.random() * 0.6 + 0.1,
+        alpha: Math.random() * 0.9 + 0.1
+      });
+    }
   }
+  initStars(Math.round(window.innerWidth * 0.12)); // density based on width
 
   function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "white";
-    stars.forEach(s => {
+    ctx.clearRect(0,0,canvas.width, canvas.height);
+    for (let s of stars) {
       ctx.beginPath();
-      ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,255,255,'+s.alpha+')';
+      ctx.arc(s.x, s.y, s.size, 0, Math.PI*2);
       ctx.fill();
       s.y += s.speed;
-      if (s.y > canvas.height) s.y = 0;
-    });
+      if (s.y > canvas.height + 10) {
+        s.y = -10;
+        s.x = Math.random()*canvas.width;
+      }
+    }
     requestAnimationFrame(animate);
   }
-
   animate();
 </script>
-
 </body>
 </html>
