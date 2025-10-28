@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dux Hub 🌙</title>
+<title>💠 Dux Hub - Status 💠</title>
 <style>
   * {
     margin: 0;
@@ -26,7 +26,7 @@
     z-index: -1;
   }
 
-  /* Barra superior */
+  /* Encabezado */
   .top-bar {
     position: fixed;
     top: 0;
@@ -42,7 +42,7 @@
   }
 
   .top-bar h1 {
-    font-size: 2em;
+    font-size: 1.7em;
     color: #00b4ff;
     text-shadow: 0 0 20px #00b4ff;
     letter-spacing: 2px;
@@ -51,131 +51,117 @@
 
   main {
     padding-top: 100px;
+    width: 90%;
+    max-width: 700px;
+    margin: 0 auto;
   }
 
-  section {
-    margin: 60px 0;
+  .status-box {
+    background: rgba(0, 10, 30, 0.6);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 0 20px #00b4ff40;
+    border: 1px solid #00b4ff40;
+    backdrop-filter: blur(4px);
   }
 
-  h2 {
-    font-size: 1.8em;
+  .section {
+    margin: 25px 0;
+    text-align: left;
+    line-height: 1.8em;
+  }
+
+  .section-title {
     color: #00b4ff;
-    text-shadow: 0 0 10px #00b4ff;
-    margin-bottom: 25px;
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-top: 25px;
+    border-bottom: 1px solid #00b4ff40;
+    padding-bottom: 5px;
   }
 
-  .links {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    align-items: center;
+  .game {
+    margin-left: 15px;
+  }
+
+  code {
+    background: rgba(255,255,255,0.1);
+    padding: 3px 6px;
+    border-radius: 6px;
+    color: #8ecae6;
+  }
+
+  .ok {
+    color: #00ff99;
+    text-shadow: 0 0 10px #00ff99;
+  }
+
+  .fail {
+    color: #ff5555;
+    text-shadow: 0 0 10px #ff5555;
+  }
+
+  footer {
+    margin-top: 50px;
+    font-size: 0.9em;
+    color: #8ecae6;
   }
 
   a {
-    display: inline-block;
-    padding: 12px 25px;
-    border-radius: 25px;
-    font-weight: bold;
-    text-decoration: none !important;
-    outline: none !important;
-    border: none !important;
-    box-shadow: none !important;
-    width: 250px;
-    text-align: center;
-    transition: all 0.3s;
+    color: #00b4ff;
+    text-decoration: none;
   }
 
-  a:focus, a:active {
-    text-decoration: none !important;
-    outline: none !important;
-    border: none !important;
-  }
-
-  /* Redes */
-  .tiktok {
-    background: #010101;
-    border: 1px solid #ff0050;
-    box-shadow: 0 0 15px #ff0050;
-  }
-  .tiktok:hover { background: #ff0050; }
-
-  .youtube {
-    background: #ff0000;
-    box-shadow: 0 0 15px #ff0000;
-  }
-  .youtube:hover { background: #cc0000; }
-
-  .discord {
-    background: #5865f2;
-    box-shadow: 0 0 15px #5865f2;
-  }
-  .discord:hover { background: #4752c4; }
-
-  /* Juegos & Status */
-  .status {
-    background: #00b4ff;
-    box-shadow: 0 0 15px #00b4ff;
-  }
-  .status:hover { background: #0077b6; }
-
-  /* Executors */
-  .executor {
-    background: #9d4edd;
-    box-shadow: 0 0 15px #9d4edd;
-  }
-  .executor:hover { background: #7b2cbf; }
-
-  footer {
-    margin-top: 80px;
-    color: #8ecae6;
-    font-size: 0.9em;
-    user-select: none;
-    margin-bottom: 40px;
+  a:hover {
+    text-shadow: 0 0 10px #00b4ff;
   }
 </style>
 </head>
 <body>
 <canvas id="stars"></canvas>
 
-<!-- Barra superior -->
 <div class="top-bar">
-  <h1>💠 Dux Hub 💠</h1>
+  <h1>💠 DUX HUB - STATUS DE JUEGOS 💠</h1>
 </div>
 
 <main>
+  <div class="status-box">
 
-  <!-- Redes principales -->
-  <section>
-    <div class="links">
-      <a class="tiktok" href="https://www.tiktok.com/@duxscript" target="_blank">🎵 TikTok - @DuxScript</a>
-      <a class="youtube" href="https://www.youtube.com/@Duxitoz" target="_blank">▶️ YouTube - Duxitoz</a>
-      <a class="discord" href="https://discord.gg/T7gdwmHY" target="_blank">💬 Discord - Dux Hub</a>
+    <div class="section">
+      <p>🎮 <b>Juegos compatibles actualmente:</b></p>
+
+      <p class="game">🐝 Bee Rich<br>• PlaceId: <code>96601927506261</code><br>• Estado: <span class="ok">Script listo ✅ (OP)</span></p>
+
+      <p class="game">🛒 Mart Simulator<br>• PlaceId: <code>123900106804415</code><br>• Estado: <span class="ok">Script listo ✅</span></p>
+
+      <p class="game">⛏️ Dig to Earth’s CORE!<br>• PlaceId: <code>81440632616906</code><br>• Estado: <span class="ok">Script listo ✅</span></p>
+
+      <p class="game">🧠 Brainrot Royale<br>• PlaceId: <code>96151237893653</code><br>• Estado: <span class="ok">Script listo ✅ (OP)</span></p>
+
+      <p class="game">🏗️ Dam Tycoon<br>• PlaceId: <code>128811184</code><br>• Estado: <span class="ok">Script listo ✅</span></p>
+
+      <p class="game">🏢 Brainrot Restaurant<br>• PlaceId: <code>96780658634427</code><br>• Estado: <span class="fail">No listo ❌ (Patch)</span></p>
+
+      <p class="game">👹 Rob The Mother<br>• PlaceId: <code>115285389424252</code><br>• Estado: <span class="ok">Script listo ✅</span></p>
+
+      <p class="game">🎃 Make a Brainrot Army [Halloween]<br>• PlaceId: <code>74971517386226</code><br>• Estado: <span class="ok">Script listo ✅</span></p>
+
+      <p class="game">🏰 Mega Luxury<br>• PlaceId: <code>19002485340</code><br>• Estado: <span class="ok">Script listo ✅</span></p>
     </div>
-  </section>
 
-  <!-- Juegos y Status -->
-  <section>
-    <h2>🎮 Juegos & Status</h2>
-    <div class="links">
-      <a class="status" href="#">🌿 Grow a Garden - Stats</a>
-      <a class="status" href="#">🗡️ Blox Fruits - Status</a>
-      <a class="status" href="#">🐝 Bee Swarm - Status</a>
+    <div class="section">
+      <div class="section-title">💎 PREMIUM - Acceso exclusivo 💎</div>
+      <p class="game">🐔 Chicken Gun<br>• PlaceId: <code>16632764973</code><br>• Estado: <span class="ok">Script listo ✅</span><br>• Acceso: 🔐 Premium</p>
     </div>
-  </section>
 
-  <!-- Executors -->
-  <section>
-    <h2>⚙️ Executors</h2>
-    <div class="links">
-      <a class="executor" href="#">🚀 Delta Executor</a>
-      <a class="executor" href="#">💻 Hydrogen Executor</a>
-      <a class="executor" href="#">🔥 Vega X Executor</a>
+    <div class="section">
+      <div class="section-title">💬 Servidor oficial de soporte</div>
+      <p><a href="https://discord.gg/T7gdwmHY" target="_blank">https://discord.gg/T7gdwmHY</a></p>
     </div>
-  </section>
 
-  <footer>
-    © 2025 Dux Hub | Creado con 💙 por Dux
-  </footer>
+  </div>
+
+  <footer>🧩 Usa Dux Hub para automatizar tus juegos favoritos de Roblox</footer>
 </main>
 
 <script>
