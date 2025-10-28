@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dux Hub - Status de Juegos</title>
+<title>Dux Hub 🌙</title>
 <style>
   body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
     background: radial-gradient(ellipse at bottom, #0d1b2a 0%, #000000 100%);
     color: white;
-    overflow-x: hidden;
+    overflow: hidden;
   }
 
   canvas {
@@ -25,98 +25,78 @@
     position: fixed;
     top: 0;
     width: 100%;
-    height: 60px;
-    background-color: rgba(10,10,30,0.9);
+    height: 65px;
+    background-color: rgba(10, 10, 30, 0.9);
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 100;
     border-bottom: 1px solid #00b4ff;
+    z-index: 100;
+    box-shadow: 0 0 15px #00b4ff;
   }
 
-  .executor-links a {
-    margin: 0 15px;
+  .top-bar h1 {
+    font-size: 2em;
     color: #00b4ff;
-    font-weight: bold;
-    text-decoration: none;
-    transition: 0.3s;
-  }
-  .executor-links a:hover {
-    color: #00ffb3;
-  }
-
-  main {
-    padding-top: 80px; /* espacio debajo de la barra superior */
-    padding-bottom: 50px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  h1 {
-    text-align: center;
-    font-size: 2.5em;
-    margin: 10px 0;
-    color: #00b4ff;
-    text-shadow: 0 0 15px #00b4ff;
+    text-shadow: 0 0 20px #00b4ff;
     letter-spacing: 2px;
   }
 
-  .container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 25px;
-    padding: 20px;
-  }
-
-  .card {
-    background: rgba(0, 10, 20, 0.9);
-    border: 1px solid #00b4ff;
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0 0 15px #0077b6;
-    transition: 0.3s;
-  }
-
-  .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 0 25px #00b4ff;
-  }
-
-  .game-title {
-    font-size: 1.3em;
-    color: #00b4ff;
-  }
-
-  .status {
-    margin-top: 10px;
-    color: #00ffb3;
-  }
-
-  .place {
-    font-size: 0.9em;
-    color: #ccc;
-  }
-
-  .footer {
+  /* Contenedor principal */
+  main {
+    padding-top: 100px;
     text-align: center;
-    margin-top: 50px;
-    color: #8ecae6;
   }
 
-  .btn-discord {
+  .links {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+
+  a {
     display: inline-block;
-    margin-top: 15px;
-    padding: 10px 20px;
+    padding: 12px 25px;
     border-radius: 25px;
-    background: #5865f2;
     color: white;
-    text-decoration: none;
     font-weight: bold;
+    text-decoration: none;
+    width: 240px;
     transition: 0.3s;
+    text-align: center;
   }
 
-  .btn-discord:hover {
+  .tiktok {
+    background: #010101;
+    border: 1px solid #ff0050;
+    box-shadow: 0 0 15px #ff0050;
+  }
+  .tiktok:hover {
+    background: #ff0050;
+  }
+
+  .youtube {
+    background: #ff0000;
+    box-shadow: 0 0 15px #ff0000;
+  }
+  .youtube:hover {
+    background: #cc0000;
+  }
+
+  .discord {
+    background: #5865f2;
+    box-shadow: 0 0 15px #5865f2;
+  }
+  .discord:hover {
     background: #4752c4;
+  }
+
+  footer {
+    margin-top: 60px;
+    color: #8ecae6;
+    font-size: 0.9em;
   }
 </style>
 </head>
@@ -125,88 +105,23 @@
 
 <!-- Barra superior -->
 <div class="top-bar">
-  <div class="executor-links">
-    <a href="https://krnl-ios.com/" target="_blank">Krnl iOS</a>
-    <a href="https://deltaios-executor.com/" target="_blank">Delta iOS</a>
-    <a href="https://deltaexploits.gg/delta-executor-android" target="_blank">Delta Android</a>
-    <a href="https://filenetwork.vip/android.html" target="_blank">Krnl Android</a>
-  </div>
+  <h1>💠 Dux Hub 💠</h1>
 </div>
 
 <main>
-  <h1>💠 Dux Hub - Status de Juegos 💠</h1>
-
-  <div class="container">
-    <div class="card">
-      <div class="game-title">🐝 Bee Rich</div>
-      <div class="place">PlaceId: 96601927506261</div>
-      <div class="status">Script listo ✅ (OP)</div>
-    </div>
-
-    <div class="card">
-      <div class="game-title">🛒 Mart Simulator</div>
-      <div class="place">PlaceId: 123900106804415</div>
-      <div class="status">Script listo ✅</div>
-    </div>
-
-    <div class="card">
-      <div class="game-title">⛏️ Dig to Earth's CORE!</div>
-      <div class="place">PlaceId: 81440632616906</div>
-      <div class="status">Script listo ✅</div>
-    </div>
-
-    <div class="card">
-      <div class="game-title">🧠 Brainrot Royale</div>
-      <div class="place">PlaceId: 96151237893653</div>
-      <div class="status">Script listo ✅ (OP)</div>
-    </div>
-
-    <div class="card">
-      <div class="game-title">🏗️ Dam Tycoon</div>
-      <div class="place">PlaceId: 128811184</div>
-      <div class="status">Script listo ✅</div>
-    </div>
-
-    <div class="card">
-      <div class="game-title">🏢 Brainrot Restaurant</div>
-      <div class="place">PlaceId: 96780658634427</div>
-      <div class="status">No listo ❌ (Patch)</div>
-    </div>
-
-    <div class="card">
-      <div class="game-title">👹 Rob The Mother</div>
-      <div class="place">115285389424252</div>
-      <div class="status">Script listo ✅</div>
-    </div>
-
-    <div class="card">
-      <div class="game-title">🎃 Make a Brainrot Army [Halloween]</div>
-      <div class="place">74971517386226</div>
-      <div class="status">Script listo ✅</div>
-    </div>
-
-    <div class="card">
-      <div class="game-title">🏰 Mega Luxury</div>
-      <div class="place">19002485340</div>
-      <div class="status">Script listo ✅</div>
-    </div>
-
-    <div class="card">
-      <div class="game-title">🐔 Chicken Gun (Premium)</div>
-      <div class="place">16632764973</div>
-      <div class="status">Premium 🔐 Script listo ✅</div>
-    </div>
+  <div class="links">
+    <a class="tiktok" href="https://www.tiktok.com/@duxscript" target="_blank">🎵 TikTok - @DuxScript</a>
+    <a class="youtube" href="https://www.youtube.com/@Duxitoz" target="_blank">▶️ YouTube - Duxitoz</a>
+    <a class="discord" href="https://discord.gg/T7gdwmHY" target="_blank">💬 Discord - Dux Hub</a>
   </div>
 
-  <div class="footer">
-    💬 Servidor oficial de soporte:<br>
-    <a href="https://discord.gg/T7gdwmHY" target="_blank" class="btn-discord">Únete al Discord</a>
-    <p>🧩 Usa Dux Hub para automatizar tus juegos favoritos de Roblox</p>
-  </div>
+  <footer>
+    © 2025 Dux Hub | Creado con 💙 por Dux
+  </footer>
 </main>
 
 <script>
-  // Fondo de estrellas 🌌
+  // Fondo estrellado 🌌
   const canvas = document.getElementById("stars");
   const ctx = canvas.getContext("2d");
   let stars = [];
