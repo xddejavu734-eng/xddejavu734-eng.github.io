@@ -15,7 +15,7 @@
     font-family: 'Poppins', sans-serif;
     background: radial-gradient(ellipse at bottom, #0d1b2a 0%, #000000 100%);
     color: white;
-    overflow: hidden;
+    overflow-x: hidden;
     text-align: center;
   }
 
@@ -50,14 +50,24 @@
   }
 
   main {
-    padding-top: 120px;
+    padding-top: 100px;
+  }
+
+  section {
+    margin: 60px 0;
+  }
+
+  h2 {
+    font-size: 1.8em;
+    color: #00b4ff;
+    text-shadow: 0 0 10px #00b4ff;
+    margin-bottom: 25px;
   }
 
   .links {
-    margin-top: 40px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 18px;
     align-items: center;
   }
 
@@ -66,13 +76,13 @@
     padding: 12px 25px;
     border-radius: 25px;
     font-weight: bold;
-    text-decoration: none !important; /* 🔥 quita subrayado */
-    outline: none !important;         /* 🔥 quita bordes al hacer clic */
+    text-decoration: none !important;
+    outline: none !important;
     border: none !important;
     box-shadow: none !important;
-    width: 240px;
+    width: 250px;
     text-align: center;
-    transition: 0.3s;
+    transition: all 0.3s;
   }
 
   a:focus, a:active {
@@ -81,39 +91,46 @@
     border: none !important;
   }
 
+  /* Redes */
   .tiktok {
     background: #010101;
     border: 1px solid #ff0050;
     box-shadow: 0 0 15px #ff0050;
   }
-
-  .tiktok:hover {
-    background: #ff0050;
-  }
+  .tiktok:hover { background: #ff0050; }
 
   .youtube {
     background: #ff0000;
     box-shadow: 0 0 15px #ff0000;
   }
-
-  .youtube:hover {
-    background: #cc0000;
-  }
+  .youtube:hover { background: #cc0000; }
 
   .discord {
     background: #5865f2;
     box-shadow: 0 0 15px #5865f2;
   }
+  .discord:hover { background: #4752c4; }
 
-  .discord:hover {
-    background: #4752c4;
+  /* Juegos & Status */
+  .status {
+    background: #00b4ff;
+    box-shadow: 0 0 15px #00b4ff;
   }
+  .status:hover { background: #0077b6; }
+
+  /* Executors */
+  .executor {
+    background: #9d4edd;
+    box-shadow: 0 0 15px #9d4edd;
+  }
+  .executor:hover { background: #7b2cbf; }
 
   footer {
-    margin-top: 60px;
+    margin-top: 80px;
     color: #8ecae6;
     font-size: 0.9em;
     user-select: none;
+    margin-bottom: 40px;
   }
 </style>
 </head>
@@ -126,11 +143,35 @@
 </div>
 
 <main>
-  <div class="links">
-    <a class="tiktok" href="https://www.tiktok.com/@duxscript" target="_blank">🎵 TikTok - @DuxScript</a>
-    <a class="youtube" href="https://www.youtube.com/@Duxitoz" target="_blank">▶️ YouTube - Duxitoz</a>
-    <a class="discord" href="https://discord.gg/T7gdwmHY" target="_blank">💬 Discord - Dux Hub</a>
-  </div>
+
+  <!-- Redes principales -->
+  <section>
+    <div class="links">
+      <a class="tiktok" href="https://www.tiktok.com/@duxscript" target="_blank">🎵 TikTok - @DuxScript</a>
+      <a class="youtube" href="https://www.youtube.com/@Duxitoz" target="_blank">▶️ YouTube - Duxitoz</a>
+      <a class="discord" href="https://discord.gg/T7gdwmHY" target="_blank">💬 Discord - Dux Hub</a>
+    </div>
+  </section>
+
+  <!-- Juegos y Status -->
+  <section>
+    <h2>🎮 Juegos & Status</h2>
+    <div class="links">
+      <a class="status" href="#">🌿 Grow a Garden - Stats</a>
+      <a class="status" href="#">🗡️ Blox Fruits - Status</a>
+      <a class="status" href="#">🐝 Bee Swarm - Status</a>
+    </div>
+  </section>
+
+  <!-- Executors -->
+  <section>
+    <h2>⚙️ Executors</h2>
+    <div class="links">
+      <a class="executor" href="#">🚀 Delta Executor</a>
+      <a class="executor" href="#">💻 Hydrogen Executor</a>
+      <a class="executor" href="#">🔥 Vega X Executor</a>
+    </div>
+  </section>
 
   <footer>
     © 2025 Dux Hub | Creado con 💙 por Dux
