@@ -1,213 +1,470 @@
-<!doctype html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Dux Hub 👑 — Scripts</title>
+<link rel="icon" href="data:,">
+<style>
+  /* --- Reset + fuente --- */
+  :root{
+    --bg:#071428;
+    --card:#ffffff;
+    --muted:#7b93b3;
+    --accent:#0b78ff;
+    --glass: rgba(255,255,255,0.06);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial; background: radial-gradient(ellipse at 20% 10%, rgba(11,120,255,0.06) 0%, transparent 20%), linear-gradient(180deg,#04121b 0%, #071428 50%, #030712 100%); color:#072033; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;}
 
-<html
-  lang="en"
-  class="layout-wide customizer-hide"
-  data-assets-path="../assets/"
-  data-template="vertical-menu-template-free">
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+  /* --- Space background canvas sits under content --- */
+  #space {
+    position: fixed; inset: 0; z-index:0; pointer-events:none;
+  }
 
-    <title>Demo: Login Basic - Pages | Sneat - Bootstrap Dashboard FREE</title>
+  /* --- Header --- */
+  header {
+    position: sticky; top:0; z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    gap:12px;padding:18px 22px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.92));
+    box-shadow: 0 6px 24px rgba(3,12,30,0.08);
+    border-bottom: 1px solid rgba(11,120,255,0.12);
+  }
+  .brand {display:flex;align-items:center;gap:12px}
+  .logo {
+    width:44px;height:44px;border-radius:10px;
+    background: linear-gradient(135deg,var(--accent),#00c3ff);
+    display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:18px;
+    box-shadow: 0 6px 20px rgba(11,120,255,0.18);
+  }
+  h1{margin:0;font-size:1.15rem;color:#042338}
+  .beta {background: #ffefc3; color:#7a5c00; padding:6px 10px;border-radius:10px;font-weight:700;font-size:0.82rem;display:inline-block;margin-left:8px}
+  .top-right {display:flex;gap:12px;align-items:center}
 
-    <meta name="description" content="" />
+  /* --- Layout --- */
+  .wrap {position:relative; z-index:10; display:grid;grid-template-columns:260px 1fr; gap:20px; max-width:1200px;margin:26px auto;padding:0 18px;}
+  @media(max-width:920px){ .wrap{grid-template-columns:1fr; padding-bottom:40px} header{padding:14px} }
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="../assets/img/favicon/favicon.ico" />
+  /* --- Sidebar --- */
+  .sidebar {background:rgba(255,255,255,0.95); border-radius:12px;padding:12px;border:1px solid rgba(11,120,255,0.08);}
+  .search {display:flex; gap:8px; margin-bottom:12px}
+  .search input{flex:1;padding:10px 12px;border-radius:10px;border:1px solid rgba(3,12,30,0.06);font-size:0.95rem}
+  .nav {margin-top:6px;max-height:72vh;overflow:auto;padding-right:6px}
+  .nav::-webkit-scrollbar{width:8px}
+  .nav::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--accent),#00c3ff);border-radius:6px}
+  .folder{padding:10px;border-radius:8px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;margin-bottom:6px}
+  .folder:hover{background:linear-gradient(90deg, rgba(11,120,255,0.07), rgba(0,195,255,0.04));}
+  .folder.active{background:linear-gradient(90deg, rgba(11,120,255,0.12), rgba(0,195,255,0.06));font-weight:700;border-left:4px solid var(--accent);}
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
-      rel="stylesheet" />
+  /* --- Main content --- */
+  .main {padding:6px 0;overflow:auto; max-height:78vh;}
+  .section {background:var(--card); border-radius:12px; padding:14px; margin-bottom:16px; box-shadow:0 6px 22px rgba(2,20,40,0.06); border:1px solid rgba(3,12,30,0.04)}
+  .section h2 {margin:0 0 10px 0;color:#042338; font-size:1.05rem; display:flex;align-items:center; gap:10px}
+  .tiles {display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
+  .card {background: linear-gradient(180deg,#ffffff,#f5fbff); border-radius:10px;padding:10px;border:1px solid rgba(11,120,255,0.08); display:flex;flex-direction:column; min-height:120px}
+  .card .meta {display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+  .title {font-weight:700;color:#063b61}
+  .game {font-size:0.85rem;color:var(--muted)}
+  .code {background:rgba(3,12,30,0.04); padding:10px;border-radius:8px;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;font-size:0.85rem;color:#042338; white-space:pre-wrap; word-break:break-all; overflow:auto; max-height:84px; margin-top:auto; border:1px solid rgba(3,12,30,0.03)}
+  .btn-row {display:flex;gap:8px;margin-top:8px}
+  .btn {padding:8px 10px;border-radius:8px;border:0;cursor:pointer;font-weight:700}
+  .copy-btn {background:var(--accent);color:white}
+  .copy-btn.copied {background:#18d18a}
+  .info-btn {background:#eef6ff;color:var(--accent);border:1px solid rgba(11,120,255,0.12)}
 
-    <link rel="stylesheet" href="../assets/vendor/fonts/iconify-icons.css" />
+  /* --- Footer --- */
+  footer {max-width:1200px;margin:10px auto 60px auto;padding:16px;border-radius:12px;background:rgba(255,255,255,0.95);display:flex;justify-content:space-between;align-items:center;gap:12px;border:1px solid rgba(11,120,255,0.08)}
+  .socials a{display:inline-block;padding:8px 10px;border-radius:8px;background:linear-gradient(90deg,var(--accent),#00c3ff);color:white;text-decoration:none;font-weight:700;margin-right:8px}
+  .small{color:rgba(3,12,30,0.5);font-size:0.9rem}
 
-    <!-- Core CSS -->
-    <!-- build:css assets/vendor/css/theme.css  -->
+  /* --- tiny responsive tweaks --- */
+  @media(max-width:540px){
+    header h1{font-size:1rem}
+    .tiles{grid-template-columns:1fr}
+    .code{max-height:140px}
+  }
+</style>
+</head>
+<body>
+<canvas id="space"></canvas>
 
-    <link rel="stylesheet" href="../assets/vendor/css/core.css" />
-    <link rel="stylesheet" href="../assets/css/demo.css" />
+<header>
+  <div class="brand">
+    <div class="logo">DUX</div>
+    <div>
+      <h1>Dux Hub 👑</h1>
+      <div class="beta">⚠️ BETA</div>
+    </div>
+  </div>
 
-    <!-- Vendors CSS -->
+  <div class="top-right">
+    <div style="text-align:right">
+      <div style="font-weight:700;color:#063b61">Scripts list</div>
+      <div style="font-size:0.85rem;color:var(--muted)">Blanco & Azul · Fondo espacial animado</div>
+    </div>
+  </div>
+</header>
 
-    <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+<div class="wrap">
 
-    <!-- endbuild -->
+  <!-- SIDEBAR -->
+  <aside class="sidebar" aria-label="Menu">
+    <div class="search">
+      <input id="q" type="search" placeholder="Buscar juego o script..." oninput="filterCards()" />
+      <button class="info-btn" onclick="showAll()">Todos</button>
+    </div>
 
-    <!-- Page CSS -->
-    <!-- Page -->
-    <link rel="stylesheet" href="../assets/vendor/css/pages/page-auth.css" />
+    <div class="nav" id="folders">
+      <!-- folders injected by JS -->
+    </div>
+  </aside>
 
-    <!-- Helpers -->
-    <script src="../assets/vendor/js/helpers.js"></script>
-    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+  <!-- MAIN -->
+  <main class="main" id="main">
+    <!-- sections injected by JS -->
+  </main>
+</div>
 
-    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+<footer>
+  <div>
+    <span class="small">© 2025 Dux Hub</span><br>
+    <span class="small">Abre un script, copia y pégalo en tu executor.</span>
+  </div>
 
-    <script src="../assets/js/config.js"></script>
-  </head>
+  <div>
+    <a class="social" href="https://discord.gg/UGZyQJZd" target="_blank" rel="noopener">Discord</a>
+    <a class="social" href="https://www.youtube.com/channel/UClZbyX_5KNWJVZNwZMnSInw" target="_blank" rel="noopener">YouTube</a>
+    <a class="social" href="https://www.tiktok.com/@duxscript" target="_blank" rel="noopener">TikTok</a>
+  </div>
+</footer>
 
-  <body>
-    <!-- Content -->
+<script>
+/* ---------------- SPACE BACKGROUND --------------
+   canvas stars + subtle nebula moving
+--------------------------------------------------*/
+const canvas = document.getElementById('space');
+const ctx = canvas.getContext('2d');
+let W = canvas.width = innerWidth;
+let H = canvas.height = innerHeight;
+window.addEventListener('resize', ()=>{ W=canvas.width=innerWidth; H=canvas.height=innerHeight; initStars(); });
 
-    <div class="container-xxl">
-      <div class="authentication-wrapper authentication-basic container-p-y">
-        <div class="authentication-inner">
-          <!-- Register -->
-          <div class="card px-sm-6 px-0">
-            <div class="card-body">
-              <!-- Logo -->
-              <div class="app-brand justify-content-center">
-                <a href="index.html" class="app-brand-link gap-2">
-                  <span class="app-brand-logo demo">
-                    <span class="text-primary">
-                      <svg
-                        width="25"
-                        viewBox="0 0 25 42"
-                        version="1.1"
-                        xmlns="http://www.w3.org/2000/svg"
-                        xmlns:xlink="http://www.w3.org/1999/xlink">
-                        <defs>
-                          <path
-                            d="M13.7918663,0.358365126 L3.39788168,7.44174259 C0.566865006,9.69408886 -0.379795268,12.4788597 0.557900856,15.7960551 C0.68998853,16.2305145 1.09562888,17.7872135 3.12357076,19.2293357 C3.8146334,19.7207684 5.32369333,20.3834223 7.65075054,21.2172976 L7.59773219,21.2525164 L2.63468769,24.5493413 C0.445452254,26.3002124 0.0884951797,28.5083815 1.56381646,31.1738486 C2.83770406,32.8170431 5.20850219,33.2640127 7.09180128,32.5391577 C8.347334,32.0559211 11.4559176,30.0011079 16.4175519,26.3747182 C18.0338572,24.4997857 18.6973423,22.4544883 18.4080071,20.2388261 C17.963753,17.5346866 16.1776345,15.5799961 13.0496516,14.3747546 L10.9194936,13.4715819 L18.6192054,7.984237 L13.7918663,0.358365126 Z"
-                            id="path-1"></path>
-                          <path
-                            d="M5.47320593,6.00457225 C4.05321814,8.216144 4.36334763,10.0722806 6.40359441,11.5729822 C8.61520715,12.571656 10.0999176,13.2171421 10.8577257,13.5094407 L15.5088241,14.433041 L18.6192054,7.984237 C15.5364148,3.11535317 13.9273018,0.573395879 13.7918663,0.358365126 C13.5790555,0.511491653 10.8061687,2.3935607 5.47320593,6.00457225 Z"
-                            id="path-3"></path>
-                          <path
-                            d="M7.50063644,21.2294429 L12.3234468,23.3159332 C14.1688022,24.7579751 14.397098,26.4880487 13.008334,28.506154 C11.6195701,30.5242593 10.3099883,31.790241 9.07958868,32.3040991 C5.78142938,33.4346997 4.13234973,34 4.13234973,34 C4.13234973,34 2.75489982,33.0538207 2.37032616e-14,31.1614621 C-0.55822714,27.8186216 -0.55822714,26.0572515 -4.05231404e-15,25.8773518 C0.83734071,25.6075023 2.77988457,22.8248993 3.3049379,22.52991 C3.65497346,22.3332504 5.05353963,21.8997614 7.50063644,21.2294429 Z"
-                            id="path-4"></path>
-                          <path
-                            d="M20.6,7.13333333 L25.6,13.8 C26.2627417,14.6836556 26.0836556,15.9372583 25.2,16.6 C24.8538077,16.8596443 24.4327404,17 24,17 L14,17 C12.8954305,17 12,16.1045695 12,15 C12,14.5672596 12.1403557,14.1461923 12.4,13.8 L17.4,7.13333333 C18.0627417,6.24967773 19.3163444,6.07059163 20.2,6.73333333 C20.3516113,6.84704183 20.4862915,6.981722 20.6,7.13333333 Z"
-                            id="path-5"></path>
-                        </defs>
-                        <g id="g-app-brand" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                          <g id="Brand-Logo" transform="translate(-27.000000, -15.000000)">
-                            <g id="Icon" transform="translate(27.000000, 15.000000)">
-                              <g id="Mask" transform="translate(0.000000, 8.000000)">
-                                <mask id="mask-2" fill="white">
-                                  <use xlink:href="#path-1"></use>
-                                </mask>
-                                <use fill="currentColor" xlink:href="#path-1"></use>
-                                <g id="Path-3" mask="url(#mask-2)">
-                                  <use fill="currentColor" xlink:href="#path-3"></use>
-                                  <use fill-opacity="0.2" fill="#FFFFFF" xlink:href="#path-3"></use>
-                                </g>
-                                <g id="Path-4" mask="url(#mask-2)">
-                                  <use fill="currentColor" xlink:href="#path-4"></use>
-                                  <use fill-opacity="0.2" fill="#FFFFFF" xlink:href="#path-4"></use>
-                                </g>
-                              </g>
-                              <g
-                                id="Triangle"
-                                transform="translate(19.000000, 11.000000) rotate(-300.000000) translate(-19.000000, -11.000000) ">
-                                <use fill="currentColor" xlink:href="#path-5"></use>
-                                <use fill-opacity="0.2" fill="#FFFFFF" xlink:href="#path-5"></use>
-                              </g>
-                            </g>
-                          </g>
-                        </g>
-                      </svg>
-                    </span>
-                  </span>
-                  <span class="app-brand-text demo text-heading fw-bold">Sneat</span>
-                </a>
-              </div>
-              <!-- /Logo -->
-              <h4 class="mb-1">Welcome to Sneat! 👋</h4>
-              <p class="mb-6">Please sign-in to your account and start the adventure</p>
+let stars = [], nebula = [];
+function rand(a,b){return a + Math.random()*(b-a)}
+function initStars(){
+  stars = []; nebula=[];
+  for(let i=0;i<220;i++){
+    stars.push({
+      x: Math.random()*W,
+      y: Math.random()*H,
+      r: Math.random()*1.4,
+      s: 0.1 + Math.random()*0.8,
+      alpha: 0.2 + Math.random()*0.9,
+      dx: (Math.random()-0.5)*0.02
+    });
+  }
+  // nebula blobs
+  for(let i=0;i<6;i++){
+    nebula.push({
+      x: Math.random()*W,
+      y: Math.random()*H*0.8,
+      r: 200+Math.random()*400,
+      hue: 200 + Math.random()*40,
+      phase: Math.random()*Math.PI*2,
+      speed: 0.0008 + Math.random()*0.0015
+    });
+  }
+}
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  // nebula soft
+  nebula.forEach(n=>{
+    n.phase += n.speed;
+    const g = ctx.createRadialGradient(n.x + Math.sin(n.phase)*60, n.y + Math.cos(n.phase)*40, n.r*0.05, n.x, n.y, n.r);
+    g.addColorStop(0, `rgba(${20},${100 + Math.sin(n.phase)*40},${220},0.12)`);
+    g.addColorStop(0.5, `rgba(10,40,120,0.06)`);
+    g.addColorStop(1, `rgba(2,6,20,0)`);
+    ctx.fillStyle = g;
+    ctx.fillRect(0,0,W,H);
+  });
+  // stars
+  stars.forEach(s=>{
+    s.x += s.dx;
+    if(s.x<0) s.x=W;
+    if(s.x>W) s.x=0;
+    ctx.beginPath();
+    ctx.fillStyle = `rgba(255,255,255,${s.alpha})`;
+    ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+    ctx.fill();
+  });
+  requestAnimationFrame(draw);
+}
+initStars();
+draw();
 
-              <form id="formAuthentication" class="mb-6" action="index.html">
-                <div class="mb-6">
-                  <label for="email" class="form-label">Email or Username</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="email"
-                    name="email-username"
-                    placeholder="Enter your email or username"
-                    autofocus />
-                </div>
-                <div class="mb-6 form-password-toggle">
-                  <label class="form-label" for="password">Password</label>
-                  <div class="input-group input-group-merge">
-                    <input
-                      type="password"
-                      id="password"
-                      class="form-control"
-                      name="password"
-                      placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                      aria-describedby="password" />
-                    <span class="input-group-text cursor-pointer"><i class="icon-base bx bx-hide"></i></span>
-                  </div>
-                </div>
-                <div class="mb-8">
-                  <div class="d-flex justify-content-between">
-                    <div class="form-check mb-0">
-                      <input class="form-check-input" type="checkbox" id="remember-me" />
-                      <label class="form-check-label" for="remember-me"> Remember Me </label>
-                    </div>
-                    <a href="auth-forgot-password-basic.html">
-                      <span>Forgot Password?</span>
-                    </a>
-                  </div>
-                </div>
-                <div class="mb-6">
-                  <button class="btn btn-primary d-grid w-100" type="submit">Login</button>
-                </div>
-              </form>
+/* ----------------- SCRIPTS DATA -----------------
+   This list is built from all your messages.
+   Each item: { group: 'Game/Folder', name: '', code: '' }
+--------------------------------------------------*/
+const scripts = [
+  /* Arise Crossover */
+  {group:'ARISE CROSSOVER', name:'GOOMBA HUB', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/JustLevel/goombahub/main/AriseCrossover.lua"))()`},
 
-              <p class="text-center">
-                <span>New on our platform?</span>
-                <a href="auth-register-basic.html">
-                  <span>Create an account</span>
-                </a>
-              </p>
-            </div>
+  /* Blox Fruits */
+  {group:'BLOX FRUITS', name:'ASTRAL HUB', code:`loadstring(game:HttpGet('https://cdn.robloxscripts.gg/public/furky/furky-astral-source.lua'))()`},
+  {group:'BLOX FRUITS', name:'HOHO HUB', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI"))()`},
+  {group:'BLOX FRUITS', name:'REDZ HUB (incluye Settings)', code:`local Settings = {
+  JoinTeam = "Pirates"; -- Pirates/Marines
+  Translator = true; -- true/false
+}
+getgenv().BETA_VERSION = true
+loadstring(game:HttpGet("https://raw.githubusercontent.com/tlredz/Scripts/refs/heads/main/main.luau"))(Settings)`},
+  {group:'BLOX FRUITS', name:'BLUE X HUB', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-BlueX/BlueX-Hub/refs/heads/main/Main.lua"))()`},
+  {group:'BLOX FRUITS', name:'DEV-GRAVITY BloxFruit', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-GravityHub/BloxFruit/refs/heads/main/Main.lua"))()`},
+  {group:'BLOX FRUITS', name:'SCRIPT SERVER HOP', code:`https://www.mediafire.com/file/2sz4aephhdiu0l0/SCRIPT+HOP+SERVER.txt/file`},
+
+  /* Steal / Brainrot */
+  {group:'STEAL / BRAINROT', name:'STEAL A CLASH (DuxClash)', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/xddejavu734-eng/Dux-Clash-royal-Menu/main/DuxClash.lua", true))()`},
+  {group:'STEAL / BRAINROT', name:'ZOMBIE BRAINROT EVOLUTION', code:`loadstring(game:HttpGet("https://rawscripts.net/raw/Brainrot-Zombie-Evolution-Brainrot-Zombie-OP-script-free-51645"))()`},
+  {group:'STEAL / BRAINROT', name:'HOHO HUB (Brainrot)', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI"))()`},
+  {group:'STEAL / BRAINROT', name:'LEGENDS BRAINROT (Key: ayam)', code:`https://www.mediafire.com/file/vj0in6milhaui15/SCRIPT+LEGENDS+BRAINROT.txt/file`},
+  {group:'STEAL / BRAINROT', name:'ARBIX TP NUEVO', code:`https://www.mediafire.com/file/3jvwf5xpoa2ocar/SCRIPT+ARBIX+TP+VC+SERVER.txt/file`},
+  {group:'STEAL / BRAINROT', name:'CHILLI HUB', code:`https://www.mediafire.com/file/edydn45v754qxm3/SCRIPT+CHILLI+HUB+BRAINROT.txt/file`},
+  {group:'STEAL / BRAINROT', name:'HOHO HUB (PVB)', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI"))()`},
+
+  /* Bee / Bee Rich / Atlas */
+  {group:'BEE / ATLAS', name:'ATLAS - Chris12089', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/Chris12089/atlasbss/main/script.lua"))()`},
+  {group:'BEE / ATLAS', name:'BEE RICH (Dux)', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/xddejavu734-eng/Dux-Clash-royal-Menu/main/DuxBee.lua", true))()`},
+  {group:'BEE / ATLAS', name:'DUX BEE SCRIPT (DuxScript)', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/xddejavu734-eng/DuxScript/main/Dux%20Bee%20Script"))()`},
+  {group:'BEE / ATLAS', name:'DUX HUB (DuxScript main)', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/xddejavu734-eng/DuxScript/main/Dux%20Hub"))()`},
+
+  /* Arcade Basketball */
+  {group:'ARCADE BASKETBALL', name:'Unlock All (pastebin)', code:`https://pastebin.com/raw/w64jCQpf`},
+  {group:'ARCADE BASKETBALL', name:'Auto Green (pastebin)', code:`loadstring(game:HttpGet('https://pastebin.com/raw/L2LX0eM9'))()`},
+
+  /* Natural Disaster */
+  {group:'NATURAL DISASTER', name:'Balloon Giver (Keyless)', code:`loadstring(game:HttpGet("https://rawscripts.net/raw/Free-CLIENTSIDED-Balloon-Giver!_175"))()`},
+
+  /* Ride & Misc */
+  {group:'MISC', name:'Ride and Slide', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/gumanba/Scripts/main/RideandSlide"))()`},
+  {group:'MISC', name:'Brookhaven Halloween', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/gumanba/Scripts/main/BrookhavenHalloween"))()`},
+  {group:'MISC', name:'Slasher Blade Loot', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/gumanba/Scripts/main/SlasherBladeLoot"))()`},
+  {group:'MISC', name:'DUMP (ALPHA)', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/gumanba/Scripts/main/DUMP"))()`},
+  {group:'MISC', name:'Rob The Place (DuxHub)', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/xddejavu734-eng/DuxHub/main/DuxRobTheplace"))()`},
+  {group:'MISC', name:'Make Ur Army', code:`loadstring(game:HttpGet("https://pastefy.app/iftLSDRm/raw"))()`},
+  {group:'MISC', name:'Chicago Life', code:`loadstring(game:HttpGet("https://pastefy.app/eXkcBnHb/raw"))()`},
+  {group:'MISC', name:'My Fishing Island (Invoke remote example)', code:`game:GetService("ReplicatedStorage").Events.BuyRod:InvokeServer("Bronze",-math.huge)`},
+
+  /* Build a Boat */
+  {group:'BUILD A BOAT', name:'BoatBuilder Hub', code:`loadstring(game:HttpGet(("https://raw.githubusercontent.com/catblox1346/StensUIReMake/refs/heads/main/Script/boatbuilderhub_B1"),true))()`},
+
+  /* Grand Piece / GPO */
+  {group:'GRAND PIECE ONLINE', name:'SwitchHub Loader (Key)', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/cloneref/SwitchHubRecode/refs/heads/main/Loader/SwitchHubLoaderAlotGame.lua"))()`},
+
+  /* Plant vs Brainrot */
+  {group:'PLANTAS VS BRAINROT', name:'Blessed Hub X', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/mynamewendel-ctrl/Blessed-Hub-X-/refs/heads/main/Plants-Vs-Brainrots.lua"))()`},
+
+  /* Weakly Legacy 2 */
+  {group:'WEAKLY LEGACY', name:'Weakly Legacy 2', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/OhhMyGehlee/sh/refs/heads/main/a"))()`},
+
+  /* Muscle Legends / Speed hub (also used for DIG) */
+  {group:'MUSCLE / DIG', name:'Speed Hub X', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua", true))()`},
+
+  /* MM2 roles checker */
+  {group:'MM2', name:'MM2 Roles Checker', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/Bac0nHck/Scripts/main/MM2RolesChecker"))()`},
+
+  /* Final Stand: Remastered (luarmor) */
+  {group:'FINAL STAND', name:'Final Stand Loader', code:`loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/3819c25f3a7f07b58ac9aa8d5aaa90ac.lua"))()`},
+
+  /* BloxFruit alternate loaders */
+  {group:'BLOX FRUITS', name:'Dev-Gravity BloxFruit', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-GravityHub/BloxFruit/refs/heads/main/Main.lua"))()`},
+
+  /* 99 Nights */
+  {group:'99 NIGHTS', name:'99 Nights script', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/Ttttttt55/my-script/refs/heads/main/script"))()`},
+
+  /* BonkHub loader (raise animals) */
+  {group:'RAISE ANIMALS', name:'BonkHub loader', code:`loadstring(game:HttpGet("https://bonkhub.online/loader.lua",true))()`},
+  {group:'RAISE ANIMALS', name:'Tbao (Raise of animals)', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/tbao143/thaibao/refs/heads/main/TbaoHub"))()`},
+
+  /* Many mediafire / hub links you pasted (kept as-is) */
+  {group:'EXTRAS / MEDIAFIRE', name:'BONK HUB NORMAL', code:`https://www.mediafire.com/file/8snedlegw42wys7/SCRIPT+BONK+HUB+NORMAL.txt/file`},
+  {group:'EXTRAS / MEDIAFIRE', name:'H4X HUB', code:`https://www.mediafire.com/file/2florr3w9dw0ydf/SCRIPT+H4X.txt/file`},
+  {group:'EXTRAS / MEDIAFIRE', name:'VOID WARE', code:`https://www.mediafire.com/file/nm491e4nvwnbr2j/SCRIPT+VOIDWARE.txt/file`},
+  {group:'EXTRAS / MEDIAFIRE', name:'VORTEX HUB', code:`https://www.mediafire.com/file/svhh5vhscr8ogmi/SCRIPT+99NIGHT+VORTEX+HUB.txt/file`},
+  {group:'EXTRAS / MEDIAFIRE', name:'FOXNAME', code:`https://www.mediafire.com/file/pb8chz4qx3e14ok/SCRIPT+FOXNAME+DIAMOND99.txt/file`},
+  {group:'EXTRAS / MEDIAFIRE', name:'SERIOUSLY', code:`https://www.mediafire.com/file/2lg692qhlvht152/SCRIPT+SERIOUSLY+99NOCHES.txt/file`},
+  {group:'EXTRAS / MEDIAFIRE', name:'FOXNAME V2', code:`https://www.mediafire.com/file/962kvzgws7fdtl3/SCRIPT+FARM+DAY+++GEMAS.txt/file`},
+
+  /* Blox mediafire entries you pasted */
+  {group:'BLOX FRUITS', name:'ANDEPZAIHUB (mediafire)', code:`https://www.mediafire.com/file/xpnq8upphf1enys/SCRIPT+ANDEPZAIHUB.TXT/file`},
+  {group:'BLOX FRUITS', name:'ASTRAL HUB (cdn loader)', code:`loadstring(game:HttpGet('https://cdn.robloxscripts.gg/public/furky/furky-astral-source.lua'))()`},
+  {group:'BLOX FRUITS', name:'BLUE X HUB (mediafire)', code:`https://www.mediafire.com/file/mizwgtlc6gdwkl1/SCRIPT+BLUEX+HUB.txt/file`},
+  {group:'BLOX FRUITS', name:'DAT THG', code:`https://www.mediafire.com/file/j6d2fva815bpfpp/SCRIPT+DAT+THG.txt/file`},
+  {group:'BLOX FRUITS', name:'HOHO HUB (loader)', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI"))()`},
+  {group:'BLOX FRUITS', name:'REDZ HUB (loader)', code:`local Settings = {
+  JoinTeam = "Pirates"; Translator = true;
+}
+getgenv().BETA_VERSION = true
+loadstring(game:HttpGet("https://raw.githubusercontent.com/tlredz/Scripts/refs/heads/main/main.luau"))(Settings)`},
+  {group:'BLOX FRUITS', name:'TSUO HUB (mediafire)', code:`https://www.mediafire.com/file/giyq8l80fpqk2jb/SCRIPT+TSUO+HUB.txt/file`},
+  {group:'BLOX FRUITS', name:'W-AZURE', code:`https://www.mediafire.com/file/lvehh3dle23ej5a/NUEVO+W-AZURE+TRUE.txt/file`},
+  {group:'BLOX FRUITS', name:'NEW OMG HUB', code:`https://www.mediafire.com/file/yqty2pkjbqmlfut/SCRIPT+NEW+OMG+HUB+2025.txt/file`},
+  {group:'BLOX FRUITS', name:'TEDDY HUB', code:`https://www.mediafire.com/file/uweo7ms5gvl1c3h/SCRIPT+TEDDY+HUB.txt/file`},
+  {group:'BLOX FRUITS', name:'GRAVITY HUB', code:`https://www.mediafire.com/file/nkbcvf5y1ijevcb/GRAVITY+HUB.txt/file`},
+
+  /* DIG */
+  {group:'DIG', name:'FROSTBYTE', code:`https://www.mediafire.com/file/j0ua34pwf4lnv94/SCRIPT+FROSTBYTE+DIG.txt/file`},
+
+  /* DEAD RAILS */
+  {group:'DEAD RAILS', name:'NAT HUB', code:`https://www.mediafire.com/file/d89mbxqwkzjwt3o/SCRIPT_NAT_HUB.txt/file`},
+  {group:'DEAD RAILS', name:'SKULL HUB', code:`https://www.mediafire.com/file/fhtm57gmk7gzuk4/SCRIPT+SKULL+HUB+AUTO+BONOS.txt/file`},
+
+  /* Fisch */
+  {group:'FISCH', name:'NATIVE HUB', code:`https://www.mediafire.com/file/7b8apdysqo369ne/SCRIPT_NATIVE_NEW.txt/file`},
+  {group:'FISCH', name:'ZENITH HUB (loader)', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/rxito/ZenithHub/refs/heads/main/Loader"))()`},
+  {group:'FISCH', name:'ALCHEMY HUB (loader)', code:`loadstring(game:HttpGet("https://scripts.alchemyhub.xyz"))()`},
+
+  /* Grow a Garden */
+  {group:'GROW A GARDEN', name:'DUPLICAR DINERO (mediafire)', code:`https://www.mediafire.com/file/t3uuf2f10p0xww1/SCRIPT+LUNOR.txt/file`},
+  {group:'GROW A GARDEN', name:'KICIAHOOK (loader)', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/kiciahook/kiciahook/refs/heads/main/loader.luau"))()`},
+  {group:'GROW A GARDEN', name:'LUNOR HUB (loader & key note)', code:`script_key = 'Insert Lunor Key Here';
+loadstring(game:HttpGet('https://raw.githubusercontent.com/Catto-YFCN/Lunor_Dependencies/refs/heads/main/Loader'))()
+
+-- Para obtener la key: https://ads.luarmor.net/get_key?for=LinkvertiseAD12_Hours-HhMMjfiZOeFt`},
+  {group:'GROW A GARDEN', name:'NO LAG HUB', code:`https://www.mediafire.com/file/6t5t3pb7e8jtjvs/SCRIPT+NO+LAG+GROW+GARDEN.txt/file`},
+  {group:'GROW A GARDEN', name:'SPEED HUB', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua", true))()`},
+
+  /* HUNTS / HUNTY ZOMBIE*/
+  {group:'HUNTY ZOMBIE', name:'HUNTY ZOMBIE SCRIPT', code:`https://www.mediafire.com/file/nlr7pib279xkfxv/SCRIPT+HUNTY+ZOMBIE+TORA+ISME.txt/file`},
+  {group:'HUNTY ZOMBIE', name:'SOLIX HUB', code:`https://www.mediafire.com/file/d66j12ef9ynbuv0/SCRIPT_SOLIX_HUB.txt/file`},
+  {group:'HUNTY ZOMBIE', name:'TYPE HUB', code:`https://www.mediafire.com/file/xjcmcidto7rsjl3/SCRIPT+TYPE+HUB+HUNTY+ZOMBIE.txt/file`},
+  {group:'HUNTY ZOMBIE', name:'ZEE HUB', code:`https://www.mediafire.com/file/1tzpo49zjgij7gv/SCRIPT+ZEE+HUB+HUNTY+ZOMBIE.txt/file`},
+  {group:'HUNTY ZOMBIE', name:'CHIYO HUB', code:`https://www.mediafire.com/file/l6p95il7t8sa9yc/SCRIPT+CHIYO+HUB.txt/file`},
+  {group:'HUNTY ZOMBIE', name:'MIRAGE HUB', code:`https://www.mediafire.com/file/cbor7shfei6xi5y/SCRIPT+MIRAGE+HUB.txt/file`},
+
+  /* VOX SEAS */
+  {group:'VOX SEAS', name:'FARM DINERO', code:`loadstring(game:HttpGet('https://raw.githubusercontent.com/shakaUnlocked/IiI/refs/heads/main/AutoVoxSeas.lua'))()`},
+  {group:'VOX SEAS', name:'LEGEND HUB', code:`loadstring(game:HttpGet("https://pastefy.app/ULaWpxKm/raw"))()`},
+  {group:'VOX SEAS', name:'NEXUS HUB', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/CrazyHub123/NexusHubRevival/refs/heads/main/NewLoader.lua"))()`},
+
+  /* Steal - some more */
+  {group:'STEAL / BRAINROT', name:'AJJAN', code:`https://www.mediafire.com/file/b8gzxd0hu3dmydc/SCRIPT+AJJAN+STEAL+A+BRAINROT.txt/file`},
+  {group:'STEAL / BRAINROT', name:'LENNON V3', code:`https://www.mediafire.com/file/6phdz9th76ddq6v/SCRIPT+LENNON+V3.txt/file`},
+  {group:'STEAL / BRAINROT', name:'LEMON HUB', code:`https://www.mediafire.com/file/loxj38lxrqr31a4/SCRIPT+LEMON+HUB.txt/file`},
+  {group:'STEAL / BRAINROT', name:'MAKAL HUB', code:`https://www.mediafire.com/file/k29my232199w3k8/SCRIPT+MAKAL+HUB.txt/file`},
+  {group:'STEAL / BRAINROT', name:'PUSARX', code:`https://www.mediafire.com/file/9taswgj9izhjd3w/SCRIPT+PUSARX+BRAINROT.txt/file`},
+  {group:'STEAL / BRAINROT', name:'TP ARBIX', code:`https://www.mediafire.com/file/3hj8kgeynzmnx4g/NEW+TP+ARBIX+HUB.txt/file`},
+  {group:'STEAL / BRAINROT', name:'KENGER HUB', code:`https://www.mediafire.com/file/s4ocwl0p4h0xvhf/SCRIPT+KENGER+HUB.txt/file`}
+];
+
+/* ---------- Render folders (groups) & sections ---------- */
+const foldersEl = document.getElementById('folders');
+const mainEl = document.getElementById('main');
+
+// derive groups
+const groups = Array.from(new Set(scripts.map(s=>s.group)));
+groups.sort();
+
+// render sidebar folders
+groups.forEach((g,i)=>{
+  const div = document.createElement('div');
+  div.className='folder'+(i===0?' active':'');
+  div.innerHTML = `<div style="font-weight:700;color:#063b61">${g}</div><div style="color:var(--muted);font-size:0.85rem">${scripts.filter(s=>s.group===g).length}</div>`;
+  div.addEventListener('click', ()=> { selectGroup(g,div) });
+  foldersEl.appendChild(div);
+});
+
+// render main sections
+function renderSections(filterText=''){
+  mainEl.innerHTML = '';
+  groups.forEach(g=>{
+    const items = scripts.filter(s => s.group===g && (s.name.toLowerCase().includes(filterText) || s.code.toLowerCase().includes(filterText) || g.toLowerCase().includes(filterText)));
+    if(items.length===0) return;
+    const sec = document.createElement('section'); sec.className='section';
+    sec.innerHTML = `<h2>${g}</h2>`;
+    const tiles = document.createElement('div'); tiles.className='tiles';
+    items.forEach(item=>{
+      const card = document.createElement('article'); card.className='card';
+      card.innerHTML = `
+        <div class="meta">
+          <div>
+            <div class="title">${item.name}</div>
+            <div class="game">${item.group}</div>
           </div>
-          <!-- /Register -->
         </div>
-      </div>
-    </div>
+        <div class="code" data-code>${escapeHtml(item.code)}</div>
+        <div class="btn-row">
+          <button class="btn copy-btn" title="Copiar script">📋 Copiar</button>
+          <button class="btn info-btn" onclick="openExternal('${encodeURI(item.code)}')">Abrir/Ver</button>
+        </div>
+      `;
+      // copy handler
+      card.querySelector('.copy-btn').addEventListener('click', function(){
+        const codeText = item.code;
+        navigator.clipboard.writeText(codeText).then(()=>{
+          const b = this;
+          b.classList.add('copied'); b.textContent='✅ Copiado';
+          setTimeout(()=>{ b.classList.remove('copied'); b.textContent='📋 Copiar'; },1400);
+        });
+      });
+      tiles.appendChild(card);
+    });
+    sec.appendChild(tiles);
+    mainEl.appendChild(sec);
+  });
+}
 
-    <!-- / Content -->
+// initial render
+renderSections();
 
-    <div class="buy-now">
-      <a
-        href="https://themeselection.com/item/sneat-dashboard-pro-bootstrap/"
-        target="_blank"
-        class="btn btn-danger btn-buy-now"
-        >Upgrade to Pro</a
-      >
-    </div>
+// helper: select group from sidebar
+function selectGroup(g,node){
+  document.querySelectorAll('.folder').forEach(f=>f.classList.remove('active'));
+  node.classList.add('active');
+  // scroll to that section
+  const sections = Array.from(mainEl.querySelectorAll('.section'));
+  const idx = groups.indexOf(g);
+  if(sections[idx]) sections[idx].scrollIntoView({behavior:'smooth', block:'start'});
+}
 
-    <!-- Core JS -->
+// filter function
+function filterCards(){
+  const q = document.getElementById('q').value.trim().toLowerCase();
+  renderSections(q);
+}
 
-    <script src="../assets/vendor/libs/jquery/jquery.js"></script>
+// show all
+function showAll(){ document.getElementById('q').value=''; renderSections(); }
 
-    <script src="../assets/vendor/libs/popper/popper.js"></script>
-    <script src="../assets/vendor/js/bootstrap.js"></script>
+// open external (for mediafire/paste/etc)
+function openExternal(enc){
+  // if code looks like URL, open directly; else show code in new window
+  const code = decodeURI(enc || '');
+  const maybeUrl = code.match(/https?:\/\/[^\s'"]+/);
+  if(maybeUrl){
+    window.open(maybeUrl[0], '_blank');
+    return;
+  }
+  // otherwise show a small popup with code
+  const w = window.open('', '_blank', 'width=720,height=480');
+  const pre = w.document.createElement('pre');
+  pre.style.whiteSpace='pre-wrap';
+  pre.style.fontFamily='monospace';
+  pre.style.padding='12px';
+  pre.textContent = code;
+  w.document.body.appendChild(pre);
+}
 
-    <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+/* Escape HTML in code block */
+function escapeHtml(s){
+  return s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
+}
 
-    <script src="../assets/vendor/js/menu.js"></script>
+/* Utilities: allow pressing Enter in search to focus first match */
+document.getElementById('q').addEventListener('keydown', (e)=>{
+  if(e.key==='Enter'){ e.preventDefault(); const first = document.querySelector('.copy-btn'); if(first) first.focus(); }
+});
 
-    <!-- endbuild -->
-
-    <!-- Vendors JS -->
-
-    <!-- Main JS -->
-
-    <script src="../assets/js/main.js"></script>
-
-    <!-- Page JS -->
-
-    <!-- Place this tag before closing body tag for github widget button. -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
-  </body>
+</script>
+</body>
 </html>
