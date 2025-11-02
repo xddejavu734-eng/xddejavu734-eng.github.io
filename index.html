@@ -1,338 +1,162 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>💠 Dux Hub - Todos los Scripts 💠</title>
-<link rel="icon" href="data:,">
-<style>
-  :root{
-    --bg1:#0d1b2a;
-    --accent:#00b4ff;
-    --card: rgba(0,10,30,0.6);
-    --glass: rgba(255,255,255,0.06);
-    --ok: #00ff99;
-    --bad:#ff5555;
-  }
-  *{box-sizing:border-box;font-family:Poppins,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;}
-  body{margin:0;min-height:100vh;background:radial-gradient(ellipse at bottom,var(--bg1) 0%, #000 100%);color:#e6f7ff;}
-  header{position:sticky;top:0;background:rgba(4,10,20,0.6);backdrop-filter:blur(6px);border-bottom:1px solid rgba(0,180,255,0.08);padding:18px 20px;display:flex;align-items:center;gap:16px;z-index:40}
-  header h1{margin:0;color:var(--accent);text-shadow:0 0 18px rgba(0,180,255,0.12)}
-  main{padding:26px;max-width:1100px;margin:0 auto}
-  .controls{display:flex;gap:10px;align-items:center;margin-bottom:18px}
-  .search{flex:1;display:flex}
-  .search input{width:100%;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:var(--glass);color:inherit}
-  .copy-all{padding:10px 14px;border-radius:10px;background:var(--accent);color:#001220;border:0;font-weight:700;cursor:pointer}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}
-  .card{background:var(--card);padding:14px;border-radius:12px;border:1px solid rgba(0,180,255,0.06);box-shadow:0 6px 26px rgba(0,0,0,0.55)}
-  .title{display:flex;align-items:center;justify-content:space-between;gap:8px}
-  .title h3{margin:0;font-size:1.05rem;color:#bff0ff}
-  .status{font-size:0.86rem}
-  .code{display:block;background:rgba(255,255,255,0.03);padding:10px;border-radius:8px;margin:10px 0;white-space:pre-wrap;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;font-size:0.86rem;color:#cfefff}
-  .row{display:flex;gap:8px;flex-wrap:wrap}
-  .btn{padding:8px 10px;border-radius:8px;border:0;cursor:pointer;font-weight:700}
-  .btn-copy{background:var(--accent);color:#001220}
-  .btn-info{background:#1f2937;color:#e6f7ff}
-  footer{margin:30px 0;text-align:center;color:#9fd8ff}
-  .small{font-size:0.85rem;color:#9fd8ff}
-  @media (max-width:420px){header h1{font-size:1rem}}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dux — Colección de Loadstrings</title>
+  <style>
+    body{font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:#0f1724; color:#e6eef8; margin:0; padding:20px;}
+    .container{max-width:1000px;margin:0 auto;}
+    header{display:flex;gap:12px;align-items:center;margin-bottom:18px;}
+    h1{font-size:1.4rem;margin:0}
+    p.lead{margin:0;color:#a9b6c8}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:14px;border-radius:12px;margin-bottom:12px;box-shadow:0 6px 18px rgba(2,6,23,0.6);}
+    .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+    .meta{font-size:0.86rem;color:#9fb0c8}
+    .code{background:#001827;padding:10px;border-radius:8px;font-family:monospace; font-size:0.9rem; word-break:break-all; color:#c7f0ff}
+    button{background:#0ea5b7;border:0;padding:8px 10px;border-radius:8px;color:#021623;cursor:pointer;font-weight:600}
+    button.secondary{background:#1f2937;color:#cfeff6}
+    .copy-ok{color:#34d399;margin-left:8px;font-weight:700}
+    .actions{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap}
+    .small{font-size:0.85rem;padding:6px 8px;border-radius:7px}
+    footer{margin-top:18px;color:#98a9bf;font-size:0.85rem}
+    a.link{color:#9be7ff;text-decoration:none}
+    @media(max-width:540px){
+      .row{flex-direction:column;align-items:stretch}
+    }
+  </style>
 </head>
 <body>
-<header>
-  <h1>💠 Dux Hub — Todos los Scripts</h1>
-</header>
-
-<main>
-  <div class="controls">
-    <div class="search"><input id="q" placeholder="Buscar juego o script..." oninput="filterCards()" /></div>
-    <button class="copy-all" onclick="copyAll()">Copiar todo</button>
-  </div>
-
-  <div class="grid" id="grid">
-
-    <!-- 1 -->
-    <div class="card" data-search="steal clash royal duxclash">
-      <div class="title">
-        <h3>Steal a Clash Royal</h3>
-        <div class="status small">Key: —</div>
+  <div class="container">
+    <header>
+      <div>
+        <h1>Dux — Mis Loadstrings</h1>
+        <p class="lead">Botones para copiar/abrir/descargar cada script. Guarda el archivo y úsalo cuando quieras.</p>
       </div>
-      <div class="code" id="s1">loadstring(game:HttpGet("https://raw.githubusercontent.com/xddejavu734-eng/Dux-Clash-royal-Menu/main/DuxClash.lua", true))()</div>
+    </header>
+
+    <!-- Script 1 -->
+    <div class="card" id="card1">
       <div class="row">
-        <button class="btn btn-copy" onclick="copyScript('s1')">Copiar Script</button>
+        <div style="flex:1">
+          <div class="meta">DuxClash — Clash royal style</div>
+          <div class="code" id="code1">loadstring(game:HttpGet("https://raw.githubusercontent.com/xddejavu734-eng/Dux-Clash-royal-Menu/main/DuxClash.lua", true))()</div>
+        </div>
+        <div style="min-width:220px">
+          <div class="actions">
+            <button onclick="copyText('code1')" class="small">Copiar</button>
+            <button onclick="openUrl('https://raw.githubusercontent.com/xddejavu734-eng/Dux-Clash-royal-Menu/main/DuxClash.lua')" class="small secondary">Abrir URL</button>
+            <button onclick="downloadText('code1','DuxClash_loadstring.txt')" class="small">Descargar .txt</button>
+            <span id="copied1" class="copy-ok" style="display:none">¡Copiado!</span>
+          </div>
+        </div>
       </div>
     </div>
 
-    <!-- 2 -->
-    <div class="card" data-search="zombie brainrot evolution">
-      <div class="title"><h3>Zombie Brainrot EVOLUTION</h3><div class="status small">Key: —</div></div>
-      <div class="code" id="s2">loadstring(game:HttpGet("https://rawscripts.net/raw/Brainrot-Zombie-Evolution-Brainrot-Zombie-OP-script-free-51645"))()</div>
-      <div class="row"><button class="btn btn-copy" onclick="copyScript('s2')">Copiar Script</button></div>
+    <!-- Script 2 -->
+    <div class="card" id="card2">
+      <div class="row">
+        <div style="flex:1">
+          <div class="meta">SlasherBladeLoot — (gumanba)</div>
+          <div class="code" id="code2">loadstring(game:HttpGet("https://raw.githubusercontent.com/gumanba/Scripts/main/SlasherBladeLoot", true))()</div>
+        </div>
+        <div style="min-width:220px">
+          <div class="actions">
+            <button onclick="copyText('code2')" class="small">Copiar</button>
+            <button onclick="openUrl('https://raw.githubusercontent.com/gumanba/Scripts/main/SlasherBladeLoot')" class="small secondary">Abrir URL</button>
+            <button onclick="downloadText('code2','SlasherBladeLoot_loadstring.txt')" class="small">Descargar .txt</button>
+            <span id="copied2" class="copy-ok" style="display:none">¡Copiado!</span>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- 3 -->
-    <div class="card" data-search="blox fruit acsu key">
-      <div class="title"><h3>Blox Fruit (Key required)</h3><div class="status small">Key: ✅</div></div>
-      <div class="code" id="s3">loadstring(game:HttpGet("https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI"))()</div>
-      <div class="row"><button class="btn btn-copy" onclick="copyScript('s3')">Copiar Script</button></div>
+    <!-- Script 3 -->
+    <div class="card" id="card3">
+      <div class="row">
+        <div style="flex:1">
+          <div class="meta">Dux Hub — Hub principal</div>
+          <div class="code" id="code3">loadstring(game:HttpGet("https://raw.githubusercontent.com/xddejavu734-eng/DuxScript/main/Dux%20Hub", true))()</div>
+        </div>
+        <div style="min-width:220px">
+          <div class="actions">
+            <button onclick="copyText('code3')" class="small">Copiar</button>
+            <button onclick="openUrl('https://raw.githubusercontent.com/xddejavu734-eng/DuxScript/main/Dux%20Hub')" class="small secondary">Abrir URL</button>
+            <button onclick="downloadText('code3','DuxHub_loadstring.txt')" class="small">Descargar .txt</button>
+            <span id="copied3" class="copy-ok" style="display:none">¡Copiado!</span>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- 4 -->
-    <div class="card" data-search="arcade basketball unlock all pastebin w64jCQpf">
-      <div class="title"><h3>ARCADE BASKETBALL — Unlock All</h3><div class="status small">Key: —</div></div>
-      <div class="code" id="s4">loadstring(game:HttpGet('https://pastebin.com/raw/w64jCQpf'))()</div>
-      <div class="row"><button class="btn btn-copy" onclick="copyScript('s4')">Copiar Script</button></div>
+    <!-- Script 4: Ejemplo personalizado (puedes editar) -->
+    <div class="card" id="card4">
+      <div class="row">
+        <div style="flex:1">
+          <div class="meta">Ejemplo — request genérico</div>
+          <div class="code" id="code4">local args = {
+	"Gameplay",
+	"Train",
+	{
+		1,
+		1
+	}
+}
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("RequestServerAction"):FireServer(unpack(args))</div>
+        </div>
+        <div style="min-width:220px">
+          <div class="actions">
+            <button onclick="copyText('code4')" class="small">Copiar</button>
+            <button onclick="downloadText('code4','request_example.txt')" class="small">Descargar .txt</button>
+            <span id="copied4" class="copy-ok" style="display:none">¡Copiado!</span>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- 5 -->
-    <div class="card" data-search="arcade basketball auto green L2LX0eM9">
-      <div class="title"><h3>ARCADE BASKETBALL — Auto Green</h3><div class="status small">Key: —</div></div>
-      <div class="code" id="s5">loadstring(game:HttpGet('https://pastebin.com/raw/L2LX0eM9'))()</div>
-      <div class="row"><button class="btn btn-copy" onclick="copyScript('s5')">Copiar Script</button></div>
-    </div>
-
-    <!-- 6 -->
-    <div class="card" data-search="bee swarm simulator atlas script chris12089">
-      <div class="title"><h3>Bee Swarm Simulator — Atlas Script</h3><div class="status small">OP / No Key</div></div>
-      <div class="code" id="s6">loadstring(game:HttpGet("https://raw.githubusercontent.com/Chris12089/atlasbss/main/script.lua"))()</div>
-      <div class="row"><button class="btn btn-copy" onclick="copyScript('s6')">Copiar Script</button></div>
-    </div>
-
-    <!-- 7 -->
-    <div class="card" data-search="natural disaster balloon free clientside">
-      <div class="title"><h3>NATURAL DISASTER — Balloon Giver</h3><div class="status small">Key: —</div></div>
-      <div class="code" id="s7">loadstring(game:HttpGet("https://rawscripts.net/raw/Free-CLIENTSIDED-Balloon-Giver!_175"))()</div>
-      <div class="row"><button class="btn btn-copy" onclick="copyScript('s7')">Copiar Script</button></div>
-    </div>
-
-    <!-- 8 (Demon Blade note) -->
-    <div class="card" data-search="demon blade not working webcam">
-      <div class="title"><h3>Demon Blade Script</h3><div class="status small">Estado: No funciona (ver anuncios)</div></div>
-      <div class="code" id="s8">-- Script not working; check announcements</div>
-      <div class="row"><button class="btn btn-copy" onclick="copyScript('s8')">Copiar Nota</button></div>
-    </div>
-
-    <!-- 9 -->
-    <div class="card" data-search="ride and slide gumanba">
-      <div class="title"><h3>Ride and Slide</h3><div class="status small">Key: —</div></div>
-      <div class="code" id="s9">loadstring(game:HttpGet("https://raw.githubusercontent.com/gumanba/Scripts/main/RideandSlide"))()</div>
-      <div class="row"><button class="btn btn-copy" onclick="copyScript('s9')">Copiar Script</button></div>
-    </div>
-
-    <!-- 10 -->
-    <div class="card" data-search="brookhaven pastefy ACtpnMQu">
-      <div class="title"><h3>Brookhaven (No Key)</h3><div class="status small">Key: —</div></div>
-      <div class="code" id="s10">loadstring(game:HttpGet("https://pastefy.app/ACtpnMQu/raw", true))()</div>
-      <div class="row"><button class="btn btn-copy" onclick="copyScript('s10')">Copiar Script</button></div>
-    </div>
-
-    <!-- 11 -->
-    <div class="card" data-search="bee swarm best keyless atlasbss">
-      <div class="title"><h3>Bee Swarm — Best Script (Keyless)</h3><div class="status small">OP / No Key</div></div>
-      <div class="code" id="s11">loadstring(game:HttpGet("https://raw.githubusercontent.com/Chris12089/atlasbss/main/script.lua"))()</div>
-      <div class="row"><button class="btn btn-copy" onclick="copyScript('s11')">Copiar Script</button></div>
-    </div>
-
-    <!-- 12 -->
-    <div class="card" data-search="build a boat catblox boatbuilderhub">
-      <div class="title"><h3>Build a Boat</h3><div class="status small">Puede necesitar Key</div></div>
-      <div class="code" id="s12">loadstring(game:HttpGet(("https://raw.githubusercontent.com/catblox1346/StensUIReMake/refs/heads/main/Script/boatbuilderhub_B1"),true))()</div>
-      <div class="row"><button class="btn btn-copy" onclick="copyScript('s12')">Copiar Script</button></div>
-    </div>
-
-    <!-- 13 -->
-    <div class="card" data-search="hypershot script scriptblox">
-      <div class="title"><h3>Hypershot (ScriptBlox)</h3><div class="status small">Link ScriptBlox</div></div>
-      <div class="code" id="s13">https://scriptblox.com/script/Hypershot-Zep-v2-60158</div>
-      <div class="row"><button class="btn btn-copy" onclick="copyText('s13')">Copiar Link</button></div>
-    </div>
-
-    <!-- 14 -->
-    <div class="card" data-search="grand piece online cloneref key">
-      <div class="title"><h3>Grand Piece Online (Key)</h3><div class="status small">Key: ✅</div></div>
-      <div class="code" id="s14">loadstring(game:HttpGet("https://raw.githubusercontent.com/cloneref/SwitchHubRecode/refs/heads/main/Loader/SwitchHubLoaderAlotGame.lua"))()</div>
-      <div class="row"><button class="btn btn-copy" onclick="copyScript('s14')">Copiar Script</button></div>
-    </div>
-
-    <!-- 15 -->
-    <div class="card" data-search="plant vs brainrot blessed hub">
-      <div class="title"><h3>Plant vs Brainrot</h3><div class="status small">No Key</div></div>
-      <div class="code" id="s15">loadstring(game:HttpGet("https://raw.githubusercontent.com/mynamewendel-ctrl/Blessed-Hub-X-/refs/heads/main/Plants-Vs-Brainrots.lua"))()</div>
-      <div class="row"><button class="btn btn-copy" onclick="copyScript('s15')">Copiar Script</button></div>
-    </div>
-
-    <!-- 16 -->
-    <div class="card" data-search="weakly legacy 2 ohhmygehlee key">
-      <div class="title"><h3>Weakly Legacy 2</h3><div class="status small">Key: ✅</div></div>
-      <div class="code" id="s16">loadstring(game:HttpGet("https://raw.githubusercontent.com/OhhMyGehlee/sh/refs/heads/main/a"))()</div>
-      <div class="row"><button class="btn btn-copy" onclick="copyScript('s16')">Copiar Script</button></div>
-    </div>
-
-    <!-- 17 -->
-    <div class="card" data-search="muscle legends ahmadv99 speed hub x">
-      <div class="title"><h3>Muscle Legends</h3><div class="status small">Key: ✅</div></div>
-      <div class="code" id="s17">loadstring(game:HttpGet("https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua", true))()</div>
-      <div class="row"><button class="btn btn-copy" onclick="copyScript('s17')">Copiar Script</button></div>
-    </div>
-
-    <!-- 18 -->
-    <div class="card" data-search="bee rich duxbee xddejavu">
-      <div class="title"><h3>Bee Rich (Dux)</h3><div class="status small">Key: —</div></div>
-      <div class="code" id="s18">loadstring(game:HttpGet("https://raw.githubusercontent.com/xddejavu734-eng/Dux-Clash-royal-Menu/main/DuxBee.lua", true))()</div>
-      <div class="row"><button class="btn btn-copy" onclick="copyScript('s18')">Copiar Script</button></div>
-    </div>
-
-    <!-- 19 -->
-    <div class="card" data-search="mm2 roles checker baconhck">
-      <div class="title"><h3>MM2 — View murder & sheriff</h3><div class="status small">Link</div></div>
-      <div class="code" id="s19">loadstring(game:HttpGet("https://raw.githubusercontent.com/Bac0nHck/Scripts/main/MM2RolesChecker"))()</div>
-      <div class="row"><button class="btn btn-copy" onclick="copyScript('s19')">Copiar Script</button></div>
-    </div>
-
-    <!-- 20 -->
-    <div class="card" data-search="final stand remastered luarmor">
-      <div class="title"><h3>Final Stand: Remastered</h3><div class="status small">Loader</div></div>
-      <div class="code" id="s20">loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/3819c25f3a7f07b58ac9aa8d5aaa90ac.lua"))()</div>
-      <div class="row"><button class="btn btn-copy" onclick="copyScript('s20')">Copiar Script</button></div>
-    </div>
-
-    <!-- 21 -->
-    <div class="card" data-search="dux bee script duxscript dubee">
-      <div class="title"><h3>Dux Bee Script</h3><div class="status small">Actualización Dux Hub</div></div>
-      <div class="code" id="s21">loadstring(game:HttpGet("https://raw.githubusercontent.com/xddejavu734-eng/DuxScript/main/Dux%20Bee%20Script"))()</div>
-      <div class="row"><button class="btn btn-copy" onclick="copyScript('s21')">Copiar Script</button></div>
-    </div>
-
-    <!-- 22 -->
-    <div class="card" data-search="dig to earth core inf money dux hub">
-      <div class="title"><h3>Dig to Earth's CORE — Inf money</h3><div class="status small">Dux Hub</div></div>
-      <div class="code" id="s22">loadstring(game:HttpGet("https://raw.githubusercontent.com/xddejavu734-eng/DuxScript/main/Dux%20Hub"))()</div>
-      <div class="row"><button class="btn btn-copy" onclick="copyScript('s22')">Copiar Script</button></div>
-    </div>
-
-    <!-- 23 -->
-    <div class="card" data-search="brainrot royale dux hub insta kill">
-      <div class="title"><h3>Brainrot Royale — Insta kill</h3><div class="status small">Use before patch</div></div>
-      <div class="code" id="s23">loadstring(game:HttpGet("https://raw.githubusercontent.com/xddejavu734-eng/DuxScript/main/Dux%20Hub"))()</div>
-      <div class="row"><button class="btn btn-copy" onclick="copyScript('s23')">Copiar Script</button></div>
-    </div>
-
-    <!-- 24 -->
-    <div class="card" data-search="blox fruit bluex halloween event">
-      <div class="title"><h3>Blox Fruit — Halloween Event</h3><div class="status small">Keyless / BlueX</div></div>
-      <div class="code" id="s24">loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-BlueX/BlueX-Hub/refs/heads/main/Main.lua"))()</div>
-      <div class="row"><button class="btn btn-copy" onclick="copyScript('s24')">Copiar Script</button></div>
-    </div>
-
-    <!-- 25 -->
-    <div class="card" data-search="my fishing island inf money buyrod invoke">
-      <div class="title"><h3>My Fishing Island — Inf Money (Invoke)</h3><div class="status small">Remote call</div></div>
-      <div class="code" id="s25">game:GetService("ReplicatedStorage").Events.BuyRod:InvokeServer("Bronze",-math.huge)</div>
-      <div class="row"><button class="btn btn-copy" onclick="copyScript('s25')">Copiar</button></div>
-    </div>
-
-    <!-- 26 -->
-    <div class="card" data-search="make ur army pastefy iftlSDRm">
-      <div class="title"><h3>Make Ur Army — Inf Money</h3><div class="status small">Pastefy</div></div>
-      <div class="code" id="s26">loadstring(game:HttpGet("https://pastefy.app/iftLSDRm/raw"))()</div>
-      <div class="row"><button class="btn btn-copy" onclick="copyScript('s26')">Copiar Script</button></div>
-    </div>
-
-    <!-- 27 -->
-    <div class="card" data-search="99 nights jump rope ttttttt55">
-      <div class="title"><h3>99 Nights in the Forest — Inf Money</h3><div class="status small">Script</div></div>
-      <div class="code" id="s27">loadstring(game:HttpGet("https://raw.githubusercontent.com/Ttttttt55/my-script/refs/heads/main/script"))()</div>
-      <div class="row"><button class="btn btn-copy" onclick="copyScript('s27')">Copiar Script</button></div>
-    </div>
-
-    <!-- 28 -->
-    <div class="card" data-search="slasher blade loot gumanba">
-      <div class="title"><h3>Slasher Blade — Loot</h3><div class="status small">INF Stats parcheado</div></div>
-      <div class="code" id="s28">loadstring(game:HttpGet("https://raw.githubusercontent.com/gumanba/Scripts/main/SlasherBladeLoot"))()</div>
-      <div class="row"><button class="btn btn-copy" onclick="copyScript('s28')">Copiar Script</button></div>
-    </div>
-
-    <!-- 29 -->
-    <div class="card" data-search="dump alpha gumanba">
-      <div class="title"><h3>DUMP (ALPHA)</h3><div class="status small">DUMP alpha</div></div>
-      <div class="code" id="s29">loadstring(game:HttpGet("https://raw.githubusercontent.com/gumanba/Scripts/main/DUMP"))()</div>
-      <div class="row"><button class="btn btn-copy" onclick="copyScript('s29')">Copiar Script</button></div>
-    </div>
-
-    <!-- 30 -->
-    <div class="card" data-search="rob the place dux robtheplace">
-      <div class="title"><h3>Rob The Place — Dux Hub</h3><div class="status small">Keyless</div></div>
-      <div class="code" id="s30">loadstring(game:HttpGet("https://raw.githubusercontent.com/xddejavu734-eng/DuxHub/main/DuxRobTheplace"))()</div>
-      <div class="row"><button class="btn btn-copy" onclick="copyScript('s30')">Copiar Script</button></div>
-    </div>
-
-    <!-- 31 -->
-    <div class="card" data-search="chicago life pastefy eXkcBnHb">
-      <div class="title"><h3>Chicago Life — Auto Farm</h3><div class="status small">Keyless</div></div>
-      <div class="code" id="s31">loadstring(game:HttpGet("https://pastefy.app/eXkcBnHb/raw"))()</div>
-      <div class="row"><button class="btn btn-copy" onclick="copyScript('s31')">Copiar Script</button></div>
-    </div>
-
-    <!-- 32 -->
-    <div class="card" data-search="brookhaven halloween gumanba brookhavenhalloween">
-      <div class="title"><h3>Brookhaven — Halloween Autocomplete</h3><div class="status small">No Key</div></div>
-      <div class="code" id="s32">loadstring(game:HttpGet("https://raw.githubusercontent.com/gumanba/Scripts/main/BrookhavenHalloween"))()</div>
-      <div class="row"><button class="btn btn-copy" onclick="copyScript('s32')">Copiar Script</button></div>
-    </div>
-
-    <!-- 33 -->
-    <div class="card" data-search="bonkhub loader bonkhub.online">
-      <div class="title"><h3>BonkHub — Loader</h3><div class="status small">Loader</div></div>
-      <div class="code" id="s33">loadstring(game:HttpGet("https://bonkhub.online/loader.lua",true))()</div>
-      <div class="row"><button class="btn btn-copy" onclick="copyScript('s33')">Copiar Script</button></div>
-    </div>
-
-    <!-- 34 -->
-    <div class="card" data-search="raise of animals tbao thai bao">
-      <div class="title"><h3>Raise of Animals (Tbao)</h3><div class="status small">Keyless raise of animals</div></div>
-      <div class="code" id="s34">loadstring(game:HttpGet("https://raw.githubusercontent.com/tbao143/thaibao/refs/heads/main/TbaoHub"))()</div>
-      <div class="row"><button class="btn btn-copy" onclick="copyScript('s34')">Copiar Script</button></div>
-    </div>
-
+    <footer>
+      Consejo: si quieres que edite estos scripts (p. ej. quitar prints, cambiar tiempos, añadir checks), pégame el código del script concreto y yo te lo devuelvo ya corregido y listo para pegar en tu executor.
+    </footer>
   </div>
 
-  <footer>
-    <div class="small">© Dux Hub • Más info: <a href="https://xddejavu734-eng.github.io/" target="_blank" style="color:var(--accent)">xddejavu734-eng.github.io</a> • Discord: <a href="https://discord.gg/ubBeGXk5" target="_blank" style="color:var(--accent)">discord.gg/ubBeGXk5</a></div>
-  </footer>
-</main>
+  <script>
+    function copyText(codeId){
+      const el = document.getElementById(codeId);
+      if(!el) return;
+      const text = el.innerText || el.textContent;
+      navigator.clipboard.writeText(text).then(()=>{
+        const num = codeId.replace('code','');
+        const span = document.getElementById('copied'+num);
+        if(span){ span.style.display = 'inline-block'; setTimeout(()=>span.style.display='none',1500); }
+      }).catch(()=> {
+        alert('Error al copiar. Selecciona el texto y copia manualmente (Ctrl+C).');
+      });
+    }
 
-<script>
-  function copyScript(id){
-    const txt = document.getElementById(id).textContent;
-    navigator.clipboard.writeText(txt).then(() => {
-      const b = event.currentTarget;
-      const old = b.innerText;
-      b.innerText = "Copiado ✅";
-      setTimeout(()=> b.innerText = old,1400);
-    }, (e)=> { alert("No se pudo copiar: " + e) });
-  }
+    function openUrl(url){
+      try {
+        window.open(url, '_blank', 'noopener');
+      } catch(e){
+        alert('No se pudo abrir la URL en una nueva pestaña. Copia el enlace manualmente: ' + url);
+      }
+    }
 
-  function copyText(id){
-    const txt = document.getElementById(id).textContent;
-    navigator.clipboard.writeText(txt);
-    alert("Copiado al portapapeles");
-  }
-
-  function copyAll(){
-    // junta todos los scripts visibles y copia
-    const codes = document.querySelectorAll('.card .code');
-    let all = "";
-    codes.forEach(c => { all += c.textContent + "\\n\\n"; });
-    navigator.clipboard.writeText(all).then(()=> alert("Todos los scripts copiados ✅"));
-  }
-
-  function filterCards(){
-    const q = document.getElementById('q').value.toLowerCase();
-    document.querySelectorAll('#grid .card').forEach(card=>{
-      const txt = (card.getAttribute('data-search') || "") + " " + card.innerText;
-      if(txt.toLowerCase().includes(q)){ card.style.display = ""; } else { card.style.display = "none"; }
-    });
-  }
-</script>
+    function downloadText(codeId, filename){
+      const el = document.getElementById(codeId);
+      if(!el) return;
+      const text = el.innerText || el.textContent;
+      const blob = new Blob([text], {type: 'text/plain;charset=utf-8'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename || 'script.txt';
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(()=>{
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      },100);
+    }
+  </script>
 </body>
 </html>
