@@ -3,241 +3,103 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>💠 Dux Hub - Status 💠</title>
+<title>💠 Dux Hub - Scripts 💠</title>
 <style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
   body {
     font-family: 'Poppins', sans-serif;
     background: radial-gradient(ellipse at bottom, #0d1b2a 0%, #000000 100%);
     color: white;
-    overflow-x: hidden;
     text-align: center;
+    padding: 20px;
   }
-
-  canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: -1;
-  }
-
-  /* Barra superior */
-  .top-bar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 70px;
-    background-color: rgba(10, 10, 30, 0.9);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-bottom: 1px solid #00b4ff;
-    z-index: 100;
-    box-shadow: 0 0 15px #00b4ff;
-  }
-
-  .top-bar h1 {
-    font-size: 1.7em;
+  h1 {
     color: #00b4ff;
     text-shadow: 0 0 20px #00b4ff;
-    letter-spacing: 2px;
-    user-select: none;
+    margin-bottom: 20px;
   }
-
-  /* Redes */
-  .socials {
-    margin-top: 90px;
-    text-align: center;
-  }
-
-  .socials a {
-    margin: 0 15px;
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-    font-size: 1.2em;
-    transition: 0.3s;
-  }
-
-  .socials a:hover {
-    color: #00b4ff;
-    text-shadow: 0 0 15px #00b4ff;
-  }
-
-  main {
-    padding-top: 40px;
-    width: 90%;
-    max-width: 700px;
-    margin: 0 auto;
-  }
-
-  .status-box {
+  .game-box {
     background: rgba(0, 10, 30, 0.6);
     border-radius: 15px;
-    padding: 20px;
+    padding: 15px;
+    margin: 15px auto;
+    max-width: 700px;
     box-shadow: 0 0 20px #00b4ff40;
     border: 1px solid #00b4ff40;
-    backdrop-filter: blur(4px);
-    margin-top: 25px;
-  }
-
-  .section {
-    margin: 25px 0;
     text-align: left;
-    line-height: 1.8em;
   }
-
-  .section-title {
-    color: #00b4ff;
+  .game-title {
     font-weight: bold;
     font-size: 1.2em;
-    margin-top: 25px;
-    border-bottom: 1px solid #00b4ff40;
-    padding-bottom: 5px;
-  }
-
-  .game {
-    margin-left: 15px;
-  }
-
-  code {
-    background: rgba(255,255,255,0.1);
-    padding: 3px 6px;
-    border-radius: 6px;
-    color: #8ecae6;
-  }
-
-  .ok {
     color: #00ff99;
-    text-shadow: 0 0 10px #00ff99;
+    margin-bottom: 5px;
   }
-
-  .fail {
-    color: #ff5555;
-    text-shadow: 0 0 10px #ff5555;
+  .status {
+    margin-bottom: 10px;
+    font-size: 0.95em;
   }
-
-  footer {
-    margin-top: 50px;
-    font-size: 0.9em;
-    color: #8ecae6;
+  .copy-btn {
+    background-color: #00b4ff;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
   }
-
-  a {
-    color: #00b4ff;
-    text-decoration: none;
+  .copy-btn:hover {
+    background-color: #0088cc;
   }
-
-  a:hover {
-    text-shadow: 0 0 10px #00b4ff;
+  code {
+    display: block;
+    background: rgba(255,255,255,0.1);
+    padding: 6px;
+    border-radius: 6px;
+    word-wrap: break-word;
+    margin-bottom: 10px;
   }
-
-  /* Brillo animado */
-  @keyframes glow {
-    0%, 100% { text-shadow: 0 0 10px #00ff99; }
-    50% { text-shadow: 0 0 25px #00ff99; }
-  }
-  @keyframes alert {
-    0%, 100% { text-shadow: 0 0 10px #ff5555; }
-    50% { text-shadow: 0 0 25px #ff0000; }
-  }
-
-  .ok { animation: glow 2s infinite; }
-  .fail { animation: alert 2s infinite; }
 </style>
 </head>
 <body>
-<canvas id="stars"></canvas>
 
-<!-- Barra Superior -->
-<div class="top-bar">
-  <h1>💠 DUX HUB - STATUS DE JUEGOS 💠</h1>
+<h1>💠 Dux Hub - Scripts 💠</h1>
+
+<div class="game-box">
+  <div class="game-title">🐝 Bee Rich</div>
+  <div class="status">Estado: <span style="color:#00ff99">Script listo ✅ (OP)</span></div>
+  <code id="script1">loadstring(game:HttpGet("https://raw.githubusercontent.com/xddejavu734-eng/Dux-Clash-royal-Menu/main/DuxBee.lua", true))()</code>
+  <button class="copy-btn" onclick="copyScript('script1')">Copiar Script</button>
 </div>
 
-<!-- Redes -->
-<div class="socials">
-  🎥 <a href="https://www.youtube.com/@Duxitoz" target="_blank">YouTube</a>
-  🎵 <a href="https://www.tiktok.com/@duxscript" target="_blank">TikTok</a>
-  💬 <a href="https://discord.gg/T7gdwmHY" target="_blank">Discord</a>
+<div class="game-box">
+  <div class="game-title">🏡 Brokhaven</div>
+  <div class="status">Estado: <span style="color:#00ff99">No Key ✅</span></div>
+  <code id="script2">loadstring(game:HttpGet("https://raw.githubusercontent.com/gumanba/Scripts/main/BrookhavenHalloween"))()</code>
+  <button class="copy-btn" onclick="copyScript('script2')">Copiar Script</button>
 </div>
 
-<main>
-  <div class="status-box">
+<div class="game-box">
+  <div class="game-title">🎃 Rob The Place</div>
+  <div class="status">Estado: <span style="color:#00ff99">Keyless ✅</span></div>
+  <code id="script3">loadstring(game:HttpGet("https://raw.githubusercontent.com/xddejavu734-eng/DuxHub/main/DuxRobTheplace"))()</code>
+  <button class="copy-btn" onclick="copyScript('script3')">Copiar Script</button>
+</div>
 
-    <div class="section">
-      <p>🎮 <b>Juegos compatibles actualmente:</b></p>
-
-      <p class="game">🐝 Bee Rich<br>• PlaceId: <code>96601927506261</code><br>• Estado: <span class="ok">Script listo ✅ (OP)</span></p>
-
-      <p class="game">🛒 Mart Simulator<br>• PlaceId: <code>123900106804415</code><br>• Estado: <span class="ok">Script listo ✅</span></p>
-
-      <p class="game">⛏️ Dig to Earth’s CORE!<br>• PlaceId: <code>81440632616906</code><br>• Estado: <span class="ok">Script listo ✅</span></p>
-
-      <p class="game">🧠 Brainrot Royale<br>• PlaceId: <code>96151237893653</code><br>• Estado: <span class="ok">Script listo ✅ (OP)</span></p>
-
-      <p class="game">🏗️ Dam Tycoon<br>• PlaceId: <code>128811184</code><br>• Estado: <span class="ok">Script listo ✅</span></p>
-
-      <p class="game">🏢 Brainrot Restaurant<br>• PlaceId: <code>96780658634427</code><br>• Estado: <span class="fail">No listo ❌ (Patch)</span></p>
-
-      <p class="game">👹 Rob The Mother<br>• PlaceId: <code>115285389424252</code><br>• Estado: <span class="ok">Script listo ✅</span></p>
-
-      <p class="game">🎃 Make a Brainrot Army [Halloween]<br>• PlaceId: <code>74971517386226</code><br>• Estado: <span class="ok">Script listo ✅</span></p>
-
-      <p class="game">🏰 Mega Luxury<br>• PlaceId: <code>19002485340</code><br>• Estado: <span class="ok">Script listo ✅</span></p>
-    </div>
-
-    <div class="section">
-      <div class="section-title">💎 PREMIUM - Acceso exclusivo 💎</div>
-      <p class="game">🐔 Chicken Gun<br>• PlaceId: <code>16632764973</code><br>• Estado: <span class="ok">Script listo ✅</span><br>• Acceso: 🔐 Premium</p>
-    </div>
-
-  </div>
-
-  <footer>🧩 Usa Dux Hub para automatizar tus juegos favoritos de Roblox</footer>
-</main>
+<div class="game-box">
+  <div class="game-title">😈 Chicago Life</div>
+  <div class="status">Estado: <span style="color:#00ff99">Keyless ✅</span></div>
+  <code id="script4">loadstring(game:HttpGet("https://pastefy.app/eXkcBnHb/raw"))()</code>
+  <button class="copy-btn" onclick="copyScript('script4')">Copiar Script</button>
+</div>
 
 <script>
-  // Fondo estrellado 🌌
-  const canvas = document.getElementById("stars");
-  const ctx = canvas.getContext("2d");
-  let stars = [];
-
-  function resize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-
-  window.addEventListener("resize", resize);
-  resize();
-
-  for (let i = 0; i < 200; i++) {
-    stars.push({
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      size: Math.random() * 2,
-      speed: Math.random() * 0.5
-    });
-  }
-
-  function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "white";
-    stars.forEach(s => {
-      ctx.beginPath();
-      ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
-      ctx.fill();
-      s.y += s.speed;
-      if (s.y > canvas.height) s.y = 0;
-    });
-    requestAnimationFrame(animate);
-  }
-
-  animate();
+function copyScript(id) {
+  const code = document.getElementById(id);
+  navigator.clipboard.writeText(code.textContent).then(() => {
+    alert("Script copiado al portapapeles ✅");
+  });
+}
 </script>
+
 </body>
 </html>
