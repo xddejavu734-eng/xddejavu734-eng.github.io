@@ -1,122 +1,2314 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>💠 Dux Hub - Todos los Scripts 💠</title>
-<link rel="icon" href="data:,">
-<style>
-  :root{
-    --bg1:#0d1b2a;
-    --accent:#00b4ff;
-    --card: rgba(0,10,30,0.6);
-    --glass: rgba(255,255,255,0.06);
-    --ok: #00ff99;
-    --bad:#ff5555;
-  }
-  *{box-sizing:border-box;font-family:Poppins,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;}
-  body{margin:0;min-height:100vh;background:radial-gradient(ellipse at bottom,var(--bg1) 0%, #000 100%);color:#e6f7ff;}
-  header{position:sticky;top:0;background:rgba(4,10,20,0.6);backdrop-filter:blur(6px);border-bottom:1px solid rgba(0,180,255,0.08);padding:18px 20px;display:flex;align-items:center;gap:16px;z-index:40}
-  header h1{margin:0;color:var(--accent);text-shadow:0 0 18px rgba(0,180,255,0.12)}
-  main{padding:26px;max-width:1100px;margin:0 auto}
-  .controls{display:flex;gap:10px;align-items:center;margin-bottom:18px}
-  .search{flex:1;display:flex}
-  .search input{width:100%;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:var(--glass);color:inherit}
-  .copy-all{padding:10px 14px;border-radius:10px;background:var(--accent);color:#001220;border:0;font-weight:700;cursor:pointer}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}
-  .card{background:var(--card);padding:14px;border-radius:12px;border:1px solid rgba(0,180,255,0.06);box-shadow:0 6px 26px rgba(0,0,0,0.55)}
-  .title{display:flex;align-items:center;justify-content:space-between;gap:8px}
-  .title h3{margin:0;font-size:1.05rem;color:#bff0ff}
-  .status{font-size:0.86rem}
-  .code{
-    display:block;
-    background: rgba(255,255,255,0.03);
-    padding: 10px;
-    border-radius: 8px;
-    margin: 10px 0;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;
-    font-size: 0.86rem;
-    color: #cfefff;
-
-    /* Corrección para loadstring largo */
-    white-space: pre-wrap;      /* permite que se rompa la línea */
-    word-break: break-all;      /* fuerza el quiebre de palabras muy largas */
-    overflow-x: auto;           /* agrega scroll horizontal si aún se sale */
-  }
-  .row{display:flex;gap:8px;flex-wrap:wrap}
-  .btn{padding:8px 10px;border-radius:8px;border:0;cursor:pointer;font-weight:700}
-  .btn-copy{background:var(--accent);color:#001220}
-  .btn-info{background:#1f2937;color:#e6f7ff}
-  footer{margin:30px 0;text-align:center;color:#9fd8ff}
-  .small{font-size:0.85rem;color:#9fd8ff}
-  @media (max-width:420px){header h1{font-size:1rem}}
+<html lang="es"><head><style>body {transition: opacity ease-in 0.2s; } 
+body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relative; } 
 </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anti-Hambreado Script Team</title>
+<link rel="icon" href="https://i.postimg.cc/wTpYKGqV/Anti-Hambreado.jpg" type="image/jpeg">
+  <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Orbitron', monospace;
+            background: linear-gradient(135deg, #0f0f0f 0%, #2d1b1b 50%, #1a0000 100%);
+            min-height: 100vh;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #ff0000;
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) translateX(0px) rotate(0deg); opacity: 0; }
+            50% { transform: translateY(-20px) translateX(10px) rotate(180deg); opacity: 1; }
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(90deg, rgba(0,0,0,0.95) 0%, rgba(45,27,27,0.95) 50%, rgba(26,0,0,0.95) 100%);
+            backdrop-filter: blur(15px);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(255, 0, 0, 0.3);
+            border-bottom: 2px solid rgba(255, 0, 0, 0.2);
+        }
+
+        .logo {
+            font-size: 1.0rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #ff0000, #ff6666);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 5px #ff0000); }
+            to { filter: drop-shadow(0 0 15px #ff0000); }
+        }
+
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 8px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            border-radius: 8px;
+        }
+
+        .hamburger:hover {
+            border-color: rgba(255, 0, 0, 0.5);
+            background: rgba(255, 0, 0, 0.1);
+        }
+
+        .hamburger span {
+            width: 28px;
+            height: 3px;
+            background: linear-gradient(45deg, #ff0000, #ff3333);
+            margin: 3px 0;
+            transition: all 0.4s ease;
+            border-radius: 2px;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+            transform: scale(0);
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100vh;
+            background: linear-gradient(180deg, rgba(0,0,0,0.98) 0%, rgba(45,27,27,0.98) 100%);
+            backdrop-filter: blur(25px);
+            transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            z-index: 999;
+            padding: 90px 0 20px 0;
+            box-shadow: -10px 0 40px rgba(255, 0, 0, 0.3);
+            overflow-y: auto;
+            border-left: 3px solid rgba(255, 0, 0, 0.3);
+        }
+
+        .sidebar.active {
+            right: 0;
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .sidebar::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #ff0000, #ff3333);
+            border-radius: 4px;
+        }
+
+        .sidebar-item {
+            padding: 18px 30px;
+            border-bottom: 1px solid rgba(255, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.4s ease;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sidebar-item::before {
+            content: '';
+            position: absolute;
+            left: -100%;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .sidebar-item:hover::before {
+            left: 100%;
+        }
+
+        .sidebar-item:hover {
+            background: linear-gradient(90deg, rgba(255, 0, 0, 0.1), rgba(255, 0, 0, 0.05));
+            transform: translateX(-8px);
+            border-left: 4px solid #ff0000;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+        }
+
+        .sidebar-item.active {
+            background: linear-gradient(90deg, rgba(255, 0, 0, 0.2), rgba(255, 0, 0, 0.1));
+            border-left: 6px solid #ff0000;
+            color: #ff6666;
+        }
+
+        .folder-icon {
+            margin-right: 15px;
+            font-size: 1.4rem;
+            filter: drop-shadow(0 0 5px #ff0000);
+        }
+
+        .welcome-screen {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 120px 2rem 2rem 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .team-logo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin-bottom: 2rem;
+            border: 4px solid #ff0000;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 30px rgba(255, 0, 0, 0.5); }
+            50% { transform: scale(1.05); box-shadow: 0 0 50px rgba(255, 0, 0, 0.8); }
+            100% { transform: scale(1); box-shadow: 0 0 30px rgba(255, 0, 0, 0.5); }
+        }
+
+        .welcome-content h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #ff0000, #ff6666, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            text-shadow: 0 8px 16px rgba(255, 0, 0, 0.4);
+            animation: titleGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            from { filter: drop-shadow(0 0 10px #ff0000); }
+            to { filter: drop-shadow(0 0 25px #ff0000); }
+        }
+
+        .team-name {
+            font-size: 1.8rem;
+            color: #ff3333;
+            margin-bottom: 2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            animation: slideIn 1s ease-out 0.5s both;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .welcome-content p {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 700px;
+            margin-bottom: 3rem;
+            line-height: 1.8;
+            animation: fadeInUp 1s ease-out 1s both;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .buttons-container {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, rgba(255, 0, 0, 0.2), rgba(255, 51, 51, 0.2));
+            color: #fff;
+            border: 2px solid #ff0000;
+            padding: 15px 35px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            font-size: 1.1rem;
+            font-weight: 700;
+            position: relative;
+            overflow: hidden;
+            animation: buttonPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes buttonPulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 0, 0, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(255, 0, 0, 0.6); }
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            background: linear-gradient(45deg, rgba(255, 0, 0, 0.4), rgba(255, 51, 51, 0.4));
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(255, 0, 0, 0.4);
+        }
+
+        .discord-button {
+            background: linear-gradient(45deg, #7289da, #5865f2);
+            border-color: #7289da;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .discord-button:hover {
+            background: linear-gradient(45deg, #5865f2, #7289da);
+            box-shadow: 0 15px 35px rgba(114, 137, 218, 0.4);
+        }
+
+        .discord-icon {
+            width: 24px;
+            height: 24px;
+        }
+
+        .content {
+            display: none;
+            padding: 110px 2rem 3rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .content.active {
+            display: block;
+            animation: contentSlideIn 0.6s ease-out;
+        }
+
+        @keyframes contentSlideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #ff0000, #ff6666, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 3rem;
+            text-shadow: 0 4px 8px rgba(255, 0, 0, 0.3);
+            text-align: center;
+            animation: titleSlide 1s ease-out;
+        }
+
+        @keyframes titleSlide {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .script-card {
+            background: linear-gradient(145deg, rgba(0, 0, 0, 0.8), rgba(45, 27, 27, 0.6));
+            margin-bottom: 2.5rem;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(255, 0, 0, 0.2);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 0, 0, 0.2);
+            animation: cardSlideIn 0.8s ease-out;
+        }
+
+        @keyframes cardSlideIn {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .script-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 60px rgba(255, 0, 0, 0.4);
+            border-color: rgba(255, 0, 0, 0.5);
+        }
+
+        .script-header {
+            background: linear-gradient(135deg, #ff0000 0%, #cc0000 50%, #990000 100%);
+            color: white;
+            padding: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .script-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 1s ease;
+        }
+
+        .script-card:hover .script-header::before {
+            left: 100%;
+        }
+
+        .script-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .copy-button {
+            background: rgba(0, 0, 0, 0.3);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .copy-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .copy-button:hover::before {
+            width: 200px;
+            height: 200px;
+        }
+
+        .copy-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        .copy-button.copied {
+            background: linear-gradient(45deg, #00ff00, #4CAF50);
+            border-color: #00ff00;
+            animation: copySuccess 0.6s ease-out;
+        }
+
+        @keyframes copySuccess {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1.1); }
+        }
+
+        .script-content {
+            padding: 0;
+        }
+
+        .script-code {
+            background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+            color: #e2e8f0;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            padding: 2rem;
+            margin: 0;
+            overflow-x: auto;
+            white-space: pre;
+            border-top: 2px solid rgba(255, 0, 0, 0.2);
+        }
+
+        .script-code::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .script-code::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .script-code::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #ff0000, #ff3333);
+            border-radius: 4px;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(0, 0, 0, 0.8), rgba(26, 0, 0, 0.6));
+            z-index: 998;
+            display: none;
+            backdrop-filter: blur(5px);
+        }
+
+        .overlay.active {
+            display: block;
+            animation: overlayFadeIn 0.3s ease-out;
+        }
+
+        @keyframes overlayFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                right: -100%;
+            }
+            
+            .welcome-content h1 {
+                font-size: 2.0rem;
+            }
+            
+            .team-name {
+                font-size: 1.4rem;
+            }
+            
+            .content {
+                padding: 100px 1rem 2rem 1rem;
+            }
+            
+            .script-header {
+                padding: 1.5rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .buttons-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
 </head>
 <body>
-<header>
-  <h1>💠 Dux Hub — Todos los Scripts</h1>
-</header>
+    <div class="particles">
+        <!-- Las partículas se generarán dinámicamente con JavaScript -->
+    <div class="particle" style="left: 80.8922%; top: 40.4781%; animation-delay: 5.70293s; animation-duration: 4.20638s;"></div><div class="particle" style="left: 37.8341%; top: 9.23119%; animation-delay: 4.46425s; animation-duration: 7.87774s;"></div><div class="particle" style="left: 77.7943%; top: 44.8458%; animation-delay: 0.662915s; animation-duration: 5.48172s;"></div><div class="particle" style="left: 47.811%; top: 70.3798%; animation-delay: 1.80588s; animation-duration: 7.4315s;"></div><div class="particle" style="left: 1.34297%; top: 67.3441%; animation-delay: 5.80562s; animation-duration: 6.85843s;"></div><div class="particle" style="left: 36.9472%; top: 93.7993%; animation-delay: 4.17254s; animation-duration: 5.34192s;"></div><div class="particle" style="left: 90.396%; top: 26.2807%; animation-delay: 0.304996s; animation-duration: 5.53954s;"></div><div class="particle" style="left: 21.9614%; top: 94.6405%; animation-delay: 4.19866s; animation-duration: 7.73484s;"></div><div class="particle" style="left: 10.4158%; top: 85.4729%; animation-delay: 5.02425s; animation-duration: 6.07858s;"></div><div class="particle" style="left: 61.2571%; top: 47.2872%; animation-delay: 1.64609s; animation-duration: 7.47469s;"></div><div class="particle" style="left: 67.7841%; top: 14.877%; animation-delay: 5.11565s; animation-duration: 6.63756s;"></div><div class="particle" style="left: 28.0579%; top: 66.7472%; animation-delay: 1.86945s; animation-duration: 7.24738s;"></div><div class="particle" style="left: 41.7126%; top: 50.321%; animation-delay: 2.58775s; animation-duration: 4.02792s;"></div><div class="particle" style="left: 28.6549%; top: 66.2604%; animation-delay: 2.88146s; animation-duration: 7.89396s;"></div><div class="particle" style="left: 65.7617%; top: 79.1838%; animation-delay: 5.31089s; animation-duration: 6.0389s;"></div><div class="particle" style="left: 74.2335%; top: 45.2065%; animation-delay: 4.37917s; animation-duration: 7.2642s;"></div><div class="particle" style="left: 61.1173%; top: 65.0606%; animation-delay: 5.63533s; animation-duration: 6.96433s;"></div><div class="particle" style="left: 16.5978%; top: 29.9292%; animation-delay: 3.44058s; animation-duration: 5.44946s;"></div><div class="particle" style="left: 28.0818%; top: 22.0251%; animation-delay: 4.42006s; animation-duration: 5.18902s;"></div><div class="particle" style="left: 61.8301%; top: 92.834%; animation-delay: 1.61096s; animation-duration: 4.40856s;"></div><div class="particle" style="left: 8.71182%; top: 72.4858%; animation-delay: 5.52089s; animation-duration: 7.0029s;"></div><div class="particle" style="left: 19.2322%; top: 75.0445%; animation-delay: 3.61156s; animation-duration: 7.1128s;"></div><div class="particle" style="left: 53.3623%; top: 85.9809%; animation-delay: 5.80114s; animation-duration: 5.01474s;"></div><div class="particle" style="left: 16.45%; top: 11.0796%; animation-delay: 1.16408s; animation-duration: 5.05239s;"></div><div class="particle" style="left: 97.9291%; top: 46.9309%; animation-delay: 4.85066s; animation-duration: 5.05963s;"></div><div class="particle" style="left: 49.8739%; top: 43.4511%; animation-delay: 4.50665s; animation-duration: 4.0986s;"></div><div class="particle" style="left: 55.2397%; top: 58.0139%; animation-delay: 4.38563s; animation-duration: 4.19101s;"></div><div class="particle" style="left: 18.4708%; top: 5.15307%; animation-delay: 0.420103s; animation-duration: 4.07988s;"></div><div class="particle" style="left: 94.3064%; top: 3.54699%; animation-delay: 0.833095s; animation-duration: 7.03247s;"></div><div class="particle" style="left: 80.9051%; top: 0.579393%; animation-delay: 1.17802s; animation-duration: 4.23391s;"></div><div class="particle" style="left: 67.3389%; top: 76.2208%; animation-delay: 1.0155s; animation-duration: 6.138s;"></div><div class="particle" style="left: 39.2714%; top: 18.7664%; animation-delay: 1.28976s; animation-duration: 5.82871s;"></div><div class="particle" style="left: 47.3034%; top: 44.9663%; animation-delay: 0.108288s; animation-duration: 5.1371s;"></div><div class="particle" style="left: 51.8405%; top: 4.82469%; animation-delay: 2.00412s; animation-duration: 4.30091s;"></div><div class="particle" style="left: 68.6523%; top: 56.3306%; animation-delay: 2.85045s; animation-duration: 5.52456s;"></div><div class="particle" style="left: 45.9701%; top: 95.3677%; animation-delay: 0.060265s; animation-duration: 7.67211s;"></div><div class="particle" style="left: 0.470673%; top: 13.8359%; animation-delay: 4.58311s; animation-duration: 4.07874s;"></div><div class="particle" style="left: 48.5061%; top: 72.2092%; animation-delay: 0.00334795s; animation-duration: 5.51929s;"></div><div class="particle" style="left: 98.7793%; top: 52.4726%; animation-delay: 2.01162s; animation-duration: 6.41846s;"></div><div class="particle" style="left: 78.5819%; top: 86.2914%; animation-delay: 2.71531s; animation-duration: 4.66716s;"></div><div class="particle" style="left: 89.0682%; top: 20.9221%; animation-delay: 5.32797s; animation-duration: 6.33055s;"></div><div class="particle" style="left: 93.8668%; top: 93.3935%; animation-delay: 0.740124s; animation-duration: 7.58293s;"></div><div class="particle" style="left: 22.3899%; top: 44.5382%; animation-delay: 0.0977492s; animation-duration: 7.94765s;"></div><div class="particle" style="left: 78.4821%; top: 7.12714%; animation-delay: 5.99898s; animation-duration: 5.90668s;"></div><div class="particle" style="left: 77.1161%; top: 38.796%; animation-delay: 4.62s; animation-duration: 5.90004s;"></div><div class="particle" style="left: 84.9809%; top: 84.6066%; animation-delay: 4.84864s; animation-duration: 5.41836s;"></div><div class="particle" style="left: 79.6453%; top: 11.0044%; animation-delay: 3.56461s; animation-duration: 5.21626s;"></div><div class="particle" style="left: 90.8292%; top: 3.70679%; animation-delay: 1.27571s; animation-duration: 4.96626s;"></div><div class="particle" style="left: 67.2419%; top: 98.3678%; animation-delay: 2.45656s; animation-duration: 7.71858s;"></div><div class="particle" style="left: 37.1447%; top: 5.58912%; animation-delay: 2.83238s; animation-duration: 6.70582s;"></div></div>
 
-<main>
-  <div class="controls">
-    <div class="search"><input id="q" placeholder="Buscar juego o script..." oninput="filterCards()" /></div>
-    <button class="copy-all" onclick="copyAll()">Copiar todo</button>
-  </div>
-
-  <div class="grid" id="grid">
-
-    <!-- 1 -->
-    <div class="card" data-search="steal clash royal duxclash">
-      <div class="title">
-        <h3>Steal a Clash Royal</h3>
-        <div class="status small">Key: —</div>
-      </div>
-      <div class="code" id="s1">loadstring(game:HttpGet("https://raw.githubusercontent.com/xddejavu734-eng/Dux-Clash-royal-Menu/main/DuxClash.lua", true))()</div>
-      <div class="row">
-        <button class="btn btn-copy" onclick="copyScript('s1')">Copiar Script</button>
-      </div>
+    <div class="header">
+        <div class="logo">⚡ ANTI-HAMBREADO</div>
+        <div class="hamburger" onclick="toggleSidebar()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
     </div>
 
-    <!-- ... aquí irían los demás scripts, igual que tu HTML original ... -->
+    <div class="overlay" onclick="closeSidebar()"></div>
 
-  </div>
+    <div class="sidebar">
+        <div class="sidebar-item active" onclick="showContent('welcome')">
+            <span class="folder-icon">🏠</span>
+            Inicio
+        </div> 
+    <div class="sidebar-item" onclick="window.open('https://antihambreadoscriptteam.github.io/executores', '_blank')">
+    <span class="folder-icon">📥</span>
+    EXECUTORES ACTUALIZADOS
+</div>
+        <div class="sidebar-item" onclick="window.open('https://youtube.com/@anti-hambreado-script-team', '_blank')">
+    <span class="folder-icon">🎥</span>
+    NUESTRO CANAL DE YOUTUBE
+    </div>
+<div class="sidebar-item" onclick="showContent('servidores-privados')">
+    <span class="folder-icon">📁</span>
+    🔥 SERVIDORES PRIVADOS GRATIS 🔥
+</div>
+<div class="sidebar-item" onclick="showContent('script-hub-universales')">
+    <span class="folder-icon">📁</span>
+    SCRIPT HUB UNIVERSALES
+</div>
+      <div class="sidebar-item" onclick="showContent('noches-bosque')">
+    <span class="folder-icon">📁</span>
+    99 NOCHES EN EL BOSQUE
+</div>
+<div class="sidebar-item" onclick="showContent('arise-crossover')">
+    <span class="folder-icon">📁</span>
+    ARISE CROSSOVER
+</div>
+<div class="sidebar-item" onclick="showContent('attack-titan')">
+    <span class="folder-icon">📁</span>
+    ATTACK ON TITAN REVOLUTION
+</div>
+<div class="sidebar-item" onclick="showContent('basically-fnf')">
+    <span class="folder-icon">📁</span>
+    BASICALLY FNF: REMIX
+</div>
+<div class="sidebar-item" onclick="showContent('block-spin')">
+    <span class="folder-icon">📁</span>
+    BLOCK SPIN
+</div>
+<div class="sidebar-item" onclick="showContent('bloodmoney')">
+    <span class="folder-icon">📁</span>
+    BLOODMONEY
+</div>
+<div class="sidebar-item" onclick="showContent('blox-fruits')">
+    <span class="folder-icon">📁</span>
+    BLOX FRUITS
+</div>
+<div class="sidebar-item" onclick="showContent('blue-lock')">
+    <span class="folder-icon">📁</span>
+    BLUE LOCK RIVALS
+</div>
+<div class="sidebar-item" onclick="showContent('dead-defense')">
+    <span class="folder-icon">📁</span>
+    DEAD DEFENSE
+</div>
+<div class="sidebar-item" onclick="showContent('dead-rails')">
+    <span class="folder-icon">📁</span>
+    DEAD RAILS
+</div>
+<div class="sidebar-item" onclick="showContent('demon-fall')">
+    <span class="folder-icon">📁</span>
+    DEMON FALL
+</div>
+<div class="sidebar-item" onclick="showContent('dig')">
+    <span class="folder-icon">📁</span>
+    DIG
+</div>
+<div class="sidebar-item" onclick="showContent('dragon-ball-rage')">
+    <span class="folder-icon">📁</span>
+    DRAGON BALL RAGE
+</div>
+<div class="sidebar-item" onclick="showContent('doors')">
+    <span class="folder-icon">📁</span>
+    DOORS
+</div>
+<div class="sidebar-item" onclick="showContent('dandy-world')">
+    <span class="folder-icon">📁</span>
+    DANDY'S WORLD
+</div>
+<div class="sidebar-item" onclick="showContent('dragon-blox')">
+    <span class="folder-icon">📁</span>
+    DRAGON BLOX
+</div>
+<div class="sidebar-item" onclick="showContent('demon-blade')">
+    <span class="folder-icon">📁</span>
+    DEMON BLADE
+</div>
+<div class="sidebar-item" onclick="showContent('evade')">
+    <span class="folder-icon">📁</span>
+    EVADE
+</div>
+<div class="sidebar-item" onclick="showContent('fisch')">
+    <span class="folder-icon">📁</span>
+    FISCH
+</div>
+<div class="sidebar-item" onclick="showContent('forsaken')">
+    <span class="folder-icon">📁</span>
+    FORSAKEN
+</div>
+<div class="sidebar-item" onclick="showContent('fruit-battlegrounds')">
+    <span class="folder-icon">📁</span>
+    FRUIT BATTLEGROUNDS
+</div>
+<div class="sidebar-item" onclick="showContent('grow-garden')">
+    <span class="folder-icon">📁</span>
+    GROW a GARDEN
+</div>
+<div class="sidebar-item" onclick="showContent('grand-piece-online')">
+    <span class="folder-icon">📁</span>
+    GRAND PIECE ONLINE
+</div>
+<div class="sidebar-item" onclick="showContent('hunty-zombie')">
+    <span class="folder-icon">📁</span>
+    HUNTY ZOMBIE
+</div>
+<div class="sidebar-item" onclick="showContent('ink-game')">
+    <span class="folder-icon">📁</span>
+    INK GAME
+</div>
+<div class="sidebar-item" onclick="showContent('jailbreak')">
+    <span class="folder-icon">📁</span>
+    JAILBREAK
+</div>
+<div class="sidebar-item" onclick="showContent('king-legacy')">
+    <span class="folder-icon">📁</span>
+    KING LEGACY
+</div>
+<div class="sidebar-item" onclick="showContent('muscle-legends')">
+    <span class="folder-icon">📁</span>
+    MUSCLE LEGENDS
+</div>
+<div class="sidebar-item" onclick="showContent('ninja-times')">
+    <span class="folder-icon">📁</span>
+    NINJA TIMES
+</div>
+<div class="sidebar-item" onclick="showContent('plantas-vs-brainrot')">
+    <span class="folder-icon">📁</span>
+    PLANTAS VS BRAINROT
+</div>
+<div class="sidebar-item" onclick="showContent('prospecting')">
+    <span class="folder-icon">📁</span>
+    PROSPECTING
+</div>
+<div class="sidebar-item" onclick="showContent('piggy')">
+    <span class="folder-icon">📁</span>
+    PIGGY
+</div>
+<div class="sidebar-item" onclick="showContent('raise-a-floppa')">
+    <span class="folder-icon">📁</span>
+    RAISE A FLOPPA
+</div>
+<div class="sidebar-item" onclick="showContent('raise-animals')">
+    <span class="folder-icon">📁</span>
+    RAISE ANIMALS
+</div>
+<div class="sidebar-item" onclick="showContent('smash-project')">
+    <span class="folder-icon">📁</span>
+    SMASH PROJECT
+</div>
+<div class="sidebar-item" onclick="showContent('steal-brainrot')">
+    <span class="folder-icon">📁</span>
+    STEAL A BRAINROT
+</div>
+<div class="sidebar-item" onclick="showContent('strongest-battlegrounds')">
+    <span class="folder-icon">📁</span>
+    THE STRONGEST BATTLEGROUNDS
+</div>
+<div class="sidebar-item" onclick="showContent('vox-seas')">
+    <span class="folder-icon">📁</span>
+    VOX SEAS
+</div>
+<div class="sidebar-item" onclick="showContent('weak-legacy')">
+    <span class="folder-icon">📁</span>
+    WEAK LEGACY
+</div>
+    <div class="sidebar-item" onclick="showContent('saludo')">
+        <span class="folder-icon">📁</span>
+        Si lees esto, ignorame
+    </div>
+</div>
 
-  <footer>
-    <div class="small">© Dux Hub • Más info: <a href="https://xddejavu734-eng.github.io/" target="_blank" style="color:var(--accent)">xddejavu734-eng.github.io</a> • Discord: <a href="https://discord.gg/ubBeGXk5" target="_blank" style="color:var(--accent)">discord.gg/ubBeGXk5</a></div>
-  </footer>
-</main>
+    <div id="welcome" class="welcome-screen" style="display: flex;">
+    <img src="https://i.postimg.cc/wTpYKGqV/Anti-Hambreado.jpg" alt="Anti-Hambreado Logo" class="team-logo">
+    <div class="welcome-content">
+        <h1>🔥 BIENVENIDO 🔥</h1>
+        <div class="team-name">Anti-Hambreado Script Team</div>
+        <p>¡Hola! Bienvenido al repositorio oficial de scripts de Anti-Hambreado Script Team. Aquí encontrarás todos los scripts de @Campione Script organizados por juegos y listos para usar. Únete a nuestra comunidad en Discord y explora nuestra colección de herramientas.</p>
+
+        <div class="buttons-container">
+            <button class="cta-button" onclick="toggleSidebar()">🚀 Explorar Scripts</button>
+            <a href="https://discord.gg/rTGF5xhe3h" target="_blank" style="text-decoration: none;">
+                <button class="cta-button discord-button">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/discord.svg" alt="Discord" class="discord-icon" style="filter: invert(1);">
+                    Únete a Discord
+                </button>
+            </a>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>© 2025 Anti-Hambreado Script Team. Todos los derechos reservados.</p>
+    <p>Diseñado con ❤️ para nuestra comunidad</p>
+</footer>
+
+    <!-- Contenido para cada sección -->
+    <div id="noches-bosque" class="content">
+        <h2 class="section-title">🌲 99 NOCHES EN EL BOSQUE</h2>
+        
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">NUEVO SCRIPT</div>
+                <button class="copy-button" onclick="copyScript(this, 'script1')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="script1">https://www.mediafire.com/file/1t99xa9wv0tgytz/SCRIPT+99+NOCHES+EN+EL+BOSQUE+ALINS.txt/file</pre>
+            </div>
+        </div>
+
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">BONK HUB</div>
+                <button class="copy-button" onclick="copyScript(this, 'script2')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="script2">https://www.mediafire.com/file/87bvqmx9qtq9ynq/KAITAN+99NOCHES.txt/file</pre>
+            </div>
+        </div>
+
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">BONK HUB NORMAL</div>
+                <button class="copy-button" onclick="copyScript(this, 'script3')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="script3">https://www.mediafire.com/file/8snedlegw42wys7/SCRIPT+BONK+HUB+NORMAL.txt/file</pre>
+            </div>
+        </div>
+
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">H4X HUB</div>
+                <button class="copy-button" onclick="copyScript(this, 'script4')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="script4">https://www.mediafire.com/file/2florr3w9dw0ydf/SCRIPT+H4X.txt/file</pre>
+            </div>
+        </div>
+
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">VOID WARE</div>
+                <button class="copy-button" onclick="copyScript(this, 'script5')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="script5">https://www.mediafire.com/file/nm491e4nvwnbr2j/SCRIPT+VOIDWARE.txt/file</pre>
+            </div>
+        </div>
+
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">VORTEX HUB</div>
+                <button class="copy-button" onclick="copyScript(this, 'script6')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="script6">https://www.mediafire.com/file/svhh5vhscr8ogmi/SCRIPT+99NIGHT+VORTEX+HUB.txt/file</pre>
+            </div>
+        </div>
+<div class="script-card">
+    <div class="script-header">
+        <div class="script-title">FOXNAME</div>
+        <button class="copy-button" onclick="copyScript(this, 'script7')">📋 Copiar</button>
+    </div>
+    <div class="script-content">
+        <pre class="script-code" id="script7">https://www.mediafire.com/file/pb8chz4qx3e14ok/SCRIPT+FOXNAME+DIAMOND99.txt/file</pre>
+    </div>
+</div>
+
+<div class="script-card">
+    <div class="script-header">
+        <div class="script-title">SERIOUSLY</div>
+        <button class="copy-button" onclick="copyScript(this, 'script8')">📋 Copiar</button>
+    </div>
+    <div class="script-content">
+        <pre class="script-code" id="script8">https://www.mediafire.com/file/2lg692qhlvht152/SCRIPT+SERIOUSLY+99NOCHES.txt/file</pre>
+    </div>
+</div>
+
+<div class="script-card">
+    <div class="script-header">
+        <div class="script-title">FOXNAME V2</div>
+        <button class="copy-button" onclick="copyScript(this, 'script9')">📋 Copiar</button>
+    </div>
+    <div class="script-content">
+        <pre class="script-code" id="script9">https://www.mediafire.com/file/962kvzgws7fdtl3/SCRIPT+FARM+DAY+++GEMAS.txt/file</pre>
+    </div>
+</div>
+    </div>
+
+    <div id="arise-crossover" class="content">
+        <h2 class="section-title">⚔️ ARISE CROSSOVER</h2>
+        
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">GOOMBA HUB</div>
+                <button class="copy-button" onclick="copyScript(this, 'arise1')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="arise1">loadstring(game:HttpGet("https://raw.githubusercontent.com/JustLevel/goombahub/main/AriseCrossover.lua"))()</pre>
+            </div>
+        </div>
+    </div>
+
+    <div id="attack-titan" class="content">
+        <h2 class="section-title">⚔️ ATTACK ON TITAN REVOLUTION</h2>
+        
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">LUNARZ</div>
+                <button class="copy-button" onclick="copyScript(this, 'aot1')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="aot1">https://www.mediafire.com/file/5g5cet0ha9da467/SCRIPT+LUNARZ.txt/file</pre>
+            </div>
+        </div>
+    </div>
+
+    <div id="blue-lock" class="content">
+        <h2 class="section-title">⚽ BLUE LOCK RIVALS</h2>
+        
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">OMG HUB</div>
+                <button class="copy-button" onclick="copyScript(this, 'bl1')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="bl1">https://www.mediafire.com/file/yqty2pkjbqmlfut/SCRIPT+NEW+OMG+HUB+2025.txt/file</pre>
+            </div>
+        </div>
+    </div>
+
+    <div id="block-spin" class="content">
+        <h2 class="section-title">🎲 BLOCK SPIN</h2>
+        
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">HERMANOS-DEV</div>
+                <button class="copy-button" onclick="copyScript(this, 'bs1')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="bs1">--[[
+Credit: Hermanos-Dev, Dont Delete This.
+]]
+
+local loader = loadstring
+local url = "https://raw.githubusercontent.com/hermanos-dev/hermanos-hub/refs/heads/main/BlockSpin/blockspin-pvp.lua"
+local response = game:HttpGet(url)
+loader(response)()</pre>
+            </div>
+        </div>
+
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">QUARTY</div>
+                <button class="copy-button" onclick="copyScript(this, 'bs2')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="bs2">https://www.mediafire.com/file/qg500i15aeucrbv/SCRIPT+QUARTY.txt/file</pre>
+            </div>
+        </div>
+    </div>
+
+    <div id="blox-fruits" class="content">
+        <h2 class="section-title">🍎 BLOX FRUITS</h2>
+        
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">ANDEPZAIHUB</div>
+                <button class="copy-button" onclick="copyScript(this, 'blox1')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="blox1">https://www.mediafire.com/file/xpnq8upphf1enys/SCRIPT+ANDEPZAIHUB.TXT/file</pre>
+            </div>
+        </div>
+
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">ASTRAL HUB</div>
+                <button class="copy-button" onclick="copyScript(this, 'blox2')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="blox2">loadstring(game:HttpGet('https://cdn.robloxscripts.gg/public/furky/furky-astral-source.lua'))()</pre>
+            </div>
+        </div>
+
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">BLUE X HUB</div>
+                <button class="copy-button" onclick="copyScript(this, 'blox3')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="blox3">https://www.mediafire.com/file/mizwgtlc6gdwkl1/SCRIPT+BLUEX+HUB.txt/file</pre>
+            </div>
+        </div>
+
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">DAT THG</div>
+                <button class="copy-button" onclick="copyScript(this, 'blox4')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="blox4">https://www.mediafire.com/file/j6d2fva815bpfpp/SCRIPT+DAT+THG.txt/file</pre>
+            </div>
+        </div>
+
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">HOHO HUB</div>
+                <button class="copy-button" onclick="copyScript(this, 'blox5')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="blox5">loadstring(game:HttpGet("https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI"))()</pre>
+            </div>
+        </div>
+
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">REDZ HUB</div>
+                <button class="copy-button" onclick="copyScript(this, 'blox6')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="blox6">local Settings = {
+  JoinTeam = "Pirates"; -- Pirates/Marines
+  Translator = true; -- true/false
+}
+
+getgenv().BETA_VERSION = true
+loadstring(game:HttpGet("https://raw.githubusercontent.com/tlredz/Scripts/refs/heads/main/main.luau"))(Settings)</pre>
+            </div>
+        </div>
+
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">SCRIPT SERVER HOP</div>
+                <button class="copy-button" onclick="copyScript(this, 'blox7')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="blox7">https://www.mediafire.com/file/2sz4aephhdiu0l0/SCRIPT+HOP+SERVER.txt/file</pre>
+            </div>
+        </div>
+
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">TSUO HUB</div>
+                <button class="copy-button" onclick="copyScript(this, 'blox8')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="blox8">https://www.mediafire.com/file/giyq8l80fpqk2jb/SCRIPT+TSUO+HUB.txt/file</pre>
+            </div>
+        </div>
+
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">W-AZURE</div>
+                <button class="copy-button" onclick="copyScript(this, 'blox9')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="blox9">https://www.mediafire.com/file/lvehh3dle23ej5a/NUEVO+W-AZURE+TRUE.txt/file</pre>
+            </div>
+        </div>
+<div class="script-card">
+    <div class="script-header">
+        <div class="script-title">NEW OMG HUB</div>
+        <button class="copy-button" onclick="copyScript(this, 'blox10')">📋 Copiar</button>
+    </div>
+    <div class="script-content">
+        <pre class="script-code" id="blox10">https://www.mediafire.com/file/yqty2pkjbqmlfut/SCRIPT+NEW+OMG+HUB+2025.txt/file</pre>
+    </div>
+</div>
+
+<div class="script-card">
+    <div class="script-header">
+        <div class="script-title">TEDDY HUB</div>
+        <button class="copy-button" onclick="copyScript(this, 'blox11')">📋 Copiar</button>
+    </div>
+    <div class="script-content">
+        <pre class="script-code" id="blox11">https://www.mediafire.com/file/uweo7ms5gvl1c3h/SCRIPT+TEDDY+HUB.txt/file</pre>
+    </div>
+</div>
+
+<div class="script-card">
+    <div class="script-header">
+        <div class="script-title">GRAVITY HUB</div>
+        <button class="copy-button" onclick="copyScript(this, 'blox12')">📋 Copiar</button>
+    </div>
+    <div class="script-content">
+        <pre class="script-code" id="blox12">https://www.mediafire.com/file/nkbcvf5y1ijevcb/GRAVITY+HUB.txt/file</pre>
+    </div>
+</div>
+    </div>
+
+    <div id="dig" class="content">
+        <h2 class="section-title">⛏️ DIG</h2>
+        
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">FROSTBYTE</div>
+                <button class="copy-button" onclick="copyScript(this, 'dig1')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="dig1">https://www.mediafire.com/file/j0ua34pwf4lnv94/SCRIPT+FROSTBYTE+DIG.txt/file</pre>
+            </div>
+        </div>
+    </div>
+
+    <div id="dead-rails" class="content">
+        <h2 class="section-title">🚂 DEAD RAILS</h2>
+        
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">NAT HUB</div>
+                <button class="copy-button" onclick="copyScript(this, 'dr1')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="dr1">https://www.mediafire.com/file/d89mbxqwkzjwt3o/SCRIPT_NAT_HUB.txt/file</pre>
+            </div>
+        </div>
+
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">SKULL HUB</div>
+                <button class="copy-button" onclick="copyScript(this, 'dr2')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="dr2">https://www.mediafire.com/file/fhtm57gmk7gzuk4/SCRIPT+SKULL+HUB+AUTO+BONOS.txt/file</pre>
+            </div>
+        </div>
+    </div>
+
+    <div id="fisch" class="content">
+        <h2 class="section-title">🎣 FISCH</h2>
+        
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">NATIVE HUB</div>
+                <button class="copy-button" onclick="copyScript(this, 'fisch1')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="fisch1">https://www.mediafire.com/file/7b8apdysqo369ne/SCRIPT_NATIVE_NEW.txt/file</pre>
+            </div>
+        </div>
+
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">NATIVE HUB NEW</div>
+                <button class="copy-button" onclick="copyScript(this, 'fisch2')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="fisch2">https://www.mediafire.com/file/7b8apdysqo369ne/SCRIPT_NATIVE_NEW.txt/file</pre>
+            </div>
+        </div>
+
+<div class="script-card">
+    <div class="script-header">
+        <div class="script-title">ZENITH HUB</div>
+        <button class="copy-button" onclick="copyScript(this, 'fisch3')">📋 Copiar</button>
+    </div>
+    <div class="script-content">
+        <pre class="script-code" id="fisch3">loadstring(game:HttpGet("https://raw.githubusercontent.com/rxito/ZenithHub/refs/heads/main/Loader"))()</pre>
+    </div>
+</div>
+
+<div class="script-card">
+    <div class="script-header">
+        <div class="script-title">ALCHEMY HUB </div>
+        <button class="copy-button" onclick="copyScript(this, 'fisch4')">📋 Copiar</button>
+    </div>
+    <div class="script-content">
+        <pre class="script-code" id="fisch4">loadstring(game:HttpGet("https://scripts.alchemyhub.xyz"))()</pre>
+    </div>
+</div>
+
+<div class="script-card">
+    <div class="script-header">
+        <div class="script-title">RIFT HUB</div>
+        <button class="copy-button" onclick="copyScript(this, 'fisch5')">📋 Copiar</button>
+    </div>
+    <div class="script-content">
+        <pre class="script-code" id="fisch5">https://www.mediafire.com/file/1kforlypif7dbdu/SCRIPT+RIFT+HUB.txt/file</pre>
+    </div>
+</div>
+</div>
+
+    <div id="grow-garden" class="content">
+        <h2 class="section-title">🌱 GROW A GARDEN</h2>
+        
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">DUPLICAR DINERO</div>
+                <button class="copy-button" onclick="copyScript(this, 'garden1')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="garden1">https://www.mediafire.com/file/t3uuf2f10p0xww1/SCRIPT+LUNOR.txt/file</pre>
+            </div>
+        </div>
+
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">GUMANBA</div>
+                <button class="copy-button" onclick="copyScript(this, 'garden2')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="garden2">https://www.mediafire.com/file/t3uuf2f10p0xww1/SCRIPT+LUNOR.txt/file</pre>
+            </div>
+        </div>
+
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">KICIAHOOK</div>
+                <button class="copy-button" onclick="copyScript(this, 'garden3')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="garden3">loadstring(game:HttpGet("https://raw.githubusercontent.com/kiciahook/kiciahook/refs/heads/main/loader.luau"))()</pre>
+            </div>
+        </div>
+
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">LUNOR HUB</div>
+                <button class="copy-button" onclick="copyScript(this, 'garden4')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="garden4">script_key = 'Insert Lunor Key Here';
+loadstring(game:HttpGet('https://raw.githubusercontent.com/Catto-YFCN/Lunor_Dependencies/refs/heads/main/Loader'))()
+
+-- Para obtener la key: https://ads.luarmor.net/get_key?for=LinkvertiseAD12_Hours-HhMMjfiZOeFt</pre>
+            </div>
+        </div>
+
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">NAT HUB</div>
+                <button class="copy-button" onclick="copyScript(this, 'garden5')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="garden5">https://www.mediafire.com/file/d89mbxqwkzjwt3o/SCRIPT_NAT_HUB.txt/file</pre>
+            </div>
+        </div>
+
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">NO LAG HUB</div>
+                <button class="copy-button" onclick="copyScript(this, 'garden6')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="garden6">https://www.mediafire.com/file/6t5t3pb7e8jtjvs/SCRIPT+NO+LAG+GROW+GARDEN.txt/file</pre>
+            </div>
+        </div>
+
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">SPEED HUB</div>
+                <button class="copy-button" onclick="copyScript(this, 'garden7')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="garden7">loadstring(game:HttpGet("https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua", true))()</pre>
+            </div>
+        </div>
+
+<div class="script-card">
+    <div class="script-header">
+        <div class="script-title">BONK HUB</div>
+        <button class="copy-button" onclick="copyScript(this, 'garden8')">📋 Copiar</button>
+    </div>
+    <div class="script-content">
+        <pre class="script-code" id="garden8">https://www.mediafire.com/file/8snedlegw42wys7/SCRIPT+BONK+HUB+NORMAL.txt/file</pre>
+    </div>
+</div>
+
+<div class="script-card">
+    <div class="script-header">
+        <div class="script-title">THUNDAR Z</div>
+        <button class="copy-button" onclick="copyScript(this, 'garden9')">📋 Copiar</button>
+    </div>
+    <div class="script-content">
+        <pre class="script-code" id="garden9">https://www.mediafire.com/file/ny412eci4oz8sml/SCRIPT+THUNDAR+Z.txt/file</pre>
+    </div>
+</div>
+    </div>
+
+    <div id="hunty-zombie" class="content">
+        <h2 class="section-title">🧟 HUNTY ZOMBIE</h2>
+        
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">HUNTY ZOMBIE SCRIPT</div>
+                <button class="copy-button" onclick="copyScript(this, 'hz1')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="hz1">https://www.mediafire.com/file/nlr7pib279xkfxv/SCRIPT+HUNTY+ZOMBIE+TORA+ISME.txt/file</pre>
+            </div>
+        </div>
+
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">SOLIX HUB</div>
+                <button class="copy-button" onclick="copyScript(this, 'hz2')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="hz2">https://www.mediafire.com/file/d66j12ef9ynbuv0/SCRIPT_SOLIX_HUB.txt/file</pre>
+            </div>
+        </div>
+
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">TYPE HUB</div>
+                <button class="copy-button" onclick="copyScript(this, 'hz3')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="hz3">https://www.mediafire.com/file/xjcmcidto7rsjl3/SCRIPT+TYPE+HUB+HUNTY+ZOMBIE.txt/file</pre>
+            </div>
+        </div>
+
+<div class="script-card">
+    <div class="script-header">
+        <div class="script-title">ALCHEMY HUB</div>
+        <button class="copy-button" onclick="copyScript(this, 'hz4')">📋 Copiar</button>
+    </div>
+    <div class="script-content">
+        <pre class="script-code" id="hz4">loadstring(game:HttpGet("https://scripts.alchemyhub.xyz"))()</pre>
+    </div>
+</div>
+
+<div class="script-card">
+    <div class="script-header">
+        <div class="script-title">ZEE HUB</div>
+        <button class="copy-button" onclick="copyScript(this, 'hz5')">📋 Copiar</button>
+    </div>
+    <div class="script-content">
+        <pre class="script-code" id="hz5">https://www.mediafire.com/file/1tzpo49zjgij7gv/SCRIPT+ZEE+HUB+HUNTY+ZOMBIE.txt/file</pre>
+    </div>
+</div>
+
+<div class="script-card">
+    <div class="script-header">
+        <div class="script-title">CHIYO HUB</div>
+        <button class="copy-button" onclick="copyScript(this, 'hz6')">📋 Copiar</button>
+    </div>
+    <div class="script-content">
+        <pre class="script-code" id="hz6">https://www.mediafire.com/file/l6p95il7t8sa9yc/SCRIPT+CHIYO+HUB.txt/file</pre>
+    </div>
+</div>
+
+<div class="script-card">
+    <div class="script-header">
+        <div class="script-title">MIRAGE HUB</div>
+        <button class="copy-button" onclick="copyScript(this, 'hz7')">📋 Copiar</button>
+    </div>
+    <div class="script-content">
+        <pre class="script-code" id="hz7">https://www.mediafire.com/file/cbor7shfei6xi5y/SCRIPT+MIRAGE+HUB.txt/file</pre>
+    </div>
+</div>
+    </div>
+
+    <div id="ink-game" class="content">
+        <h2 class="section-title">🖋️ INK GAME</h2>
+        
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">VOID WARE</div>
+                <button class="copy-button" onclick="copyScript(this, 'ink1')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="ink1">loadstring(game:HttpGet("https://raw.githubusercontent.com/VapeVoidware/VW-Add/main/inkgame.lua", true))()</pre>
+            </div>
+        </div>
+    </div>
+
+    <div id="king-legacy" class="content">
+        <h2 class="section-title">👑 KING LEGACY</h2>
+        
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">ARC HUB</div>
+                <button class="copy-button" onclick="copyScript(this, 'kl1')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="kl1">getgenv().RaidUI = false -- For Hidden Raid Mode true = show and false = hidden
+getgenv().CustomDistance = 10 -- For Bug Can't Swipe Distance
+getgenv().ResetFirstLoad = true -- For Reset First Time Load true = yes and false = no
+loadstring(game:HttpGet("https://raw.githubusercontent.com/ChopLoris/ArcHub/main/main.lua"))()</pre>
+            </div>
+        </div>
+
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">OMG HUB</div>
+                <button class="copy-button" onclick="copyScript(this, 'kl2')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="kl2">https://www.mediafire.com/file/yqty2pkjbqmlfut/SCRIPT+NEW+OMG+HUB+2025.txt/file</pre>
+            </div>
+        </div>
+    </div>
+
+    <div id="prospecting" class="content">
+        <h2 class="section-title">⛏️ PROSPECTING</h2>
+        
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">NUEVO SCRIPT</div>
+                <button class="copy-button" onclick="copyScript(this, 'pro1')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="pro1">https://www.mediafire.com/file/gmu353izjgrg33c/SCRIPT+PROSPECTING.txt/file</pre>
+            </div>
+        </div>
+    </div>
+
+    <div id="steal-brainrot" class="content">
+        <h2 class="section-title">🧠 STEAL A BRAINROT</h2>
+
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">AJJAN</div>
+                <button class="copy-button" onclick="copyScript(this, 'sb1')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="sb1">https://www.mediafire.com/file/b8gzxd0hu3dmydc/SCRIPT+AJJAN+STEAL+A+BRAINROT.txt/file</pre>
+            </div>
+        </div>
+
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">ARBIX TP NUEVO</div>
+                <button class="copy-button" onclick="copyScript(this, 'sb2')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="sb2">https://www.mediafire.com/file/3jvwf5xpoa2ocar/SCRIPT+ARBIX+TP+VC+SERVER.txt/file</pre>
+            </div>
+        </div>
+
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">CHILLI HUB</div>
+                <button class="copy-button" onclick="copyScript(this, 'sb3')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="sb3">https://www.mediafire.com/file/edydn45v754qxm3/SCRIPT+CHILLI+HUB+BRAINROT.txt/file</pre>
+            </div>
+        </div>
+
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">HOHO HUB</div>
+                <button class="copy-button" onclick="copyScript(this, 'sb4')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="sb4">loadstring(game:HttpGet("https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI"))()</pre>
+            </div>
+        </div>
+
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">LEGENDS BRAINROT</div>
+                <button class="copy-button" onclick="copyScript(this, 'sb5')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="sb5">https://www.mediafire.com/file/vj0in6milhaui15/SCRIPT+LEGENDS+BRAINROT.txt/file
+
+-- Key = ayam</pre>
+            </div>
+        </div>
+
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">LENNON V3</div>
+                <button class="copy-button" onclick="copyScript(this, 'sb6')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="sb6">https://www.mediafire.com/file/6phdz9th76ddq6v/SCRIPT+LENNON+V3.txt/file</pre>
+            </div>
+        </div>
+
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">LURK HACK V4</div>
+                <button class="copy-button" onclick="copyScript(this, 'sb7')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="sb7">https://www.mediafire.com/file/karv5yskubk0aqa/SCRIPT+LURK+HACKV4.txt/file</pre>
+            </div>
+        </div>
+
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">LEMON HUB</div>
+                <button class="copy-button" onclick="copyScript(this, 'sb8')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="sb8">https://www.mediafire.com/file/loxj38lxrqr31a4/SCRIPT+LEMON+HUB.txt/file</pre>
+            </div>
+        </div>
+
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">MIRANDAN HUB</div>
+                <button class="copy-button" onclick="copyScript(this, 'sb9')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="sb9">https://www.mediafire.com/file/nwwtnvdhzfo070h/SCRIPT+MIRANDAN+STEAL+A+BRAINROT.txt/file</pre>
+            </div>
+        </div>
+
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">MAKAL HUB</div>
+                <button class="copy-button" onclick="copyScript(this, 'sb10')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="sb10">https://www.mediafire.com/file/k29my232199w3k8/SCRIPT+MAKAL+HUB.txt/file</pre>
+            </div>
+        </div>
+
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">PUSARX</div>
+                <button class="copy-button" onclick="copyScript(this, 'sb11')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="sb11">https://www.mediafire.com/file/9taswgj9izhjd3w/SCRIPT+PUSARX+BRAINROT.txt/file</pre>
+            </div>
+        </div>
+
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">TELEGUIADOS HUB</div>
+                <button class="copy-button" onclick="copyScript(this, 'sb12')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="sb12">https://www.mediafire.com/file/8hhki6yha35hnxg/SCRIPT+TELEGUIADOS+STEAL+A+BRAINROT.txt/file</pre>
+            </div>
+        </div>
+
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">TP ARBIX</div>
+                <button class="copy-button" onclick="copyScript(this, 'sb13')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="sb13">https://www.mediafire.com/file/3hj8kgeynzmnx4g/NEW+TP+ARBIX+HUB.txt/file</pre>
+            </div>
+        </div>
+
+<div class="script-card">
+    <div class="script-header">
+        <div class="script-title">KENGER HUB</div>
+        <button class="copy-button" onclick="copyScript(this, 'sb15')">📋 Copiar</button>
+    </div>
+    <div class="script-content">
+        <pre class="script-code" id="sb15">https://www.mediafire.com/file/s4ocwl0p4h0xvhf/SCRIPT+KENGER+HUB.txt/file</pre>
+    </div>
+</div>
+    </div>
+
+    <div id="vox-seas" class="content">
+        <h2 class="section-title">🌊 VOX SEAS</h2>
+        
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">FARM DINERO</div>
+                <button class="copy-button" onclick="copyScript(this, 'vs1')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="vs1">loadstring(game:HttpGet('https://raw.githubusercontent.com/shakaUnlocked/IiI/refs/heads/main/AutoVoxSeas.lua'))()</pre>
+            </div>
+        </div>
+
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">LEGEND HUB</div>
+                <button class="copy-button" onclick="copyScript(this, 'vs2')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="vs2">loadstring(game:HttpGet("https://pastefy.app/ULaWpxKm/raw"))()</pre>
+            </div>
+        </div>
+
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">NEXUS HUB</div>
+                <button class="copy-button" onclick="copyScript(this, 'vs3')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="vs3">loadstring(game:HttpGet("https://raw.githubusercontent.com/CrazyHub123/NexusHubRevival/refs/heads/main/NewLoader.lua"))()</pre>
+            </div>
+        </div>
+
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">OMG HUB</div>
+                <button class="copy-button" onclick="copyScript(this, 'vs4')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="vs4">https://www.mediafire.com/file/yqty2pkjbqmlfut/SCRIPT+NEW+OMG+HUB+2025.txt/file</pre>
+            </div>
+        </div>
+
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">SPARKX SCRIPT</div>
+                <button class="copy-button" onclick="copyScript(this, 'vs5')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="vs5">loadstring(game:HttpGet("https://raw.githubusercontent.com/FloppHub-Team/Scripts-idk/refs/heads/main/Main/Vox%20Seas%20Open%20Source%20Cracked"))()</pre>
+            </div>
+        </div>
+
+        <div class="script-card">
+            <div class="script-header">
+                <div class="script-title">TYPE HUB</div>
+                <button class="copy-button" onclick="copyScript(this, 'vs6')">📋 Copiar</button>
+            </div>
+            <div class="script-content">
+                <pre class="script-code" id="vs6">https://www.mediafire.com/file/nzh2hrfjrt59e3i/SCRIPT+TYPE+HUB.txt/file</pre>
+            </div>
+        </div>
+      </div>
+
+<div id="forsaken" class="content">
+    <h2 class="section-title">🔪 FORSAKEN</h2>
+    
+    <div class="script-card">
+        <div class="script-header">
+            <div class="script-title">LOLNOTAKID</div>
+            <button class="copy-button" onclick="copyScript(this, 'forsaken1')">📋 Copiar</button>
+        </div>
+        <div class="script-content">
+            <pre class="script-code" id="forsaken1">loadstring(game:HttpGet("https://raw.githubusercontent.com/LolnotaKid/project/refs/heads/main/obfuscated_script-1758536932336.lua.txt"))()
+print("V1")</pre>
+        </div>
+    </div>
+
+<div class="script-card">
+    <div class="script-header">
+        <div class="script-title">TSUO HUB</div>
+        <button class="copy-button" onclick="copyScript(this, 'forsaken2')">📋 Copiar</button>
+    </div>
+    <div class="script-content">
+        <pre class="script-code" id="forsaken2">https://www.mediafire.com/file/giyq8l80fpqk2jb/SCRIPT+TSUO+HUB.txt/file</pre>
+    </div>
+</div>
+</div>
+
+<div id="dragon-ball-rage" class="content">
+    <h2 class="section-title">🐉 DRAGON BALL RAGE</h2>
+    
+    <div class="script-card">
+        <div class="script-header">
+            <div class="script-title">IMP HUB</div>
+            <button class="copy-button" onclick="copyScript(this, 'dbr1')">📋 Copiar</button>
+        </div>
+        <div class="script-content">
+            <pre class="script-code" id="dbr1">https://www.mediafire.com/file/l0gzkkmv5vlfedh/SCRIPT+IMP+HUB.txt/file</pre>
+        </div>
+    </div>
+</div>
+
+<div id="evade" class="content">
+    <h2 class="section-title">🏃 EVADE</h2>
+    
+    <div class="script-card">
+        <div class="script-header">
+            <div class="script-title">SPEEDHAX</div>
+            <button class="copy-button" onclick="copyScript(this, 'evade1')">📋 Copiar</button>
+        </div>
+        <div class="script-content">
+            <pre class="script-code" id="evade1">loadstring(game:HttpGet("https://raw.githubusercontent.com/thesigmacorex/RobloxScripts/main/speedhax"))()</pre>
+        </div>
+    </div>
+
+<div class="script-card">
+    <div class="script-header">
+        <div class="script-title">TORAISME</div>
+        <button class="copy-button" onclick="copyScript(this, 'evade2')">📋 Copiar</button>
+    </div>
+    <div class="script-content">
+        <pre class="script-code" id="evade2">https://www.mediafire.com/file/aacsiih11xsn166/SCRIPT+EVADE+HALLOWEEN+TORAISME.txt/file</pre>
+    </div>
+</div>
+</div>
+
+<div id="basically-fnf" class="content">
+    <h2 class="section-title">🎵 BASICALLY FNF: REMIX</h2>
+    
+    <div class="script-card">
+        <div class="script-header">
+            <div class="script-title">AUTO PLAYER</div>
+            <button class="copy-button" onclick="copyScript(this, 'fnf1')">📋 Copiar</button>
+        </div>
+        <div class="script-content">
+            <pre class="script-code" id="fnf1">loadstring(game:HttpGet("https://rawscripts.net/raw/Basically-FNF:-Remix-AutoPlayer-Lite-9989"))()</pre>
+        </div>
+    </div>
+</div>
+
+<div id="plantas-vs-brainrot" class="content">
+    <h2 class="section-title">🌿 PLANTAS VS BRAINROT</h2>
+    
+    <div class="script-card">
+        <div class="script-header">
+            <div class="script-title">SPEED HUB</div>
+            <button class="copy-button" onclick="copyScript(this, 'pvb1')">📋 Copiar</button>
+        </div>
+        <div class="script-content">
+            <pre class="script-code" id="pvb1">loadstring(game:HttpGet("https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua", true))()</pre>
+        </div>
+    </div>
+
+<div class="script-card">
+    <div class="script-header">
+        <div class="script-title">CHIYO HUB</div>
+        <button class="copy-button" onclick="copyScript(this, 'pvb2')">📋 Copiar</button>
+    </div>
+    <div class="script-content">
+        <pre class="script-code" id="pvb2">https://www.mediafire.com/file/l6p95il7t8sa9yc/SCRIPT+CHIYO+HUB.txt/file</pre>
+    </div>
+</div>
+
+<div class="script-card">
+    <div class="script-header">
+        <div class="script-title">BLESSED HUB</div>
+        <button class="copy-button" onclick="copyScript(this, 'pvb3')">📋 Copiar</button>
+    </div>
+    <div class="script-content">
+        <pre class="script-code" id="pvb3">https://www.mediafire.com/file/oh1bmjdn3p2k5mq/SCRIPT+BLESSED+HUB+X.txt/file</pre>
+    </div>
+</div>
+
+<div class="script-card">
+    <div class="script-header">
+        <div class="script-title">RIFT HUB</div>
+        <button class="copy-button" onclick="copyScript(this, 'pvb4')">📋 Copiar</button>
+    </div>
+    <div class="script-content">
+        <pre class="script-code" id="pvb4">https://www.mediafire.com/file/1kforlypif7dbdu/SCRIPT+RIFT+HUB.txt/file</pre>
+    </div>
+</div>
+</div>
+
+<div id="script-hub-universales" class="content">
+    <h2 class="section-title">🌐 SCRIPT HUB UNIVERSALES</h2>
+    
+    <div class="script-card">
+        <div class="script-header">
+            <div class="script-title">FloppHub</div>
+            <button class="copy-button" onclick="copyScript(this, 'universal1')">📋 Copiar</button>
+        </div>
+        <div class="script-content">
+            <pre class="script-code" id="universal1">loadstring(game:HttpGet("https://is.gd/JwNMnE"))()</pre>
+        </div>
+    </div>
+
+<div class="script-card">
+    <div class="script-header">
+        <div class="script-title">Anti-Hambreado Script Hub</div>
+        <button class="copy-button" onclick="copyScript(this, 'universal2')">📋 Copiar</button>
+    </div>
+    <div class="script-content">
+        <pre class="script-code" id="universal2">🚀 ¡PRÓXIMAMENTE! 🚀
+¡Gracias por ayudarnos a llegar a la meta! 🔥</pre>
+    </div>
+</div>
+</div>
+
+<div id="servidores-privados" class="content">
+    <h2 class="section-title">💲 SERVIDORES PRIVADOS GRATIS</h2>
+    
+    <div class="script-card">
+        <div class="script-header">
+            <div class="script-title">SERVIDORES GRATIS</div>
+            <button class="copy-button" onclick="redirectToURL(this)">🔗 Abrir URL</button>
+        </div>
+        <div class="script-content">
+            <pre class="script-code">https://pastebin.com/raw/Ru4UQDpN
+
+Para usar este script, es necesario copiar el
+código completo del script y seguir los pasos
+del siguiente tutorial = https://youtu.be/-UEdoNwIvOE</pre>
+        </div>
+    </div>
+</div>
 
 <script>
-  function copyScript(id){
-    const txt = document.getElementById(id).textContent;
-    navigator.clipboard.writeText(txt).then(() => {
-      const b = event.currentTarget;
-      const old = b.innerText;
-      b.innerText = "Copiado ✅";
-      setTimeout(()=> b.innerText = old,1400);
-    }, (e)=> { alert("No se pudo copiar: " + e) });
-  }
-
-  function copyText(id){
-    const txt = document.getElementById(id).textContent;
-    navigator.clipboard.writeText(txt);
-    alert("Copiado al portapapeles");
-  }
-
-  function copyAll(){
-    const codes = document.querySelectorAll('.card .code');
-    let all = "";
-    codes.forEach(c => { all += c.textContent + "\n\n"; });
-    navigator.clipboard.writeText(all).then(()=> alert("Todos los scripts copiados ✅"));
-  }
-
-  function filterCards(){
-    const q = document.getElementById('q').value.toLowerCase();
-    document.querySelectorAll('#grid .card').forEach(card=>{
-      const txt = (card.getAttribute('data-search') || "") + " " + card.innerText;
-      if(txt.toLowerCase().includes(q)){ card.style.display = ""; } else { card.style.display = "none"; }
-    });
-  }
+function redirectToURL(button) {
+    button.textContent = "🔗 Abrir URL";
+    
+    window.location.href = "https://pastebin.com/raw/Ru4UQDpN";
+}
 </script>
-</body>
-</html>
+
+<div id="bloodmoney" class="content">
+    <h2 class="section-title">🩸 BLOODMONEY</h2>
+    
+    <div class="script-card">
+        <div class="script-header">
+            <div class="script-title">ANTI-HAMBREADO TEAM SCRIPT | BLOODMONEY</div>
+            <button class="copy-button" onclick="copyScript(this, 'bloodmoney1')">📋 Copiar</button>
+        </div>
+        <div class="script-content">
+            <pre class="script-code" id="bloodmoney1">loadstring(game:HttpGet("https://raw.githubusercontent.com/FloppHub-Team/Scripts-idk/refs/heads/main/BloodMoney%20Script.txt"))()</pre>
+        </div>
+    </div>
+</div>
+
+<div id="muscle-legends" class="content">
+    <h2 class="section-title">💪 MUSCLE LEGENDS</h2>
+    
+    <div class="script-card">
+        <div class="script-header">
+            <div class="script-title">ECLIPSE HUB</div>
+            <button class="copy-button" onclick="copyScript(this, 'ml1')">📋 Copiar</button>
+        </div>
+        <div class="script-content">
+            <pre class="script-code" id="ml1">loadstring(game:HttpGet("https://protected-roblox-scripts.onrender.com/ef14c49aab8ad4e9ab69171b40989cd2"))()</pre>
+        </div>
+    </div>
+
+<div class="script-card">
+    <div class="script-header">
+        <div class="script-title">SPEED HUB</div>
+        <button class="copy-button" onclick="copyScript(this, 'ml2')">📋 Copiar</button>
+    </div>
+    <div class="script-content">
+        <pre class="script-code" id="ml2">loadstring(game:HttpGet("https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua", true))()</pre>
+    </div>
+</div>
+</div>
+
+<div id="dead-defense" class="content">
+    <h2 class="section-title">🛡️ DEAD DEFENSE</h2>
+    
+    <div class="script-card">
+        <div class="script-header">
+            <div class="script-title">GUMANBA</div>
+            <button class="copy-button" onclick="copyScript(this, 'dd1')">📋 Copiar</button>
+        </div>
+        <div class="script-content">
+            <pre class="script-code" id="dd1">loadstring(game:HttpGet("https://raw.githubusercontent.com/gumanba/Scripts/main/DeadDefense"))()</pre>
+        </div>
+    </div>
+</div>
+
+<div id="smash-project" class="content">
+    <h2 class="section-title">💥 SMASH PROJECT</h2>
+    
+    <div class="script-card">
+        <div class="script-header">
+            <div class="script-title">NEXOR HUB</div>
+            <button class="copy-button" onclick="copyScript(this, 'sp1')">📋 Copiar</button>
+        </div>
+        <div class="script-content">
+            <pre class="script-code" id="sp1">loadstring(game:HttpGet('https://raw.githubusercontent.com/NexorHub/Games/refs/heads/main/Universal/Scripts.lua'))();</pre>
+        </div>
+    </div>
+</div>
+
+<div id="demon-fall" class="content">
+    <h2 class="section-title">👹 DEMON FALL</h2>
+    
+    <div class="script-card">
+        <div class="script-header">
+            <div class="script-title">NOOB HUB</div>
+            <button class="copy-button" onclick="copyScript(this, 'df1')">📋 Copiar</button>
+        </div>
+        <div class="script-content">
+            <pre class="script-code" id="df1">https://www.mediafire.com/file/gkn6mmk0jgv2gui/Script_Demon_FALL.txt/file</pre>
+        </div>
+    </div>
+</div>
+
+<div id="doors" class="content">
+    <h2 class="section-title">🚪 DOORS</h2>
+    
+    <div class="script-card">
+        <div class="script-header">
+            <div class="script-title">DOORS SCRIPT</div>
+            <button class="copy-button" onclick="copyScript(this, 'doors1')">📋 Copiar</button>
+        </div>
+        <div class="script-content">
+            <pre class="script-code" id="doors1">loadstring(game:HttpGet("https://raw.githubusercontent.com/TheHunterSolo1/Scripts/refs/heads/main/Protected_2809220311826785.lua.txt"))()</pre>
+        </div>
+    </div>
+</div>
+
+<div id="jailbreak" class="content">
+    <h2 class="section-title">🚔 JAILBREAK</h2>
+    
+    <div class="script-card">
+        <div class="script-header">
+            <div class="script-title">SOLIX</div>
+            <button class="copy-button" onclick="copyScript(this, 'jb1')">📋 Copiar</button>
+        </div>
+        <div class="script-content">
+            <pre class="script-code" id="jb1">loadstring(game:HttpGet("https://raw.githubusercontent.com/debunked69/solixloader/refs/heads/main/solix%20v2%20new%20loader.lua"))()</pre>
+        </div>
+    </div>
+</div>
+
+<div id="dandy-world" class="content">
+    <h2 class="section-title">🌼 DANDY'S WORLD</h2>
+    
+    <div class="script-card">
+        <div class="script-header">
+            <div class="script-title">DANDY'S WORLD HUB</div>
+            <button class="copy-button" onclick="copyScript(this, 'dw1')">📋 Copiar</button>
+        </div>
+        <div class="script-content">
+            <pre class="script-code" id="dw1">loadstring(game:HttpGet("https://pastebin.com/raw/H3u62n7D"))()</pre>
+        </div>
+    </div>
+</div>
+
+<div id="weak-legacy" class="content">
+    <h2 class="section-title">⚔️ WEAK LEGACY</h2>
+    
+    <div class="script-card">
+        <div class="script-header">
+            <div class="script-title">WEAK LEGACY SCRIPT</div>
+            <button class="copy-button" onclick="copyScript(this, 'wl1')">📋 Copiar</button>
+        </div>
+        <div class="script-content">
+            <pre class="script-code" id="wl1">loadstring(game:HttpGet("https://raw.githubusercontent.com/OhhMyGehlee/sh/refs/heads/main/a"))()</pre>
+        </div>
+    </div>
+
+<div class="script-card">
+    <div class="script-header">
+        <div class="script-title">NEW OMG HUB</div>
+        <button class="copy-button" onclick="copyScript(this, 'wl2')">📋 Copiar</button>
+    </div>
+    <div class="script-content">
+        <pre class="script-code" id="wl2">https://www.mediafire.com/file/yqty2pkjbqmlfut/SCRIPT+NEW+OMG+HUB+2025.txt/file</pre>
+    </div>
+</div>
+
+<div class="script-card">
+    <div class="script-header">
+        <div class="script-title">L4BIB HUB</div>
+        <button class="copy-button" onclick="copyScript(this, 'wl3')">📋 Copiar</button>
+    </div>
+    <div class="script-content">
+        <pre class="script-code" id="wl3">https://www.mediafire.com/file/o1ddp0bcc008i4o/SCRIPT+L4BIB+HUB+WEAK+LEGACY2.txt/file</pre>
+    </div>
+</div>
+</div>
+
+<div id="ninja-times" class="content">
+    <h2 class="section-title">🥷 NINJA TIMES</h2>
+    
+    <div class="script-card">
+        <div class="script-header">
+            <div class="script-title">SCYLLA</div>
+            <button class="copy-button" onclick="copyScript(this, 'nt1')">📋 Copiar</button>
+        </div>
+        <div class="script-content">
+            <pre class="script-code" id="nt1">loadstring(game:HttpGet("https://raw.githubusercontent.com/acezqqq/Scylla/refs/heads/main/Loader.lua"))()</pre>
+        </div>
+    </div>
+</div>
+
+<div id="piggy" class="content">
+    <h2 class="section-title">🐷 PIGGY</h2>
+    
+    <div class="script-card">
+        <div class="script-header">
+            <div class="script-title">STARHACK HUB</div>
+            <button class="copy-button" onclick="copyScript(this, 'piggy1')">📋 Copiar</button>
+        </div>
+        <div class="script-content">
+            <pre class="script-code" id="piggy1">loadstring(game:HttpGet("https://raw.githubusercontent.com/StarHackScripts/StarHack-Hub-Deepstar-Hub/refs/heads/main/StarHack%20Hub%20-%20Piggy%20Pro%20Hub.txt"))()</pre>
+        </div>
+    </div>
+</div>
+
+<div id="strongest-battlegrounds" class="content">
+    <h2 class="section-title">🥊 THE STRONGEST BATTLEGROUNDS</h2>
+    
+    <div class="script-card">
+        <div class="script-header">
+            <div class="script-title">MINHNHAT HUB</div>
+            <button class="copy-button" onclick="copyScript(this, 'tsb1')">📋 Copiar</button>
+        </div>
+        <div class="script-content">
+            <pre class="script-code" id="tsb1">loadstring(game:HttpGet("https://raw.githubusercontent.com/minhnhatdepzai8-cloud/MinhNhat-HUB-V5/refs/heads/main/MinhNhatDZ.lua.txt"))()</pre>
+        </div>
+    </div>
+
+<div class="script-card">
+    <div class="script-header">
+        <div class="script-title">SANS MOVESET</div>
+        <button class="copy-button" onclick="copyScript(this, 'tsb2')">📋 Copiar</button>
+    </div>
+    <div class="script-content">
+        <pre class="script-code" id="tsb2">loadstring(game:HttpGet("https://paste.ee/r/rF9d3"))()</pre>
+    </div>
+</div>
+</div>
+
+<div id="dragon-blox" class="content">
+    <h2 class="section-title">🐉 DRAGON BLOX</h2>
+    
+    <div class="script-card">
+        <div class="script-header">
+            <div class="script-title">DEMONIC HUB</div>
+            <button class="copy-button" onclick="copyScript(this, 'db1')">📋 Copiar</button>
+        </div>
+        <div class="script-content">
+            <pre class="script-code" id="db1">loadstring(game:HttpGet("https://raw.githubusercontent.com/Prosexy/Demonic-HUB-V2/main/DemonicHub_V2.lua", true))()</pre>
+        </div>
+    </div>
+</div>
+
+<div id="fruit-battlegrounds" class="content">
+    <h2 class="section-title">🍇 FRUIT BATTLEGROUNDS</h2>
+    
+    <div class="script-card">
+        <div class="script-header">
+            <div class="script-title">DEVSEHUB</div>
+            <button class="copy-button" onclick="copyScript(this, 'fb1')">📋 Copiar</button>
+        </div>
+        <div class="script-content">
+            <pre class="script-code" id="fb1">script_key="replacekey";
+loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/d92ae761864b636f15e5214d8b9e1b57.lua"))()
+
+
+ -- Link de la key : https://ads.luarmor.net/get_key?for=DevseHUB_KEY-LpxFTiZSpAVU</pre>
+        </div>
+    </div>
+</div>
+
+<div id="demon-blade" class="content">
+    <h2 class="section-title">🗡️ DEMON BLADE</h2>
+    
+    <div class="script-card">
+        <div class="script-header">
+            <div class="script-title">DEMON BLADE SCRIPT</div>
+            <button class="copy-button" onclick="copyScript(this, 'db1')">📋 Copiar</button>
+        </div>
+        <div class="script-content">
+            <pre class="script-code" id="db1">loadstring(game:HttpGet('https://raw.githubusercontent.com/shakaUnlocked/IiI/refs/heads/main/dbrw.lua'))()</pre>
+        </div>
+    </div>
+</div>
+
+<div id="grand-piece-online" class="content">
+    <h2 class="section-title">🏴&zwj;☠️ GRAND PIECE ONLINE</h2>
+    
+    <div class="script-card">
+        <div class="script-header">
+            <div class="script-title">SWITCH HUB</div>
+            <button class="copy-button" onclick="copyScript(this, 'gpo1')">📋 Copiar</button>
+        </div>
+        <div class="script-content">
+            <pre class="script-code" id="gpo1">https://www.mediafire.com/file/ze8c788cair9stx/SCRIPT+SWITCH+HUB.txt/file</pre>
+        </div>
+    </div>
+</div>
+
+<div id="raise-a-floppa" class="content">
+    <h2 class="section-title">🐱 RAISE A FLOPPA</h2>
+    
+    <div class="script-card">
+        <div class="script-header">
+            <div class="script-title">RAISE A FLOPPA SCRIPT</div>
+            <button class="copy-button" onclick="copyScript(this, 'raf1')">📋 Copiar</button>
+        </div>
+        <div class="script-content">
+            <pre class="script-code" id="raf1">loadstring(game:HttpGet("https://pastebin.com/raw/Fif1YVVR"))()</pre>
+        </div>
+    </div>
+</div>
+
+<div id="raise-animals" class="content">
+    <h2 class="section-title">🐾 RAISE ANIMALS</h2>
+    
+    <div class="script-card">
+        <div class="script-header">
+            <div class="script-title">TBAO HUB</div>
+            <button class="copy-button" onclick="copyScript(this, 'ra1')">📋 Copiar</button>
+        </div>
+        <div class="script-content">
+            <pre class="script-code" id="ra1">https://www.mediafire.com/file/loiduq3q1ujcgjm/SCRIPT+TBAO+HUB+RAISE+ANIMALS.txt/file</pre>
+        </div>
+    </div>
+</div>
+
+<div id="saludo" class="content">
+    <h2 class="section-title">👋 Testing Windows~</h2>
+    
+    <div class="script-card">
+        <div class="script-header">
+            <div class="script-title">QUÉ ES ESTA PÁGINA?</div>
+            <button class="copy-button" onclick="copyScript(this, 'saludo1')">📋 Copiar</button>
+        </div>
+        <div class="script-content">
+            <pre class="script-code" id="saludo1">Esta pestaña sirve para evitar bugs en algunos dispositivos, simplemente ignora esta sección en tu próxima visita</pre>
+        </div>
+    </div>
+</div>
+
+    <script>
+        // Generar partículas dinámicamente
+        function createParticles() {
+            const particlesContainer = document.querySelector('.particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Función global para toggle del sidebar
+        window.toggleSidebar = function() {
+            const hamburger = document.querySelector('.hamburger');
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.querySelector('.overlay');
+            
+            if (hamburger && sidebar && overlay) {
+                hamburger.classList.toggle('active');
+                sidebar.classList.toggle('active');
+                overlay.classList.toggle('active');
+            }
+        }
+
+        // Función global para cerrar sidebar
+        window.closeSidebar = function() {
+            const hamburger = document.querySelector('.hamburger');
+            const sidebar = document.querySelector('.sidebar');
+            const overlay = document.querySelector('.overlay');
+            
+            if (hamburger && sidebar && overlay) {
+                hamburger.classList.remove('active');
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+            }
+        }
+
+        // Función global para mostrar contenido
+window.showContent = function(sectionId) {
+    // Ocultar pantalla de bienvenida
+    const welcomeScreen = document.getElementById('welcome');
+    if (welcomeScreen) {
+        welcomeScreen.style.display = 'none';
+    }
+    
+    // Ocultar todos los contenidos
+    const contents = document.querySelectorAll('.content');
+    contents.forEach(content => {
+        content.classList.remove('active');
+    });
+    
+    // Remover clase active de sidebar items
+    const sidebarItems = document.querySelectorAll('.sidebar-item');
+    sidebarItems.forEach(item => {
+        item.classList.remove('active');
+    });
+    
+    // Mostrar contenido seleccionado
+    if (sectionId === 'welcome') {
+        if (welcomeScreen) {
+            welcomeScreen.style.display = 'flex';
+        }
+        // Activar primer item (Inicio)
+        if (sidebarItems[0]) {
+            sidebarItems[0].classList.add('active');
+        }
+    } else {
+        const targetContent = document.getElementById(sectionId);
+        if (targetContent) {
+            targetContent.classList.add('active');
+        }
+        
+        // Encontrar y activar el item del sidebar correspondiente
+        sidebarItems.forEach(item => {
+            const itemText = item.textContent.trim();
+            if ((itemText.includes('99 NOCHES') && sectionId === 'noches-bosque') ||
+    (itemText.includes('ARISE') && sectionId === 'arise-crossover') ||
+    (itemText.includes('ATTACK') && sectionId === 'attack-titan') ||
+    (itemText.includes('BASICALLY FNF') && sectionId === 'basically-fnf') ||
+    (itemText.includes('BLOCK SPIN') && sectionId === 'block-spin') ||
+    (itemText.includes('BLOODMONEY') && sectionId === 'bloodmoney') ||
+    (itemText.includes('BLOX FRUITS') && sectionId === 'blox-fruits') ||
+    (itemText.includes('BLUE LOCK') && sectionId === 'blue-lock') ||
+    (itemText.includes('DEAD RAILS') && sectionId === 'dead-rails') ||
+    (itemText.includes('DEAD DEFENSE') && sectionId === 'dead-defense') ||
+    (itemText.includes('DEMON FALL') && sectionId === 'demon-fall') ||
+    (itemText.includes('DIG') && sectionId === 'dig') ||
+    (itemText.includes('DOORS') && sectionId === 'doors') ||  
+    (itemText.includes('DRAGON BALL RAGE') && sectionId === 'dragon-ball-rage') || 
+(itemText.includes('DANDY') && sectionId === 'dandy-world') || 
+(itemText.includes('DRAGON BLOX') && sectionId === 'dragon-blox') || 
+(itemText.includes('DEMON BLADE') && sectionId === 'demon-blade') ||
+    (itemText.includes('EVADE') && sectionId === 'evade') ||
+    (itemText.includes('FISCH') && sectionId === 'fisch') ||
+    (itemText.includes('FORSAKEN') && sectionId === 'forsaken') || 
+(itemText.includes('FRUIT BATTLEGROUNDS') && sectionId === 'fruit-battlegrounds') ||
+    (itemText.includes('GROW A GARDEN') && sectionId === 'grow-garden') || 
+(itemText.includes('GRAND PIECE ONLINE') && sectionId === 'grand-piece-online') ||
+    (itemText.includes('HUNTY ZOMBIE') && sectionId === 'hunty-zombie') ||
+    (itemText.includes('INK GAME') && sectionId === 'ink-game') || 
+(itemText.includes('JAILBREAK') && sectionId === 'jailbreak') ||
+    (itemText.includes('KING LEGACY') && sectionId === 'king-legacy') ||
+    (itemText.includes('MUSCLE LEGENDS') && sectionId === 'muscle-legends') || 
+(itemText.includes('NINJA TIMES') && sectionId === 'ninja-times') ||
+    (itemText.includes('PLANTAS VS BRAINROT') && sectionId === 'plantas-vs-brainrot') ||
+    (itemText.includes('PROSPECTING') && sectionId === 'prospecting') || 
+(itemText.includes('RAISE A FLOPPA') && sectionId === 'raise-a-floppa') || 
+(itemText.includes('RAISE ANIMALS') && sectionId === 'raise-animals') ||
+(itemText.includes('PIGGY') && sectionId === 'piggy') ||
+    (itemText.includes('STEAL A BRAINROT') && sectionId === 'steal-brainrot') || 
+(itemText.includes('THE STRONGEST BATTLEGROUNDS') && sectionId === 'strongest-battlegrounds') ||
+    (itemText.includes('VOX SEAS') && sectionId === 'vox-seas') || 
+(itemText.includes('WEAK LEGACY') && sectionId === 'weak-legacy') ||
+    (itemText.includes('Si lees esto, ignorame') && sectionId === 'saludo')) {
+    item.classList.add('active');
+}
+        });
+    }
+    
+    window.closeSidebar();
+}  // <-- Esta llave cierra la función showContent
+
+        // Función global para copiar scripts
+        window.copyScript = function(button, scriptId) {
+            const scriptElement = document.getElementById(scriptId);
+            if (!scriptElement) {
+                console.error('Script element not found:', scriptId);
+                return;
+            }
+            
+            const scriptText = scriptElement.textContent;
+            
+            // Intentar usar la API moderna de clipboard
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(scriptText).then(function() {
+                    // Éxito al copiar
+                    showCopySuccess(button);
+                }).catch(function(err) {
+                    console.error('Error al copiar con clipboard API: ', err);
+                    // Fallback al método antiguo
+                    fallbackCopy(scriptText, button);
+                });
+            } else {
+                // Fallback directo para navegadores antiguos
+                fallbackCopy(scriptText, button);
+            }
+        }
+
+        function showCopySuccess(button) {
+            if (!button) return;
+            
+            const originalText = button.textContent;
+            button.textContent = '✅ ¡Copiado!';
+            button.classList.add('copied');
+            
+            setTimeout(function() {
+                button.textContent = originalText;
+                button.classList.remove('copied');
+            }, 2000);
+        }
+
+        function fallbackCopy(text, button) {
+            try {
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                textArea.style.position = 'fixed';
+                textArea.style.left = '-999999px';
+                textArea.style.top = '-999999px';
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                
+                const successful = document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                if (successful) {
+                    showCopySuccess(button);
+                } else {
+                    console.error('Fallback copy failed');
+                    alert('Error al copiar el script. Por favor, selecciona y copia manualmente.');
+                }
+            } catch (err) {
+                console.error('Error en fallback copy:', err);
+                alert('Error al copiar el script. Por favor, selecciona y copia manualmente.');
+            }
+        }
+
+        // Inicializar cuando el DOM esté listo
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                createParticles();
+                window.showContent('welcome');
+                console.log('Anti-Hambreado Script Team - Página cargada correctamente');
+            } catch (error) {
+                console.error('Error al inicializar:', error);
+            }
+        });
+
+        // Efectos adicionales
+        document.addEventListener('mouseover', function(e) {
+            const card = e.target.closest('.script-card');
+            if (card) {
+                card.style.transform = 'translateY(-8px) scale(1.02)';
+            }
+        });
+
+        document.addEventListener('mouseout', function(e) {
+            const card = e.target.closest('.script-card');
+            if (card) {
+                card.style.transform = 'translateY(0) scale(1)';
+            }
+        });
+
+        // Log para debugging
+        console.log('🔥 Anti-Hambreado Script Team - JavaScript cargado');
+        console.log('💬 Discord: https://discord.gg/rTGF5xhe3h');
+    </script>
+ 
+</body><chatgpt-sidebar data-gpts-theme="light"></chatgpt-sidebar></html>
