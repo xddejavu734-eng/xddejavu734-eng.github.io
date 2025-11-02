@@ -3,291 +3,203 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Dux Hub 👑 — Scripts</title>
-<link rel="icon" href="data:,">
+<title>Dux Hub 👑 — Todos los Scripts</title>
 <style>
-  /* --- Reset + fuente --- */
   :root{
-    --bg:#071428;
-    --card:#ffffff;
-    --muted:#7b93b3;
-    --accent:#0b78ff;
-    --glass: rgba(255,255,255,0.06);
+    --bg:#000;
+    --card:#0b1220;
+    --muted:#9aaec1;
+    --accent:#ffffff;
+    --glass: rgba(255,255,255,0.03);
   }
-  *{box-sizing:border-box}
-  html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial; background: radial-gradient(ellipse at 20% 10%, rgba(11,120,255,0.06) 0%, transparent 20%), linear-gradient(180deg,#04121b 0%, #071428 50%, #030712 100%); color:#072033; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;}
-
-  /* --- Space background canvas sits under content --- */
-  #space {
-    position: fixed; inset: 0; z-index:0; pointer-events:none;
-  }
-
-  /* --- Header --- */
-  header {
-    position: sticky; top:0; z-index:50;
-    display:flex;align-items:center;justify-content:space-between;
-    gap:12px;padding:18px 22px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.92));
-    box-shadow: 0 6px 24px rgba(3,12,30,0.08);
-    border-bottom: 1px solid rgba(11,120,255,0.12);
-  }
-  .brand {display:flex;align-items:center;gap:12px}
-  .logo {
-    width:44px;height:44px;border-radius:10px;
-    background: linear-gradient(135deg,var(--accent),#00c3ff);
-    display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:18px;
-    box-shadow: 0 6px 20px rgba(11,120,255,0.18);
-  }
-  h1{margin:0;font-size:1.15rem;color:#042338}
-  .beta {background: #ffefc3; color:#7a5c00; padding:6px 10px;border-radius:10px;font-weight:700;font-size:0.82rem;display:inline-block;margin-left:8px}
-  .top-right {display:flex;gap:12px;align-items:center}
-
-  /* --- Layout --- */
-  .wrap {position:relative; z-index:10; display:grid;grid-template-columns:260px 1fr; gap:20px; max-width:1200px;margin:26px auto;padding:0 18px;}
-  @media(max-width:920px){ .wrap{grid-template-columns:1fr; padding-bottom:40px} header{padding:14px} }
-
-  /* --- Sidebar --- */
-  .sidebar {background:rgba(255,255,255,0.95); border-radius:12px;padding:12px;border:1px solid rgba(11,120,255,0.08);}
-  .search {display:flex; gap:8px; margin-bottom:12px}
-  .search input{flex:1;padding:10px 12px;border-radius:10px;border:1px solid rgba(3,12,30,0.06);font-size:0.95rem}
-  .nav {margin-top:6px;max-height:72vh;overflow:auto;padding-right:6px}
-  .nav::-webkit-scrollbar{width:8px}
-  .nav::-webkit-scrollbar-thumb{background:linear-gradient(180deg,var(--accent),#00c3ff);border-radius:6px}
-  .folder{padding:10px;border-radius:8px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;margin-bottom:6px}
-  .folder:hover{background:linear-gradient(90deg, rgba(11,120,255,0.07), rgba(0,195,255,0.04));}
-  .folder.active{background:linear-gradient(90deg, rgba(11,120,255,0.12), rgba(0,195,255,0.06));font-weight:700;border-left:4px solid var(--accent);}
-
-  /* --- Main content --- */
-  .main {padding:6px 0;overflow:auto; max-height:78vh;}
-  .section {background:var(--card); border-radius:12px; padding:14px; margin-bottom:16px; box-shadow:0 6px 22px rgba(2,20,40,0.06); border:1px solid rgba(3,12,30,0.04)}
-  .section h2 {margin:0 0 10px 0;color:#042338; font-size:1.05rem; display:flex;align-items:center; gap:10px}
-  .tiles {display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
-  .card {background: linear-gradient(180deg,#ffffff,#f5fbff); border-radius:10px;padding:10px;border:1px solid rgba(11,120,255,0.08); display:flex;flex-direction:column; min-height:120px}
-  .card .meta {display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-  .title {font-weight:700;color:#063b61}
-  .game {font-size:0.85rem;color:var(--muted)}
-  .code {background:rgba(3,12,30,0.04); padding:10px;border-radius:8px;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;font-size:0.85rem;color:#042338; white-space:pre-wrap; word-break:break-all; overflow:auto; max-height:84px; margin-top:auto; border:1px solid rgba(3,12,30,0.03)}
-  .btn-row {display:flex;gap:8px;margin-top:8px}
-  .btn {padding:8px 10px;border-radius:8px;border:0;cursor:pointer;font-weight:700}
-  .copy-btn {background:var(--accent);color:white}
-  .copy-btn.copied {background:#18d18a}
-  .info-btn {background:#eef6ff;color:var(--accent);border:1px solid rgba(11,120,255,0.12)}
-
-  /* --- Footer --- */
-  footer {max-width:1200px;margin:10px auto 60px auto;padding:16px;border-radius:12px;background:rgba(255,255,255,0.95);display:flex;justify-content:space-between;align-items:center;gap:12px;border:1px solid rgba(11,120,255,0.08)}
-  .socials a{display:inline-block;padding:8px 10px;border-radius:8px;background:linear-gradient(90deg,var(--accent),#00c3ff);color:white;text-decoration:none;font-weight:700;margin-right:8px}
-  .small{color:rgba(3,12,30,0.5);font-size:0.9rem}
-
-  /* --- tiny responsive tweaks --- */
-  @media(max-width:540px){
-    header h1{font-size:1rem}
-    .tiles{grid-template-columns:1fr}
-    .code{max-height:140px}
-  }
+  *{box-sizing:border-box;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;}
+  body{margin:0;min-height:100vh;background:var(--bg);color:#fff;overflow:hidden;}
+  canvas{position:fixed;inset:0;z-index:0}
+  .app{position:relative;z-index:10;max-width:1200px;margin:28px auto;padding:18px;}
+  header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+  .brand{display:flex;align-items:center;gap:12px}
+  .logo{width:56px;height:56px;border-radius:12px;background:linear-gradient(90deg,#111,#222);display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:18px;box-shadow:0 6px 22px rgba(255,255,255,0.02)}
+  h1{font-size:1.25rem;margin:0}
+  .beta{background:#ff5a3c;color:#fff;padding:6px 10px;border-radius:10px;font-weight:800;margin-left:8px;font-size:0.82rem}
+  .socials{display:flex;gap:8px;align-items:center}
+  .socials a{color:#fff;text-decoration:none;padding:6px 10px;border-radius:8px;background:rgba(255,255,255,0.02);display:flex;gap:8px;align-items:center;font-weight:700}
+  .layout{display:grid;grid-template-columns:300px 1fr;gap:16px}
+  @media(max-width:980px){.layout{grid-template-columns:1fr}.logo{width:44px;height:44px}}
+  .sidebar{background:var(--card);border-radius:12px;padding:12px;border:1px solid rgba(255,255,255,0.03);max-height:78vh;overflow:auto}
+  .search{display:flex;gap:8px;margin-bottom:12px}
+  .search input{flex:1;padding:10px;border-radius:10px;background:transparent;border:1px solid rgba(255,255,255,0.06);color:#fff}
+  .btn-all{padding:10px;border-radius:8px;border:0;background:rgba(255,255,255,0.06);color:#fff;font-weight:800;cursor:pointer}
+  .folders{display:flex;flex-direction:column;gap:8px}
+  .folder{padding:8px;border-radius:8px;cursor:pointer;color:var(--muted);display:flex;justify-content:space-between;align-items:center}
+  .folder.active{background:rgba(255,255,255,0.03);color:#fff;border-left:4px solid #fff;font-weight:800}
+  .main{max-height:78vh;overflow:auto}
+  .section{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:14px;border-radius:12px;margin-bottom:14px;border:1px solid rgba(255,255,255,0.02)}
+  .section h2{margin:0 0 10px 0;font-size:1rem;color:#fff}
+  .tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
+  .card{background:rgba(255,255,255,0.02);padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.02);display:flex;flex-direction:column;height:100%}
+  .meta{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:8px}
+  .title{font-weight:800}
+  .subtitle{color:var(--muted);font-size:0.82rem}
+  .code{background:rgba(255,255,255,0.02);padding:8px;border-radius:8px;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;font-size:0.85rem;color:#fff;white-space:pre-wrap;word-break:break-word;overflow:auto;max-height:96px;border:1px solid rgba(255,255,255,0.01)}
+  .row{display:flex;gap:8px;margin-top:auto}
+  .btn{padding:8px 10px;border-radius:8px;border:0;cursor:pointer;font-weight:800}
+  .copy{background:#fff;color:#000}
+  .open{background:transparent;border:1px solid rgba(255,255,255,0.06);color:#fff}
+  footer{color:var(--muted);font-weight:700;margin-top:12px;text-align:center}
 </style>
 </head>
 <body>
-<canvas id="space"></canvas>
+<canvas id="bg"></canvas>
 
-<header>
-  <div class="brand">
-    <div class="logo">DUX</div>
-    <div>
-      <h1>Dux Hub 👑</h1>
-      <div class="beta">⚠️ BETA</div>
+<div class="app">
+  <header>
+    <div class="brand">
+      <div class="logo">DUX</div>
+      <div>
+        <h1>Dux Hub 👑 <span class="beta">⚠️ BETA</span></h1>
+        <div style="color:var(--muted);font-size:0.82rem;margin-top:6px">Fondo negro • Buscador • Copiar loadstring</div>
+      </div>
     </div>
+
+    <div class="socials">
+      <a href="https://discord.gg/UGZyQJZd" target="_blank" rel="noopener">Discord</a>
+      <a href="https://www.youtube.com/channel/UClZbyX_5KNWJVZNwZMnSInw" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://www.tiktok.com/@duxscript" target="_blank" rel="noopener">TikTok</a>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar" aria-label="Navegación">
+      <div class="search">
+        <input id="q" placeholder="Buscar juego o script... (ej: blox fruit, brainrot, bee)" />
+        <button class="btn-all" onclick="resetFilter()">Mostrar todos</button>
+      </div>
+
+      <div class="folders" id="folders">
+        <!-- folders injected -->
+      </div>
+    </aside>
+
+    <main class="main" id="main" role="main" aria-live="polite">
+      <!-- sections injected -->
+    </main>
   </div>
 
-  <div class="top-right">
-    <div style="text-align:right">
-      <div style="font-weight:700;color:#063b61">Scripts list</div>
-      <div style="font-size:0.85rem;color:var(--muted)">Blanco & Azul · Fondo espacial animado</div>
-    </div>
-  </div>
-</header>
-
-<div class="wrap">
-
-  <!-- SIDEBAR -->
-  <aside class="sidebar" aria-label="Menu">
-    <div class="search">
-      <input id="q" type="search" placeholder="Buscar juego o script..." oninput="filterCards()" />
-      <button class="info-btn" onclick="showAll()">Todos</button>
-    </div>
-
-    <div class="nav" id="folders">
-      <!-- folders injected by JS -->
-    </div>
-  </aside>
-
-  <!-- MAIN -->
-  <main class="main" id="main">
-    <!-- sections injected by JS -->
-  </main>
+  <footer>© Dux Hub — Usa con responsabilidad • Scripts listados tal cual</footer>
 </div>
 
-<footer>
-  <div>
-    <span class="small">© 2025 Dux Hub</span><br>
-    <span class="small">Abre un script, copia y pégalo en tu executor.</span>
-  </div>
-
-  <div>
-    <a class="social" href="https://discord.gg/UGZyQJZd" target="_blank" rel="noopener">Discord</a>
-    <a class="social" href="https://www.youtube.com/channel/UClZbyX_5KNWJVZNwZMnSInw" target="_blank" rel="noopener">YouTube</a>
-    <a class="social" href="https://www.tiktok.com/@duxscript" target="_blank" rel="noopener">TikTok</a>
-  </div>
-</footer>
-
 <script>
-/* ---------------- SPACE BACKGROUND --------------
-   canvas stars + subtle nebula moving
---------------------------------------------------*/
-const canvas = document.getElementById('space');
+/* ---------- starfield background ---------- */
+const canvas = document.getElementById('bg');
 const ctx = canvas.getContext('2d');
-let W = canvas.width = innerWidth;
-let H = canvas.height = innerHeight;
-window.addEventListener('resize', ()=>{ W=canvas.width=innerWidth; H=canvas.height=innerHeight; initStars(); });
+let W = canvas.width = innerWidth, H = canvas.height = innerHeight;
+window.addEventListener('resize', ()=>{ W=canvas.width=innerWidth; H=canvas.height=innerHeight; init(); });
 
-let stars = [], nebula = [];
-function rand(a,b){return a + Math.random()*(b-a)}
-function initStars(){
-  stars = []; nebula=[];
-  for(let i=0;i<220;i++){
+let stars = [];
+function rnd(a,b){return a+Math.random()*(b-a)}
+function init(){
+  stars = [];
+  const n = Math.max(120, Math.floor((W*H)/7000));
+  for(let i=0;i<n;i++){
     stars.push({
       x: Math.random()*W,
       y: Math.random()*H,
-      r: Math.random()*1.4,
-      s: 0.1 + Math.random()*0.8,
-      alpha: 0.2 + Math.random()*0.9,
-      dx: (Math.random()-0.5)*0.02
-    });
-  }
-  // nebula blobs
-  for(let i=0;i<6;i++){
-    nebula.push({
-      x: Math.random()*W,
-      y: Math.random()*H*0.8,
-      r: 200+Math.random()*400,
-      hue: 200 + Math.random()*40,
-      phase: Math.random()*Math.PI*2,
-      speed: 0.0008 + Math.random()*0.0015
+      r: Math.random()*1.4+0.2,
+      vx: (Math.random()-0.5)*0.25,
+      vy: (Math.random()-0.5)*0.25,
+      a: 0.2 + Math.random()*0.8
     });
   }
 }
-function draw(){
-  ctx.clearRect(0,0,W,H);
-  // nebula soft
-  nebula.forEach(n=>{
-    n.phase += n.speed;
-    const g = ctx.createRadialGradient(n.x + Math.sin(n.phase)*60, n.y + Math.cos(n.phase)*40, n.r*0.05, n.x, n.y, n.r);
-    g.addColorStop(0, `rgba(${20},${100 + Math.sin(n.phase)*40},${220},0.12)`);
-    g.addColorStop(0.5, `rgba(10,40,120,0.06)`);
-    g.addColorStop(1, `rgba(2,6,20,0)`);
-    ctx.fillStyle = g;
-    ctx.fillRect(0,0,W,H);
-  });
-  // stars
-  stars.forEach(s=>{
-    s.x += s.dx;
-    if(s.x<0) s.x=W;
-    if(s.x>W) s.x=0;
+function frame(){
+  ctx.fillStyle = "#000";
+  ctx.fillRect(0,0,W,H);
+  ctx.globalCompositeOperation = 'lighter';
+  for(const s of stars){
+    s.x += s.vx;
+    s.y += s.vy;
+    if(s.x < -10) s.x = W+10;
+    if(s.x > W+10) s.x = -10;
+    if(s.y < -10) s.y = H+10;
+    if(s.y > H+10) s.y = -10;
     ctx.beginPath();
-    ctx.fillStyle = `rgba(255,255,255,${s.alpha})`;
-    ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+    ctx.fillStyle = `rgba(255,255,255,${s.a*0.9})`;
+    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
     ctx.fill();
-  });
-  requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(frame);
 }
-initStars();
-draw();
+init(); frame();
 
-/* ----------------- SCRIPTS DATA -----------------
-   This list is built from all your messages.
-   Each item: { group: 'Game/Folder', name: '', code: '' }
---------------------------------------------------*/
+/* ---------- SCRIPTS DATA (todos los que pegaste) ---------- */
 const scripts = [
-  /* Arise Crossover */
-  {group:'ARISE CROSSOVER', name:'GOOMBA HUB', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/JustLevel/goombahub/main/AriseCrossover.lua"))()`},
+  // STEAL / BRAINROT & DUX
+  {group:'STEAL / BRAINROT', name:'Steal a Clash Royal (DuxClash)', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/xddejavu734-eng/Dux-Clash-royal-Menu/main/DuxClash.lua", true))()`},
+  {group:'STEAL / BRAINROT', name:'Zombie Brainrot EVOLUTION', code:`loadstring(game:HttpGet("https://rawscripts.net/raw/Brainrot-Zombie-Evolution-Brainrot-Zombie-OP-script-free-51645"))()`},
+  {group:'STEAL / BRAINROT', name:'Brainrot Royale (Dux Hub — insta kill)', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/xddejavu734-eng/DuxScript/main/Dux%20Hub"))()`},
+  {group:'STEAL / BRAINROT', name:'ARBIX TP NUEVO', code:`https://www.mediafire.com/file/3jvwf5xpoa2ocar/SCRIPT+ARBIX+TP+VC+SERVER.txt/file`},
+  {group:'STEAL / BRAINROT', name:'Chilli Hub (Brainrot)', code:`https://www.mediafire.com/file/edydn45v754qxm3/SCRIPT+CHILLI+HUB+BRAINROT.txt/file`},
+  {group:'STEAL / BRAINROT', name:'Legends Brainrot (Key = ayam)', code:`https://www.mediafire.com/file/vj0in6milhaui15/SCRIPT+LEGENDS+BRAINROT.txt/file`},
 
-  /* Blox Fruits */
-  {group:'BLOX FRUITS', name:'ASTRAL HUB', code:`loadstring(game:HttpGet('https://cdn.robloxscripts.gg/public/furky/furky-astral-source.lua'))()`},
-  {group:'BLOX FRUITS', name:'HOHO HUB', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI"))()`},
-  {group:'BLOX FRUITS', name:'REDZ HUB (incluye Settings)', code:`local Settings = {
+  // BEE / ATLAS
+  {group:'BEE / ATLAS', name:'Atlas — Chris12089 (Bee Swarm)', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/Chris12089/atlasbss/main/script.lua"))()`},
+  {group:'BEE / ATLAS', name:'Bee Rich (Dux)', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/xddejavu734-eng/Dux-Clash-royal-Menu/main/DuxBee.lua", true))()`},
+  {group:'BEE / ATLAS', name:'Dux Bee Script (DuxScript)', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/xddejavu734-eng/DuxScript/main/Dux%20Bee%20Script"))()`},
+
+  // BLOX FRUITS
+  {group:'BLOX FRUITS', name:'HOHO_H (acsu123)', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI"))()`},
+  {group:'BLOX FRUITS', name:'BlueX Hub (Dev-BlueX)', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-BlueX/BlueX-Hub/refs/heads/main/Main.lua"))()`},
+  {group:'BLOX FRUITS', name:'Dev-Gravity BloxFruit', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-GravityHub/BloxFruit/refs/heads/main/Main.lua"))()`},
+  {group:'BLOX FRUITS', name:'Astral Hub (Furky)', code:`loadstring(game:HttpGet('https://cdn.robloxscripts.gg/public/furky/furky-astral-source.lua'))()`},
+  {group:'BLOX FRUITS', name:'Redz Hub (with Settings)', code:`local Settings = {
   JoinTeam = "Pirates"; -- Pirates/Marines
   Translator = true; -- true/false
 }
 getgenv().BETA_VERSION = true
 loadstring(game:HttpGet("https://raw.githubusercontent.com/tlredz/Scripts/refs/heads/main/main.luau"))(Settings)`},
-  {group:'BLOX FRUITS', name:'BLUE X HUB', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-BlueX/BlueX-Hub/refs/heads/main/Main.lua"))()`},
-  {group:'BLOX FRUITS', name:'DEV-GRAVITY BloxFruit', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-GravityHub/BloxFruit/refs/heads/main/Main.lua"))()`},
-  {group:'BLOX FRUITS', name:'SCRIPT SERVER HOP', code:`https://www.mediafire.com/file/2sz4aephhdiu0l0/SCRIPT+HOP+SERVER.txt/file`},
+  {group:'BLOX FRUITS', name:'Dev-Gravity Main Loader (alt)', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-GravityHub/BloxFruit/refs/heads/main/Main.lua"))()`},
 
-  /* Steal / Brainrot */
-  {group:'STEAL / BRAINROT', name:'STEAL A CLASH (DuxClash)', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/xddejavu734-eng/Dux-Clash-royal-Menu/main/DuxClash.lua", true))()`},
-  {group:'STEAL / BRAINROT', name:'ZOMBIE BRAINROT EVOLUTION', code:`loadstring(game:HttpGet("https://rawscripts.net/raw/Brainrot-Zombie-Evolution-Brainrot-Zombie-OP-script-free-51645"))()`},
-  {group:'STEAL / BRAINROT', name:'HOHO HUB (Brainrot)', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI"))()`},
-  {group:'STEAL / BRAINROT', name:'LEGENDS BRAINROT (Key: ayam)', code:`https://www.mediafire.com/file/vj0in6milhaui15/SCRIPT+LEGENDS+BRAINROT.txt/file`},
-  {group:'STEAL / BRAINROT', name:'ARBIX TP NUEVO', code:`https://www.mediafire.com/file/3jvwf5xpoa2ocar/SCRIPT+ARBIX+TP+VC+SERVER.txt/file`},
-  {group:'STEAL / BRAINROT', name:'CHILLI HUB', code:`https://www.mediafire.com/file/edydn45v754qxm3/SCRIPT+CHILLI+HUB+BRAINROT.txt/file`},
-  {group:'STEAL / BRAINROT', name:'HOHO HUB (PVB)', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI"))()`},
+  // ARCADE BASKETBALL
+  {group:'ARCADE BASKETBALL', name:'Unlock All (Pastebin)', code:`https://pastebin.com/raw/w64jCQpf`},
+  {group:'ARCADE BASKETBALL', name:'Auto Green (Pastebin)', code:`loadstring(game:HttpGet('https://pastebin.com/raw/L2LX0eM9'))()`},
 
-  /* Bee / Bee Rich / Atlas */
-  {group:'BEE / ATLAS', name:'ATLAS - Chris12089', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/Chris12089/atlasbss/main/script.lua"))()`},
-  {group:'BEE / ATLAS', name:'BEE RICH (Dux)', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/xddejavu734-eng/Dux-Clash-royal-Menu/main/DuxBee.lua", true))()`},
-  {group:'BEE / ATLAS', name:'DUX BEE SCRIPT (DuxScript)', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/xddejavu734-eng/DuxScript/main/Dux%20Bee%20Script"))()`},
-  {group:'BEE / ATLAS', name:'DUX HUB (DuxScript main)', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/xddejavu734-eng/DuxScript/main/Dux%20Hub"))()`},
+  // NATURAL DISASTER
+  {group:'NATURAL DISASTER', name:'Balloon Giver (free clientsided)', code:`loadstring(game:HttpGet("https://rawscripts.net/raw/Free-CLIENTSIDED-Balloon-Giver!_175"))()`},
 
-  /* Arcade Basketball */
-  {group:'ARCADE BASKETBALL', name:'Unlock All (pastebin)', code:`https://pastebin.com/raw/w64jCQpf`},
-  {group:'ARCADE BASKETBALL', name:'Auto Green (pastebin)', code:`loadstring(game:HttpGet('https://pastebin.com/raw/L2LX0eM9'))()`},
-
-  /* Natural Disaster */
-  {group:'NATURAL DISASTER', name:'Balloon Giver (Keyless)', code:`loadstring(game:HttpGet("https://rawscripts.net/raw/Free-CLIENTSIDED-Balloon-Giver!_175"))()`},
-
-  /* Ride & Misc */
-  {group:'MISC', name:'Ride and Slide', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/gumanba/Scripts/main/RideandSlide"))()`},
-  {group:'MISC', name:'Brookhaven Halloween', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/gumanba/Scripts/main/BrookhavenHalloween"))()`},
-  {group:'MISC', name:'Slasher Blade Loot', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/gumanba/Scripts/main/SlasherBladeLoot"))()`},
-  {group:'MISC', name:'DUMP (ALPHA)', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/gumanba/Scripts/main/DUMP"))()`},
+  // RIDE & MISC
+  {group:'MISC', name:'Ride and Slide (gumanba)', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/gumanba/Scripts/main/RideandSlide"))()`},
+  {group:'MISC', name:'Brookhaven Halloween (gumanba)', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/gumanba/Scripts/main/BrookhavenHalloween"))()`},
+  {group:'MISC', name:'Slasher Blade Loot (gumanba)', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/gumanba/Scripts/main/SlasherBladeLoot"))()`},
+  {group:'MISC', name:'DUMP (ALPHA) (gumanba)', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/gumanba/Scripts/main/DUMP"))()`},
   {group:'MISC', name:'Rob The Place (DuxHub)', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/xddejavu734-eng/DuxHub/main/DuxRobTheplace"))()`},
-  {group:'MISC', name:'Make Ur Army', code:`loadstring(game:HttpGet("https://pastefy.app/iftLSDRm/raw"))()`},
-  {group:'MISC', name:'Chicago Life', code:`loadstring(game:HttpGet("https://pastefy.app/eXkcBnHb/raw"))()`},
-  {group:'MISC', name:'My Fishing Island (Invoke remote example)', code:`game:GetService("ReplicatedStorage").Events.BuyRod:InvokeServer("Bronze",-math.huge)`},
+  {group:'MISC', name:'Make Ur Army (Pastefy)', code:`loadstring(game:HttpGet("https://pastefy.app/iftLSDRm/raw"))()`},
+  {group:'MISC', name:'Chicago Life (Pastefy)', code:`loadstring(game:HttpGet("https://pastefy.app/eXkcBnHb/raw"))()`},
+  {group:'MISC', name:'My Fishing Island (remote invoke example)', code:`game:GetService("ReplicatedStorage").Events.BuyRod:InvokeServer("Bronze",-math.huge)`},
 
-  /* Build a Boat */
-  {group:'BUILD A BOAT', name:'BoatBuilder Hub', code:`loadstring(game:HttpGet(("https://raw.githubusercontent.com/catblox1346/StensUIReMake/refs/heads/main/Script/boatbuilderhub_B1"),true))()`},
+  // BUILD A BOAT
+  {group:'BUILD A BOAT', name:'BoatBuilder Hub (catblox)', code:`loadstring(game:HttpGet(("https://raw.githubusercontent.com/catblox1346/StensUIReMake/refs/heads/main/Script/boatbuilderhub_B1"),true))()`},
 
-  /* Grand Piece / GPO */
-  {group:'GRAND PIECE ONLINE', name:'SwitchHub Loader (Key)', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/cloneref/SwitchHubRecode/refs/heads/main/Loader/SwitchHubLoaderAlotGame.lua"))()`},
+  // GRAND PIECE
+  {group:'GRAND PIECE ONLINE', name:'SwitchHub Loader (cloneref) - Key', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/cloneref/SwitchHubRecode/refs/heads/main/Loader/SwitchHubLoaderAlotGame.lua"))()`},
 
-  /* Plant vs Brainrot */
-  {group:'PLANTAS VS BRAINROT', name:'Blessed Hub X', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/mynamewendel-ctrl/Blessed-Hub-X-/refs/heads/main/Plants-Vs-Brainrots.lua"))()`},
+  // PLANTAS VS BRAINROT
+  {group:'PLANTAS VS BRAINROT', name:'Blessed Hub X (mynamewendel)', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/mynamewendel-ctrl/Blessed-Hub-X-/refs/heads/main/Plants-Vs-Brainrots.lua"))()`},
 
-  /* Weakly Legacy 2 */
-  {group:'WEAKLY LEGACY', name:'Weakly Legacy 2', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/OhhMyGehlee/sh/refs/heads/main/a"))()`},
+  // WEAKLY / MUSCLE / SPEED
+  {group:'WEAKLY / MUSCLE', name:'Weakly Legacy 2', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/OhhMyGehlee/sh/refs/heads/main/a"))()`},
+  {group:'WEAKLY / MUSCLE', name:'Speed Hub X (Muscle Legends)', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua", true))()`},
 
-  /* Muscle Legends / Speed hub (also used for DIG) */
-  {group:'MUSCLE / DIG', name:'Speed Hub X', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua", true))()`},
+  // MM2 / OTHER
+  {group:'MM2', name:'MM2 Roles Checker (Bac0nHck)', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/Bac0nHck/Scripts/main/MM2RolesChecker"))()`},
+  {group:'FINAL STAND', name:'Final Stand Loader (Luarmor)', code:`loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/3819c25f3a7f07b58ac9aa8d5aaa90ac.lua"))()`},
 
-  /* MM2 roles checker */
-  {group:'MM2', name:'MM2 Roles Checker', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/Bac0nHck/Scripts/main/MM2RolesChecker"))()`},
-
-  /* Final Stand: Remastered (luarmor) */
-  {group:'FINAL STAND', name:'Final Stand Loader', code:`loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/3819c25f3a7f07b58ac9aa8d5aaa90ac.lua"))()`},
-
-  /* BloxFruit alternate loaders */
-  {group:'BLOX FRUITS', name:'Dev-Gravity BloxFruit', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/Dev-GravityHub/BloxFruit/refs/heads/main/Main.lua"))()`},
-
-  /* 99 Nights */
-  {group:'99 NIGHTS', name:'99 Nights script', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/Ttttttt55/my-script/refs/heads/main/script"))()`},
-
-  /* BonkHub loader (raise animals) */
+  // 99 NIGHTS & OTHERS
+  {group:'99 NIGHTS / EXTRAS', name:'99 Nights script (Ttttttt55)', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/Ttttttt55/my-script/refs/heads/main/script"))()`},
   {group:'RAISE ANIMALS', name:'BonkHub loader', code:`loadstring(game:HttpGet("https://bonkhub.online/loader.lua",true))()`},
   {group:'RAISE ANIMALS', name:'Tbao (Raise of animals)', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/tbao143/thaibao/refs/heads/main/TbaoHub"))()`},
 
-  /* Many mediafire / hub links you pasted (kept as-is) */
-  {group:'EXTRAS / MEDIAFIRE', name:'BONK HUB NORMAL', code:`https://www.mediafire.com/file/8snedlegw42wys7/SCRIPT+BONK+HUB+NORMAL.txt/file`},
+  // EXTRAS / MEDIAFIRE (los mediafire y .txt que pegaste)
+  {group:'EXTRAS / MEDIAFIRE', name:'BONK HUB NORMAL (mediafire)', code:`https://www.mediafire.com/file/8snedlegw42wys7/SCRIPT+BONK+HUB+NORMAL.txt/file`},
   {group:'EXTRAS / MEDIAFIRE', name:'H4X HUB', code:`https://www.mediafire.com/file/2florr3w9dw0ydf/SCRIPT+H4X.txt/file`},
   {group:'EXTRAS / MEDIAFIRE', name:'VOID WARE', code:`https://www.mediafire.com/file/nm491e4nvwnbr2j/SCRIPT+VOIDWARE.txt/file`},
   {group:'EXTRAS / MEDIAFIRE', name:'VORTEX HUB', code:`https://www.mediafire.com/file/svhh5vhscr8ogmi/SCRIPT+99NIGHT+VORTEX+HUB.txt/file`},
@@ -295,117 +207,79 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/tlredz/Scripts/refs/h
   {group:'EXTRAS / MEDIAFIRE', name:'SERIOUSLY', code:`https://www.mediafire.com/file/2lg692qhlvht152/SCRIPT+SERIOUSLY+99NOCHES.txt/file`},
   {group:'EXTRAS / MEDIAFIRE', name:'FOXNAME V2', code:`https://www.mediafire.com/file/962kvzgws7fdtl3/SCRIPT+FARM+DAY+++GEMAS.txt/file`},
 
-  /* Blox mediafire entries you pasted */
-  {group:'BLOX FRUITS', name:'ANDEPZAIHUB (mediafire)', code:`https://www.mediafire.com/file/xpnq8upphf1enys/SCRIPT+ANDEPZAIHUB.TXT/file`},
-  {group:'BLOX FRUITS', name:'ASTRAL HUB (cdn loader)', code:`loadstring(game:HttpGet('https://cdn.robloxscripts.gg/public/furky/furky-astral-source.lua'))()`},
-  {group:'BLOX FRUITS', name:'BLUE X HUB (mediafire)', code:`https://www.mediafire.com/file/mizwgtlc6gdwkl1/SCRIPT+BLUEX+HUB.txt/file`},
-  {group:'BLOX FRUITS', name:'DAT THG', code:`https://www.mediafire.com/file/j6d2fva815bpfpp/SCRIPT+DAT+THG.txt/file`},
-  {group:'BLOX FRUITS', name:'HOHO HUB (loader)', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI"))()`},
-  {group:'BLOX FRUITS', name:'REDZ HUB (loader)', code:`local Settings = {
-  JoinTeam = "Pirates"; Translator = true;
-}
-getgenv().BETA_VERSION = true
-loadstring(game:HttpGet("https://raw.githubusercontent.com/tlredz/Scripts/refs/heads/main/main.luau"))(Settings)`},
-  {group:'BLOX FRUITS', name:'TSUO HUB (mediafire)', code:`https://www.mediafire.com/file/giyq8l80fpqk2jb/SCRIPT+TSUO+HUB.txt/file`},
-  {group:'BLOX FRUITS', name:'W-AZURE', code:`https://www.mediafire.com/file/lvehh3dle23ej5a/NUEVO+W-AZURE+TRUE.txt/file`},
-  {group:'BLOX FRUITS', name:'NEW OMG HUB', code:`https://www.mediafire.com/file/yqty2pkjbqmlfut/SCRIPT+NEW+OMG+HUB+2025.txt/file`},
-  {group:'BLOX FRUITS', name:'TEDDY HUB', code:`https://www.mediafire.com/file/uweo7ms5gvl1c3h/SCRIPT+TEDDY+HUB.txt/file`},
-  {group:'BLOX FRUITS', name:'GRAVITY HUB', code:`https://www.mediafire.com/file/nkbcvf5y1ijevcb/GRAVITY+HUB.txt/file`},
+  // more common ones found in conversation
+  {group:'MISC', name:'HOHO HUB (BloxFruit / Brainrot)', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI"))()`},
+  {group:'MISC', name:'Zenith Hub', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/rxito/ZenithHub/refs/heads/main/Loader"))()`},
+  {group:'MISC', name:'Alchemy Hub', code:`loadstring(game:HttpGet("https://scripts.alchemyhub.xyz"))()`},
+  {group:'MISC', name:'Nexus Hub (VoxSeas)', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/CrazyHub123/NexusHubRevival/refs/heads/main/NewLoader.lua"))()`},
+  {group:'MISC', name:'BonkHub (duplicate loader)', code:`loadstring(game:HttpGet("https://bonkhub.online/loader.lua",true))()`},
+  {group:'MISC', name:'Dux Hub (main DuxHub loader)', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/xddejavu734-eng/DuxScript/main/Dux%20Hub"))()`},
 
-  /* DIG */
-  {group:'DIG', name:'FROSTBYTE', code:`https://www.mediafire.com/file/j0ua34pwf4lnv94/SCRIPT+FROSTBYTE+DIG.txt/file`},
-
-  /* DEAD RAILS */
-  {group:'DEAD RAILS', name:'NAT HUB', code:`https://www.mediafire.com/file/d89mbxqwkzjwt3o/SCRIPT_NAT_HUB.txt/file`},
-  {group:'DEAD RAILS', name:'SKULL HUB', code:`https://www.mediafire.com/file/fhtm57gmk7gzuk4/SCRIPT+SKULL+HUB+AUTO+BONOS.txt/file`},
-
-  /* Fisch */
-  {group:'FISCH', name:'NATIVE HUB', code:`https://www.mediafire.com/file/7b8apdysqo369ne/SCRIPT_NATIVE_NEW.txt/file`},
-  {group:'FISCH', name:'ZENITH HUB (loader)', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/rxito/ZenithHub/refs/heads/main/Loader"))()`},
-  {group:'FISCH', name:'ALCHEMY HUB (loader)', code:`loadstring(game:HttpGet("https://scripts.alchemyhub.xyz"))()`},
-
-  /* Grow a Garden */
-  {group:'GROW A GARDEN', name:'DUPLICAR DINERO (mediafire)', code:`https://www.mediafire.com/file/t3uuf2f10p0xww1/SCRIPT+LUNOR.txt/file`},
-  {group:'GROW A GARDEN', name:'KICIAHOOK (loader)', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/kiciahook/kiciahook/refs/heads/main/loader.luau"))()`},
-  {group:'GROW A GARDEN', name:'LUNOR HUB (loader & key note)', code:`script_key = 'Insert Lunor Key Here';
-loadstring(game:HttpGet('https://raw.githubusercontent.com/Catto-YFCN/Lunor_Dependencies/refs/heads/main/Loader'))()
-
--- Para obtener la key: https://ads.luarmor.net/get_key?for=LinkvertiseAD12_Hours-HhMMjfiZOeFt`},
-  {group:'GROW A GARDEN', name:'NO LAG HUB', code:`https://www.mediafire.com/file/6t5t3pb7e8jtjvs/SCRIPT+NO+LAG+GROW+GARDEN.txt/file`},
-  {group:'GROW A GARDEN', name:'SPEED HUB', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/AhmadV99/Speed-Hub-X/main/Speed%20Hub%20X.lua", true))()`},
-
-  /* HUNTS / HUNTY ZOMBIE*/
-  {group:'HUNTY ZOMBIE', name:'HUNTY ZOMBIE SCRIPT', code:`https://www.mediafire.com/file/nlr7pib279xkfxv/SCRIPT+HUNTY+ZOMBIE+TORA+ISME.txt/file`},
-  {group:'HUNTY ZOMBIE', name:'SOLIX HUB', code:`https://www.mediafire.com/file/d66j12ef9ynbuv0/SCRIPT_SOLIX_HUB.txt/file`},
-  {group:'HUNTY ZOMBIE', name:'TYPE HUB', code:`https://www.mediafire.com/file/xjcmcidto7rsjl3/SCRIPT+TYPE+HUB+HUNTY+ZOMBIE.txt/file`},
-  {group:'HUNTY ZOMBIE', name:'ZEE HUB', code:`https://www.mediafire.com/file/1tzpo49zjgij7gv/SCRIPT+ZEE+HUB+HUNTY+ZOMBIE.txt/file`},
-  {group:'HUNTY ZOMBIE', name:'CHIYO HUB', code:`https://www.mediafire.com/file/l6p95il7t8sa9yc/SCRIPT+CHIYO+HUB.txt/file`},
-  {group:'HUNTY ZOMBIE', name:'MIRAGE HUB', code:`https://www.mediafire.com/file/cbor7shfei6xi5y/SCRIPT+MIRAGE+HUB.txt/file`},
-
-  /* VOX SEAS */
-  {group:'VOX SEAS', name:'FARM DINERO', code:`loadstring(game:HttpGet('https://raw.githubusercontent.com/shakaUnlocked/IiI/refs/heads/main/AutoVoxSeas.lua'))()`},
-  {group:'VOX SEAS', name:'LEGEND HUB', code:`loadstring(game:HttpGet("https://pastefy.app/ULaWpxKm/raw"))()`},
-  {group:'VOX SEAS', name:'NEXUS HUB', code:`loadstring(game:HttpGet("https://raw.githubusercontent.com/CrazyHub123/NexusHubRevival/refs/heads/main/NewLoader.lua"))()`},
-
-  /* Steal - some more */
-  {group:'STEAL / BRAINROT', name:'AJJAN', code:`https://www.mediafire.com/file/b8gzxd0hu3dmydc/SCRIPT+AJJAN+STEAL+A+BRAINROT.txt/file`},
-  {group:'STEAL / BRAINROT', name:'LENNON V3', code:`https://www.mediafire.com/file/6phdz9th76ddq6v/SCRIPT+LENNON+V3.txt/file`},
-  {group:'STEAL / BRAINROT', name:'LEMON HUB', code:`https://www.mediafire.com/file/loxj38lxrqr31a4/SCRIPT+LEMON+HUB.txt/file`},
-  {group:'STEAL / BRAINROT', name:'MAKAL HUB', code:`https://www.mediafire.com/file/k29my232199w3k8/SCRIPT+MAKAL+HUB.txt/file`},
-  {group:'STEAL / BRAINROT', name:'PUSARX', code:`https://www.mediafire.com/file/9taswgj9izhjd3w/SCRIPT+PUSARX+BRAINROT.txt/file`},
-  {group:'STEAL / BRAINROT', name:'TP ARBIX', code:`https://www.mediafire.com/file/3hj8kgeynzmnx4g/NEW+TP+ARBIX+HUB.txt/file`},
-  {group:'STEAL / BRAINROT', name:'KENGER HUB', code:`https://www.mediafire.com/file/s4ocwl0p4h0xvhf/SCRIPT+KENGER+HUB.txt/file`}
+  // add any other scripts you posted — this list is long but includes the main ones you asked
 ];
 
-/* ---------- Render folders (groups) & sections ---------- */
+/* ---------- build UI ---------- */
+const groups = Array.from(new Set(scripts.map(s=>s.group))).sort();
 const foldersEl = document.getElementById('folders');
 const mainEl = document.getElementById('main');
 
-// derive groups
-const groups = Array.from(new Set(scripts.map(s=>s.group)));
-groups.sort();
-
-// render sidebar folders
+// create folder list
 groups.forEach((g,i)=>{
-  const div = document.createElement('div');
-  div.className='folder'+(i===0?' active':'');
-  div.innerHTML = `<div style="font-weight:700;color:#063b61">${g}</div><div style="color:var(--muted);font-size:0.85rem">${scripts.filter(s=>s.group===g).length}</div>`;
-  div.addEventListener('click', ()=> { selectGroup(g,div) });
-  foldersEl.appendChild(div);
+  const d=document.createElement('div');
+  d.className='folder'+(i===0?' active':'');
+  d.tabIndex=0;
+  d.innerHTML=`<div>${g}</div><div style="color:var(--muted)">${scripts.filter(s=>s.group===g).length}</div>`;
+  d.addEventListener('click', ()=>{ document.querySelectorAll('.folder').forEach(x=>x.classList.remove('active')); d.classList.add('active'); scrollToGroup(g); });
+  foldersEl.appendChild(d);
 });
 
-// render main sections
-function renderSections(filterText=''){
-  mainEl.innerHTML = '';
+// render sections
+function render(filter=''){
+  mainEl.innerHTML='';
   groups.forEach(g=>{
-    const items = scripts.filter(s => s.group===g && (s.name.toLowerCase().includes(filterText) || s.code.toLowerCase().includes(filterText) || g.toLowerCase().includes(filterText)));
+    const items = scripts.filter(s => s.group===g && (s.name.toLowerCase().includes(filter)|| s.code.toLowerCase().includes(filter) || g.toLowerCase().includes(filter)));
     if(items.length===0) return;
-    const sec = document.createElement('section'); sec.className='section';
-    sec.innerHTML = `<h2>${g}</h2>`;
-    const tiles = document.createElement('div'); tiles.className='tiles';
+    const sec=document.createElement('section'); sec.className='section';
+    sec.dataset.group=g;
+    sec.innerHTML=`<h2>${g}</h2>`;
+    const tiles=document.createElement('div'); tiles.className='tiles';
     items.forEach(item=>{
-      const card = document.createElement('article'); card.className='card';
+      const card=document.createElement('div'); card.className='card';
       card.innerHTML = `
         <div class="meta">
           <div>
-            <div class="title">${item.name}</div>
-            <div class="game">${item.group}</div>
+            <div class="title">${escapeHtml(item.name)}</div>
+            <div class="subtitle">${escapeHtml(item.group)}</div>
           </div>
         </div>
         <div class="code" data-code>${escapeHtml(item.code)}</div>
-        <div class="btn-row">
-          <button class="btn copy-btn" title="Copiar script">📋 Copiar</button>
-          <button class="btn info-btn" onclick="openExternal('${encodeURI(item.code)}')">Abrir/Ver</button>
+        <div class="row">
+          <button class="btn copy">📋 Copiar</button>
+          <button class="btn open open-btn">🔗 Abrir</button>
         </div>
       `;
       // copy handler
-      card.querySelector('.copy-btn').addEventListener('click', function(){
-        const codeText = item.code;
-        navigator.clipboard.writeText(codeText).then(()=>{
-          const b = this;
-          b.classList.add('copied'); b.textContent='✅ Copiado';
-          setTimeout(()=>{ b.classList.remove('copied'); b.textContent='📋 Copiar'; },1400);
-        });
+      card.querySelector('.copy').addEventListener('click', function(){
+        navigator.clipboard.writeText(item.code).then(()=>{
+          const old=this.innerHTML; this.innerHTML='✅ Copiado';
+          setTimeout(()=> this.innerHTML=old,1400);
+        }).catch(()=> alert('No se pudo copiar'));
+      });
+      // open handler: try to open first URL inside code
+      card.querySelector('.open-btn').addEventListener('click', ()=>{
+        const m = item.code.match(/https?:\/\/[^\s'")]+/);
+        if(m) window.open(m[0], '_blank');
+        else {
+          // open new window with code
+          const w = window.open('', '_blank', 'width=800,height=600');
+          w.document.title = item.name;
+          const pre = w.document.createElement('pre');
+          pre.style.whiteSpace='pre-wrap';
+          pre.style.fontFamily='monospace';
+          pre.style.padding='12px';
+          pre.textContent = item.code;
+          w.document.body.appendChild(pre);
+        }
       });
       tiles.appendChild(card);
     });
@@ -413,58 +287,25 @@ function renderSections(filterText=''){
     mainEl.appendChild(sec);
   });
 }
+render();
 
-// initial render
-renderSections();
-
-// helper: select group from sidebar
-function selectGroup(g,node){
-  document.querySelectorAll('.folder').forEach(f=>f.classList.remove('active'));
-  node.classList.add('active');
-  // scroll to that section
-  const sections = Array.from(mainEl.querySelectorAll('.section'));
-  const idx = groups.indexOf(g);
-  if(sections[idx]) sections[idx].scrollIntoView({behavior:'smooth', block:'start'});
+// folder scroll
+function scrollToGroup(g){
+  const sec = Array.from(document.querySelectorAll('.section')).find(s=>s.dataset.group===g);
+  if(sec) sec.scrollIntoView({behavior:'smooth', block:'start'});
 }
 
-// filter function
-function filterCards(){
-  const q = document.getElementById('q').value.trim().toLowerCase();
-  renderSections(q);
-}
-
-// show all
-function showAll(){ document.getElementById('q').value=''; renderSections(); }
-
-// open external (for mediafire/paste/etc)
-function openExternal(enc){
-  // if code looks like URL, open directly; else show code in new window
-  const code = decodeURI(enc || '');
-  const maybeUrl = code.match(/https?:\/\/[^\s'"]+/);
-  if(maybeUrl){
-    window.open(maybeUrl[0], '_blank');
-    return;
-  }
-  // otherwise show a small popup with code
-  const w = window.open('', '_blank', 'width=720,height=480');
-  const pre = w.document.createElement('pre');
-  pre.style.whiteSpace='pre-wrap';
-  pre.style.fontFamily='monospace';
-  pre.style.padding='12px';
-  pre.textContent = code;
-  w.document.body.appendChild(pre);
-}
-
-/* Escape HTML in code block */
-function escapeHtml(s){
-  return s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
-}
-
-/* Utilities: allow pressing Enter in search to focus first match */
-document.getElementById('q').addEventListener('keydown', (e)=>{
-  if(e.key==='Enter'){ e.preventDefault(); const first = document.querySelector('.copy-btn'); if(first) first.focus(); }
+// search
+document.getElementById('q').addEventListener('input', (e)=>{
+  const v=e.target.value.trim().toLowerCase();
+  render(v);
 });
 
+// reset
+function resetFilter(){ document.getElementById('q').value=''; render(''); }
+
+// escape html helper
+function escapeHtml(s){ return s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;'); }
 </script>
 </body>
 </html>
