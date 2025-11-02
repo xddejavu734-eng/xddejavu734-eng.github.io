@@ -1,100 +1,49 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Dux — Colección de Loadstrings</title>
-  <style>
-    body{font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:#0f1724; color:#e6eef8; margin:0; padding:20px;}
-    .container{max-width:1000px;margin:0 auto;}
-    header{display:flex;gap:12px;align-items:center;margin-bottom:18px;}
-    h1{font-size:1.4rem;margin:0}
-    p.lead{margin:0;color:#a9b6c8}
-    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:14px;border-radius:12px;margin-bottom:12px;box-shadow:0 6px 18px rgba(2,6,23,0.6);}
-    .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-    .meta{font-size:0.86rem;color:#9fb0c8}
-    .code{background:#001827;padding:10px;border-radius:8px;font-family:monospace; font-size:0.9rem; word-break:break-all; color:#c7f0ff}
-    button{background:#0ea5b7;border:0;padding:8px 10px;border-radius:8px;color:#021623;cursor:pointer;font-weight:600}
-    button.secondary{background:#1f2937;color:#cfeff6}
-    .copy-ok{color:#34d399;margin-left:8px;font-weight:700}
-    .actions{margin-top:10px;display:flex;gap:8px;flex-wrap:wrap}
-    .small{font-size:0.85rem;padding:6px 8px;border-radius:7px}
-    footer{margin-top:18px;color:#98a9bf;font-size:0.85rem}
-    a.link{color:#9be7ff;text-decoration:none}
-    @media(max-width:540px){
-      .row{flex-direction:column;align-items:stretch}
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dux — Buscador de Scripts</title>
+<style>
+body {font-family: monospace; background:#0f1724; color:#e6eef8; padding:20px;}
+h1 {color:#34d399; margin-bottom:10px;}
+input[type=text] {width:100%; padding:10px; border-radius:8px; border:none; margin-bottom:15px; font-size:1rem;}
+.card {background:#001827; padding:12px; border-radius:10px; margin-bottom:12px; word-break:break-all;}
+.card h2 {margin:0 0 6px 0; font-size:1.1rem; color:#0ea5b7;}
+.card pre {background:#0c1e33; padding:10px; border-radius:8px; margin:0; overflow-x:auto;}
+button {padding:6px 10px; border:none; border-radius:8px; background:#34d399; color:#021623; font-weight:600; cursor:pointer; margin-top:6px; margin-right:6px;}
+button.secondary {background:#1f2937; color:#cfeff6;}
+.copy-ok {color:#34d399; font-weight:700; margin-left:8px;}
+</style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <div>
-        <h1>Dux — Mis Loadstrings</h1>
-        <p class="lead">Botones para copiar/abrir/descargar cada script. Guarda el archivo y úsalo cuando quieras.</p>
-      </div>
-    </header>
 
-    <!-- Script 1 -->
-    <div class="card" id="card1">
-      <div class="row">
-        <div style="flex:1">
-          <div class="meta">DuxClash — Clash royal style</div>
-          <div class="code" id="code1">loadstring(game:HttpGet("https://raw.githubusercontent.com/xddejavu734-eng/Dux-Clash-royal-Menu/main/DuxClash.lua", true))()</div>
-        </div>
-        <div style="min-width:220px">
-          <div class="actions">
-            <button onclick="copyText('code1')" class="small">Copiar</button>
-            <button onclick="openUrl('https://raw.githubusercontent.com/xddejavu734-eng/Dux-Clash-royal-Menu/main/DuxClash.lua')" class="small secondary">Abrir URL</button>
-            <button onclick="downloadText('code1','DuxClash_loadstring.txt')" class="small">Descargar .txt</button>
-            <span id="copied1" class="copy-ok" style="display:none">¡Copiado!</span>
-          </div>
-        </div>
-      </div>
-    </div>
+<h1>Dux — Buscador de Scripts</h1>
+<input type="text" id="searchBox" placeholder="Buscar script...">
 
-    <!-- Script 2 -->
-    <div class="card" id="card2">
-      <div class="row">
-        <div style="flex:1">
-          <div class="meta">SlasherBladeLoot — (gumanba)</div>
-          <div class="code" id="code2">loadstring(game:HttpGet("https://raw.githubusercontent.com/gumanba/Scripts/main/SlasherBladeLoot", true))()</div>
-        </div>
-        <div style="min-width:220px">
-          <div class="actions">
-            <button onclick="copyText('code2')" class="small">Copiar</button>
-            <button onclick="openUrl('https://raw.githubusercontent.com/gumanba/Scripts/main/SlasherBladeLoot')" class="small secondary">Abrir URL</button>
-            <button onclick="downloadText('code2','SlasherBladeLoot_loadstring.txt')" class="small">Descargar .txt</button>
-            <span id="copied2" class="copy-ok" style="display:none">¡Copiado!</span>
-          </div>
-        </div>
-      </div>
-    </div>
+<div id="scriptsContainer">
 
-    <!-- Script 3 -->
-    <div class="card" id="card3">
-      <div class="row">
-        <div style="flex:1">
-          <div class="meta">Dux Hub — Hub principal</div>
-          <div class="code" id="code3">loadstring(game:HttpGet("https://raw.githubusercontent.com/xddejavu734-eng/DuxScript/main/Dux%20Hub", true))()</div>
-        </div>
-        <div style="min-width:220px">
-          <div class="actions">
-            <button onclick="copyText('code3')" class="small">Copiar</button>
-            <button onclick="openUrl('https://raw.githubusercontent.com/xddejavu734-eng/DuxScript/main/Dux%20Hub')" class="small secondary">Abrir URL</button>
-            <button onclick="downloadText('code3','DuxHub_loadstring.txt')" class="small">Descargar .txt</button>
-            <span id="copied3" class="copy-ok" style="display:none">¡Copiado!</span>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div class="card" data-name="DuxClash">
+    <h2>DuxClash</h2>
+    <pre>loadstring(game:HttpGet("https://raw.githubusercontent.com/xddejavu734-eng/Dux-Clash-royal-Menu/main/DuxClash.lua", true))()</pre>
+    <button onclick="copyText(this)">Copiar</button>
+  </div>
 
-    <!-- Script 4: Ejemplo personalizado (puedes editar) -->
-    <div class="card" id="card4">
-      <div class="row">
-        <div style="flex:1">
-          <div class="meta">Ejemplo — request genérico</div>
-          <div class="code" id="code4">local args = {
+  <div class="card" data-name="SlasherBladeLoot">
+    <h2>SlasherBladeLoot</h2>
+    <pre>loadstring(game:HttpGet("https://raw.githubusercontent.com/gumanba/Scripts/main/SlasherBladeLoot", true))()</pre>
+    <button onclick="copyText(this)">Copiar</button>
+  </div>
+
+  <div class="card" data-name="Dux Hub">
+    <h2>Dux Hub</h2>
+    <pre>loadstring(game:HttpGet("https://raw.githubusercontent.com/xddejavu734-eng/DuxScript/main/Dux%20Hub", true))()</pre>
+    <button onclick="copyText(this)">Copiar</button>
+  </div>
+
+  <div class="card" data-name="RequestServerAction ejemplo">
+    <h2>RequestServerAction ejemplo</h2>
+    <pre>local args = {
 	"Gameplay",
 	"Train",
 	{
@@ -102,61 +51,40 @@
 		1
 	}
 }
-game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("RequestServerAction"):FireServer(unpack(args))</div>
-        </div>
-        <div style="min-width:220px">
-          <div class="actions">
-            <button onclick="copyText('code4')" class="small">Copiar</button>
-            <button onclick="downloadText('code4','request_example.txt')" class="small">Descargar .txt</button>
-            <span id="copied4" class="copy-ok" style="display:none">¡Copiado!</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <footer>
-      Consejo: si quieres que edite estos scripts (p. ej. quitar prints, cambiar tiempos, añadir checks), pégame el código del script concreto y yo te lo devuelvo ya corregido y listo para pegar en tu executor.
-    </footer>
+game:GetService("ReplicatedStorage"):WaitForChild("Events"):WaitForChild("RequestServerAction"):FireServer(unpack(args))</pre>
+    <button onclick="copyText(this)">Copiar</button>
   </div>
 
-  <script>
-    function copyText(codeId){
-      const el = document.getElementById(codeId);
-      if(!el) return;
-      const text = el.innerText || el.textContent;
-      navigator.clipboard.writeText(text).then(()=>{
-        const num = codeId.replace('code','');
-        const span = document.getElementById('copied'+num);
-        if(span){ span.style.display = 'inline-block'; setTimeout(()=>span.style.display='none',1500); }
-      }).catch(()=> {
-        alert('Error al copiar. Selecciona el texto y copia manualmente (Ctrl+C).');
-      });
-    }
+</div>
 
-    function openUrl(url){
-      try {
-        window.open(url, '_blank', 'noopener');
-      } catch(e){
-        alert('No se pudo abrir la URL en una nueva pestaña. Copia el enlace manualmente: ' + url);
-      }
-    }
+<script>
+function copyText(btn){
+  const pre = btn.previousElementSibling;
+  navigator.clipboard.writeText(pre.innerText).then(()=>{
+    const span = document.createElement('span');
+    span.className = 'copy-ok';
+    span.textContent = '¡Copiado!';
+    btn.parentNode.appendChild(span);
+    setTimeout(()=>span.remove(),1500);
+  });
+}
 
-    function downloadText(codeId, filename){
-      const el = document.getElementById(codeId);
-      if(!el) return;
-      const text = el.innerText || el.textContent;
-      const blob = new Blob([text], {type: 'text/plain;charset=utf-8'});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = filename || 'script.txt';
-      document.body.appendChild(a);
-      a.click();
-      setTimeout(()=>{
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-      },100);
+// Buscador
+const searchBox = document.getElementById('searchBox');
+const cards = document.querySelectorAll('.card');
+searchBox.addEventListener('input', ()=>{
+  const query = searchBox.value.toLowerCase();
+  cards.forEach(card=>{
+    const name = card.dataset.name.toLowerCase();
+    const code = card.querySelector('pre').innerText.toLowerCase();
+    if(name.includes(query) || code.includes(query)){
+      card.style.display='block';
+    }else{
+      card.style.display='none';
     }
-  </script>
+  });
+});
+</script>
+
 </body>
 </html>
